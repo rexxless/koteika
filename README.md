@@ -18,3 +18,5 @@ docker compose exec backend php artisan migrate
 cd koteika/deploy
 docker compose up -d
 ```
+
+<h4>Проект можно открыть по ссылке http://localhost:80</h4>
