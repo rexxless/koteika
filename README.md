@@ -19,4 +19,4 @@ cd koteika/deploy
 docker compose up -d
 ```
 
-<h4>Проект можно открыть по ссылке <ln>http://localhost:80</ln></h4>
+<h4>Проект можно открыть по ссылке <a href="http://localhost:80">http://localhost:80</a></h4>
