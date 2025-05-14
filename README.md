@@ -1,4 +1,4 @@
-
+# Инструкции по запуску
 Для первого запуска скопируйте в терминал следующее:
 ```shell
 git clone -b master https://github.com/rexxless/koteika.git
