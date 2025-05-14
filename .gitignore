@@ -15,7 +15,6 @@
 /public/dist
 /resources/js/*.local.js
 .vite
-composer.lock
 .idea/
 .vscode/
 *.sublime-project
