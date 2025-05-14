@@ -1,7 +1,7 @@
 # Инструкции по запуску
 Для первого запуска скопируйте в терминал следующее:
 ```shell
-git clone -b master https://github.com/rexxless/koteika.git
+git clone https://github.com/rexxless/koteika.git
 cd koteika/project
 cp .env.example .env # Если будет необходимо внести изменения в окружение, редактируйте файл .env (Не .env-example)!
 cd ../deploy
