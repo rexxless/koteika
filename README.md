@@ -8,7 +8,7 @@ cd ../deploy
 ln -s ../project/.env .env
 docker compose up -d --build
 docker compose exec backend composer install
-docker-compose exec backend php artisan key:generate
+docker compose exec backend php artisan key:generate
 ```
 
 Для запуска миграций и заполнения БД тестовыми данными скопируйте в терминал следующее:
