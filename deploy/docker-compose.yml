@@ -6,7 +6,7 @@ services:
       context: ../
       dockerfile: deploy/php/Dockerfile
     container_name: backend
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "1000:1000"
     depends_on:
       - postgres
     volumes:
@@ -30,10 +30,12 @@ services:
 
   postgres:
     image: postgres:15-alpine
+    env_file:
+      - ../project/.env
     environment:
-      - POSTGRES_DB=koteika
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=${DB_DATABASE}
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
     container_name: postgres
     restart: always
     ports:
