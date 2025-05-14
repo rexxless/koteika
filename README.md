@@ -6,13 +6,13 @@ cd koteika/project
 cp .env.example .env # Если будет необходимо внести изменения в окружение, редактируйте файл .env (Не .env-example)!
 cd ../deploy
 docker compose up -d --build
-docker compose exec app composer install 
+docker compose exec backend composer install 
 ```
 
 Для запуска миграций и заполнения БД тестовыми данными скопируйте в терминал следующее:
 ```shell
-docker compose exec app php artisan migrate
-docker compose exec app php artisan db:seed
+docker compose exec backend php artisan migrate
+docker compose exec backend php artisan db:seed
 ```
 
 Для всех последующих запусков достаточно скопировать в терминал следующее:
