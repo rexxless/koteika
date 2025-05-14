@@ -1,11 +1,12 @@
 version: '3.8'
 
 services:
-  app:
+  backend:
     build:
       context: ../
       dockerfile: deploy/php/Dockerfile
-    container_name: app
+    container_name: backend
+    user: "${UID:-1000}:${GID:-1000}"
     depends_on:
       - postgres
     volumes:
@@ -22,7 +23,7 @@ services:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       - ../project:/var/www
     depends_on:
-      - app
+      - backend
       - postgres
     networks:
       - app-network
@@ -30,7 +31,7 @@ services:
   postgres:
     image: postgres:15-alpine
     environment:
-      - POSTGRES_DB=buywithease
+      - POSTGRES_DB=koteika
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     container_name: postgres
@@ -53,11 +54,11 @@ services:
     networks:
       - app-network
 
-  node:
+  frontend:
     build:
-      context: ./node
-      dockerfile: Dockerfile
-    container_name: node
+      context: ../
+      dockerfile: ./deploy/node/Dockerfile
+    container_name: frontend
     ports:
       - "3000:3000"
     restart: unless-stopped

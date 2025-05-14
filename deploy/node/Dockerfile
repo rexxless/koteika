@@ -2,11 +2,11 @@ FROM node:20
 
 WORKDIR /var/www
 
-COPY package*.json ./
+COPY ./project/package*.json ./
 
 RUN npm install
 
-COPY ../../project .
+COPY ./project .
 
 EXPOSE 3000
 
