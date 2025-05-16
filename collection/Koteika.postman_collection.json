@@ -1,0 +1,768 @@
+{
+	"info": {
+		"_postman_id": "f691c01f-321e-4c4e-9bbe-3422c1f571a9",
+		"name": "Koteika",
+		"description": "# **Общие положения**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге;\n    \n- Редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).\n    \n- Ошибки возвращаются в формате:\n    \n\n{\n\n\"error\": \"Описание ошибки\",\n\n\"code\": 400\n\n}",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43464435",
+		"_collection_link": "https://remfan.postman.co/workspace/84afd3c0-6182-45c4-80ab-5adb53c23411/collection/43464435-f691c01f-321e-4c4e-9bbe-3422c1f571a9?action=share&source=collection_link&creator=43464435"
+	},
+	"item": [
+		{
+			"name": "Гость",
+			"item": [
+				{
+					"name": "Главная страница",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/main",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"main"
+							]
+						},
+						"description": "#### Ответ:\n\n{\n\n\"title\": \"Название отеля\",\n\n\"city\": \"Город\",\n\n\"slogan\": \"Слоган\",\n\n\"contacts\": \\[\n\n\"address\": \"Адрес\",\n\n\"phone\": \"+7(XXX)XXX-XX-XX\",\n\n\"email\": \"[email@example.com](https://mailto:email@example.com)\",\n\n\"social_links\": \\[\"[https://facebook.com](https://facebook.com) \", ...\\]\n\n\\],\n\n“reviews”: \\[/\\* 5 случайных отзывов \\*/\\]\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Список номеров",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms"
+							]
+						},
+						"description": "#### Ответ:\n\n{\n\n\"id\": 1,\n\n\"avg_rate\": 4.6,\n\n\"feedbacks\": 122,\n\n\"title\": \"Стандарт\",\n\n\"price\": 3000\n\n},\n\n{\n\n…\n\n},\n\n..."
+					},
+					"response": []
+				},
+				{
+					"name": "Конкретный номер",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{{id}}"
+							]
+						},
+						"description": "#### **Ответ:**\n\n{\n\n\"id\": 1,\n\n\"avg_rate\": 4.2,\n\n\"feedbacks\": 122,\n\n\"title\": \"Стандарт\",\n\n\"description\": \"Уютный номер...\",\n\n\"price\": 3000,\n\n\"photos\": \\[\"url.jpg\"\\],\n\n\"amenities\": \\[\"Wi-Fi\", \"Телевизор\"\\]\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Регистрация",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Иванов Иван Иванович\",\n    \"email\":\"admin@admin.ru\",\n    \"password\":\"admin\",\n    \"phone\":\"+71234567890\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/signup",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						},
+						"description": "#### **Поля:**\n\n| **name** | **string** | **Обязательно** | **Имя, кириллица, пробелы, тире** |  \n| **email** | **string** | **Обязательно** | **Email, уникальный** |  \n| **password** | **string** | **Обязательно** | **Минимум 8 символов** |  \n| **phone** | **string** | **Обязательно** | **+7(XXX)XXX-XX-XX** |  \n| **avatar** | **file** | **Необязательно** | **jpeg/png до 2Мб** |\n\n#### **Ответ (успех):**\n\n{\n\n\"token\": \"Токен пользователя\"\n\n}\n\n#### **Ошибки:**\n\n- 422: Невалидные данные (например, пароль меньше 8 символов)\n    \n- 409: Email уже существует"
+					},
+					"response": []
+				},
+				{
+					"name": "Вход",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"user@shop.ru\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						},
+						"description": "#### **Поля:**\n\n| **email** | **string** | **Обязательно** |  \n| **password** | **string** | **Обязательно** |\n\n#### **Ответ (успех):**\n\n{\n\n\"token\": \"Токен пользователя\"\n\n}\n\n#### **Ошибки:**\n\n- 422: Невалидные данные (например, пароль меньше 8 символов)"
+					},
+					"response": []
+				},
+				{
+					"name": "Отзывы на конкретный номер",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/{{id}}/feedback",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{{id}}",
+								"feedback"
+							]
+						},
+						"description": "#### **Ответ:**\n\n{\n\n\"id\": 1,\n\n\"rate\": 5,\n\n\"author\": 1\n\n\"title\": \"Всё гуд\",\n\n\"description\": \"Услуга оказана качественно...\"\n\n},\n\n{\n\n…\n\n},\n\n..."
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы, доступные неавторизованному пользователю"
+		},
+		{
+			"name": "Пользователь",
+			"item": [
+				{
+					"name": "Бронь номера",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"room_id\": 1,\n\t\"check_in\": \"2025-05-10\",\n\t\"check_out\": \"2025-05-15\",\n\t\"pets\": [\n\t\t{ \"name\": \"Барсик\" },\n\t\t{ \"name\": \"Мурка\" }\n\t]\n\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/rooms/{id}/booking",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{id}",
+								"booking"
+							]
+						},
+						"description": "#### **Поля:**\n\n| **room_id** | **integer** | **Обязательно** |  \n| **check_in** | **date** | **Обязательно** |  \n| **check_out** | **date** | **Обязательно** |  \n| **pets** | **array** | **Обязательно** |\n\n#### **Ответ (успех):**\n\n**{**\n\n**\"message\": \"Бронь успешно создана\"**\n\n**}**\n\n#### **Ошибки:**\n\n- 422: Невалидные данные (формат дат, пересечение броней)\n    \n- 401: Не авторизован"
+					},
+					"response": []
+				},
+				{
+					"name": "Просмотр всех броней пользователя",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/bookings",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"bookings"
+							]
+						},
+						"description": "#### **Ответ:**\n\n{\n\n\"id\": 1,\n\n\"room\": \"Люкс\",\n\n\"check_in\": \"2025-05-10\",\n\n\"check_out\": \"2025-05-15\",\n\n\"pets\":\n\n\\[\n\n{\n\n\"name\": \"Барсик\",\n\n\"animal\":\"Кот\"\n\n}\n\n\\]\n\n}"
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить бронь",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}} /api/bookings/{{id}}",
+							"host": [
+								"{{host}} "
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{id}}"
+							]
+						},
+						"description": "#### Ответ (успех):   \n\n{\n\n\"message\": \"Бронь удалена\"\n\n}  \n\n#### Ошибки: \n\n- 401: Не авторизован\n    \n- 409: Бронь уже одобрена"
+					},
+					"response": []
+				},
+				{
+					"name": "Оставить отзыв",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"rate\": 5,\n\t\"title\": \"Всё гуд\",\n\t\"description\": \"Услуга оказана качественно...\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/rooms/{id}/feedback",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{id}",
+								"feedback"
+							]
+						},
+						"description": "#### **Поля:**\n\n| rate | integer | Обязательно |  \n| title | string | Обязательно |  \n| description | string | Обязательно |\n\n#### Ответ (успех):\n\n{\n\n\"message\": \"Отзыв успешно создан\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации"
+					},
+					"response": []
+				},
+				{
+					"name": "Редактировать профиль",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"test\",\n    \"email\":\"test@hotel.ru\",\n    \"phone\":\"+70987654321\",\n    \"password\":\"qwerty123\",\n    \"avatar\":\"something.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"profile"
+							]
+						},
+						"description": "#### **Поля:**\n\n| **name** | **string** | **Необязательно** |  \n| **email** | **string** | **Необязательно** |  \n| **phone** | **string** | **Необязательно** |  \n| **avatar** | **file** | **Необязательно** |\n\n#### Ответ (успех):\n\n{\n\n\"message\": \"Профиль обновлен\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации"
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы доступные **только** с авторизацией"
+		},
+		{
+			"name": "Администратор",
+			"item": [
+				{
+					"name": "Редактировать главную страницу",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/main",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"main"
+							]
+						},
+						"description": "Возвращает главную страницу с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Добавить вещь в список удобств",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"Холодильник\",\n    \"icon\":\"fridge.jpg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/rooms/amenities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"amenities"
+							]
+						},
+						"description": "**| name | string | Обязательно |****| icon | file | Обязательно |**\n\n#### Ответ:\n\n{  \n\"message\": \"Успешно добавлено\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Список удобств",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/amenities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"amenities"
+							]
+						},
+						"description": "#### Ответ:\n\n{\n\n\"id\": 1,\n\n\"name\": \"Wi-Fi\",\n\n\"icon\":\"wifi.jpg\"\n\n},\n\n{\n\n…\n\n},\n\n...\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Редактировать вещь в списке удобств",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/amenities/{{amenity}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"amenities",
+								"{{amenity}}"
+							]
+						},
+						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить вещь из списка удобств",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/amenities/{{amenity}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"amenities",
+								"{{amenity}}"
+							]
+						},
+						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Успешно удалено\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Одобрение брони",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/bookings/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{id}}"
+							]
+						},
+						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь одобрена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 409: Бронь уже одобрена"
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование номера",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{{id}}"
+							]
+						},
+						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление номера",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{{id}}"
+							]
+						},
+						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Номер удален\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Номер не найден"
+					},
+					"response": []
+				},
+				{
+					"name": "Добавление номера",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								""
+							]
+						},
+						"description": "|  |  |\n| --- | --- |\n|  |  |\n\n| title | string | Обязательно |  \n| description | text | Обязательно |  \n| price | integer | Обязательно |  \n| photos | file | Обязательно |  \n| amenities | array | Обязательно |\n\n#### Ответ (успех):\n\n{\n\n\"message\": \"Номер добавлен\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 422: Ошибка валидации"
+					},
+					"response": []
+				},
+				{
+					"name": "Список броней",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/bookings/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								""
+							]
+						},
+						"description": "#### **Ответ:**\n\n{\n\n\"id\": 1,\n\n\"room\": \"Люкс\",\n\n\"check_in\": \"2025-05-10\",\n\n\"check_out\": \"2025-05-15\",\n\n\"pets\":\n\n\\[\n\n{\n\n\"name\": \"Барсик\",\n\n\"animal\":\"Кот\"\n\n}\n\n\\],\n\n\"approved\": \"False\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление брони",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/bookings/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"{{id}}"
+							]
+						},
+						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь удалена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Бронь не найдена"
+					},
+					"response": []
+				}
+			],
+			"description": "Запросы, которые может совершать **только** администратор"
+		}
+	]
+}
