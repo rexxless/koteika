@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Photo;
+use App\Models\Room;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

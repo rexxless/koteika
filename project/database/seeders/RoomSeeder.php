@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Room;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +13,7 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
-        $rooms = Room::factory(5)->create()->each(function ($room) {
+        Room::factory(5)->create()->each(function ($room) {
             $room->update([
                 'title' => fake('ru_RU')->sentence(3),
                 'description' => fake('ru_RU')->paragraph(),

@@ -21,12 +21,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MainDataSeeder::class,
             RoomSeeder::class,
+            IconSeeder::class,
             AmenitySeeder::class,
             PhotoSeeder::class,
+            UserSeeder::class,
             BookingSeeder::class,
             PetSeeder::class,
             FeedBackSeeder::class,
-            IconSeeder::class,
             SocialLinkSeeder::class,
         ]);
     }

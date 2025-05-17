@@ -5,26 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Booking extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
-        'avatar'
+        'room_id',
+        'check_in',
+        'check_out',
+        'user_id',
     ];
 
     protected $hidden = [
-        'is_admin',
+        'approved'
     ];
-
-    protected function casts()
-    {
-        return [
-            'password' => 'hashed',
-        ];
-    }
     public $timestamps = false;
+
 }

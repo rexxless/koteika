@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Icon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,8 +13,12 @@ class IconSeeder extends Seeder
      */
     public function run(): void
     {
-        Icon::factory(5)->create([
-            'name' => fake('ru_RU')->word(),
-        ]);
+        $iconNames = ['wifi', 'tv', 'parking', 'pool', 'spa'];
+        foreach ($iconNames as $name) {
+            Icon::create([
+                'name' => $name,
+                'link' => fake()->imageUrl(),
+            ]);
+        }
     }
 }

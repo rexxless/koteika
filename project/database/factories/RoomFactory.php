@@ -11,8 +11,8 @@ class RoomFactory extends Factory
         return [
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
-            'price' => $this->faker->randomFloat(2, 50, 500),
-            'show_case' => $this->faker->boolean(20),
+            'price' => $this->faker->randomNumber(4),
+            'showcase' => $this->faker->boolean(0),
         ];
     }
 }

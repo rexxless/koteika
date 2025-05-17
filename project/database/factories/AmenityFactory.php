@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Room;
 
 class AmenityFactory extends Factory
 {
@@ -10,7 +11,7 @@ class AmenityFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'room_id' => \App\Models\Room::factory(),
+            'room_id' => Room::factory(),
         ];
     }
 }

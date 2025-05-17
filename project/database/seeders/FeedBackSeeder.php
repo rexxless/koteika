@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Feedback;
+use App\Models\Room;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,10 +15,11 @@ class FeedBackSeeder extends Seeder
      */
     public function run(): void
     {
-        $rooms->each(function ($room) use ($user) {
+        $user = User::query()->first();
+        Room::all()->each(function ($room) use ($user) {
             Feedback::factory()->create([
                 'room_id' => $room->id,
-                'author' => $user->name,
+                'author' => $user->id,
                 'title' => fake('ru_RU')->sentence(4),
                 'description' => fake('ru_RU')->paragraph(),
             ]);

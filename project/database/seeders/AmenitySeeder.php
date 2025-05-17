@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Amenity;
+use App\Models\Icon;
+use App\Models\Room;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,10 +15,11 @@ class AmenitySeeder extends Seeder
      */
     public function run(): void
     {
-        $rooms->each(function ($room) {
+        $amenities = Icon::all();
+        Room::all()->each(function ($room) use ($amenities) {
             Amenity::factory(3)->create([
                 'room_id' => $room->id,
-                'name' => fake('ru_RU')->word(),
+                'name' => $amenities->random()->name,
             ]);
         });
     }
