@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('amenities', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->foreign('name')->references('name')->on('icons');
             $table->foreignId('room_id')->constrained('rooms');
         });
