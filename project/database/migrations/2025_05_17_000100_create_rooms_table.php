@@ -17,6 +17,9 @@ return new class extends Migration
             $table->text('description');
             $table->integer('price');
             $table->boolean('showcase')->default(false);
+            $table->integer('width');
+            $table->integer('height');
+            $table->integer('length');
         });
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use \App\Models\Room;
 
 class FeedbackFactory extends Factory
 {
@@ -13,7 +14,7 @@ class FeedbackFactory extends Factory
             'author' => $this->faker->name(),
             'title' => $this->faker->sentence(4),
             'description' => $this->faker->paragraph(),
-            'room_id' => \App\Models\Room::factory(),
+            'room_id' => Room::factory(),
         ];
     }
 }

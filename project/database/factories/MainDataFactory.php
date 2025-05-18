@@ -14,6 +14,8 @@ class MainDataFactory extends Factory
             'slogan' => $this->faker->words(4, true),
             'phone' => $this->faker->phoneNumber(),
             'email' => $this->faker->companyEmail(),
+            'address' => $this->faker->address(),
+            'working_time' => $this->faker->time(),
         ];
     }
 }

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('slogan');
             $table->string('phone');
             $table->string('email');
+            $table->text('address');
+            $table->string('working_hours');
         });
     }
 
