@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('address');
-            $table->string('working_hours');
+            $table->string('working_time');
         });
     }
 
