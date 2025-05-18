@@ -17,7 +17,7 @@ class Room extends Model
 
     public function amenities():HasMany
     {
-        return $this->hasMany(Amenity::class);
+        return $this->hasMany(Amenity::class); # скорее всего неверная связь. надо проверить структуру удобств
     }
     protected $fillable =[
       'title',
