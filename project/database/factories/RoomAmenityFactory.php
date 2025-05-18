@@ -3,14 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Room;
 
-class IconFactory extends Factory
+class RoomAmenityFactory extends Factory
 {
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->word(),
-            'link' => $this->faker->imageUrl(),
+            'name' => $this->faker->word(),
+            'room_id' => Room::factory(),
         ];
     }
 }

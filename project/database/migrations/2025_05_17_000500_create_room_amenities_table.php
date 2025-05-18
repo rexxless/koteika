@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('icons', function (Blueprint $table) {
-            $table->string('name')->primary();
-            $table->text('link');
+        Schema::create('room_amenities', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->foreign('name')->references('name')->on('amenities');
+            $table->foreignId('room_id')->constrained('rooms');
         });
     }
 
@@ -22,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('icons');
+        Schema::dropIfExists('room_amenities');
     }
 };

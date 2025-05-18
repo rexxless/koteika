@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('amenities', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreign('name')->references('name')->on('icons');
-            $table->foreignId('room_id')->constrained('rooms');
+            $table->string('name')->primary();
+            $table->text('link');
         });
     }
 
