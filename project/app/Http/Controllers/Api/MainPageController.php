@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use App\Models\MainData;
 use App\Models\SocialLink;
+use App\Services\MainPageService;
 use Illuminate\Http\Request;
 
 class MainPageController extends Controller
@@ -13,25 +14,9 @@ class MainPageController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(MainPageService $mainPageService)
     {
-        return [
-            'header' => [
-                'title' => MainData::query()->get('title')->first()->title,
-                'city' => MainData::query()->get('city')->first()->city,
-                'slogan' => MainData::query()->get('slogan')->first()->slogan,
-            ],
-            'content' => [
-                'feedbacks' => Feedback::inRandomOrder()->limit(5)->pluck('id')
-            ],
-            'footer' => [
-                'address' => MainData::query()->get('address')->first()->address,
-                'working_time' => MainData::query()->get('working_time')->first()->working_time,
-                'phone' => MainData::query()->get('phone')->first()->phone,
-                'email' => MainData::query()->get('email')->first()->email,
-                'social_links' => SocialLink::all()
-            ]
-        ];
+        return $mainPageService->index();
     }
 
     /**
