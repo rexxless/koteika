@@ -20,10 +20,13 @@ class Room extends Model
         return $this->hasMany(RoomAmenity::class); # скорее всего неверная связь. надо проверить структуру удобств
     }
     protected $fillable =[
-      'title',
-      'description',
-      'price',
-      'showcase'
+        'title',
+        'description',
+        'price',
+        'showcase',
+        'width',
+        'height',
+        'length'
     ];
 
     protected $hidden = [

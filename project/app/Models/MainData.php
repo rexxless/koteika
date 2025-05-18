@@ -13,7 +13,9 @@ class MainData extends Model
         'city',
         'slogan',
         'phone',
-        'email'
+        'email',
+        'address',
+        'working_time'
     ];
 
     public $timestamps = false;

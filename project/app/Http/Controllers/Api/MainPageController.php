@@ -17,18 +17,18 @@ class MainPageController extends Controller
     {
         return [
             'header' => [
-                'title' => MainData::query()->get('title')->first(),
-                'city' => MainData::query()->get('city')->first(),
-                'slogan' => MainData::query()->get('slogan')->first(),
+                'title' => MainData::query()->get('title')->first()->title,
+                'city' => MainData::query()->get('city')->first()->city,
+                'slogan' => MainData::query()->get('slogan')->first()->slogan,
             ],
             'content' => [
-                'feedbacks' => Feedback::inRandomOrder()->limit(5)->get()
+                'feedbacks' => Feedback::inRandomOrder()->limit(5)->pluck('id')
             ],
             'footer' => [
-                'address' => MainData::query()->get('address')->first(),
-                'working_time' => MainData::query()->get('working_time')->first(),
-                'phone' => MainData::query()->get('phone')->first(),
-                'email' => MainData::query()->get('email')->first(),
+                'address' => MainData::query()->get('address')->first()->address,
+                'working_time' => MainData::query()->get('working_time')->first()->working_time,
+                'phone' => MainData::query()->get('phone')->first()->phone,
+                'email' => MainData::query()->get('email')->first()->email,
                 'social_links' => SocialLink::all()
             ]
         ];
