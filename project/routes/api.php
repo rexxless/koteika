@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\MainPageController;
 use Illuminate\Support\Facades\Route;
 
-/*
+
 // Гость
 Route::get('/main', [MainPageController::class, 'index']);
-
+/*
 Route::get('/rooms', [RoomController::class, 'index']);
 Route::get('/rooms/{id}', [RoomController::class, 'show'])
     ->where('id', '[0-9]+');
