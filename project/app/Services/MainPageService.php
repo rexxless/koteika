@@ -14,20 +14,22 @@ class MainPageService
      */
     public function index()
     {
+        $mainData = MainData::query()->first();
+
         return [
             'header' => [
-                'title' => MainData::query()->get('title')->first()->title,
-                'city' => MainData::query()->get('city')->first()->city,
-                'slogan' => MainData::query()->get('slogan')->first()->slogan,
+                'title' => $mainData->title ?? null,
+                'city' => $mainData->city ?? null,
+                'slogan' => $mainData->slogan ?? null,
             ],
             'content' => [
-                'feedbacks' => Feedback::inRandomOrder()->limit(5)->pluck('id')
+                'feedbacks' => Feedback::inRandomOrder()->limit(5)->pluck('id')->toArray()
             ],
             'footer' => [
-                'address' => MainData::query()->get('address')->first()->address,
-                'working_time' => MainData::query()->get('working_time')->first()->working_time,
-                'phone' => MainData::query()->get('phone')->first()->phone,
-                'email' => MainData::query()->get('email')->first()->email,
+                'address' => $mainData->address ?? null,
+                'working_time' => $mainData->working_time ?? null,
+                'phone' => $mainData->phone ?? null,
+                'email' => $mainData->email ?? null,
                 'social_links' => SocialLink::all()
             ]
         ];
