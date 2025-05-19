@@ -8,18 +8,21 @@ use Illuminate\Support\Facades\Route;
 
 
 // Гость
-Route::get('/main', [MainPageController::class, 'index']);
+Route::get('/main', [MainPageController::class, 'index'])->middleware(['throttle:api']);
 
-Route::get('/rooms', [RoomController::class, 'index']);
+Route::get('/rooms', [RoomController::class, 'index'])->middleware(['throttle:api']);
 
-Route::get('/rooms/amenities', [AmenityController::class, 'index']);
+Route::get('/rooms/amenities', [AmenityController::class, 'index'])->middleware(['throttle:api']);
 
-Route::get('/rooms/{room}', [RoomController::class, 'show']);
+Route::get('/rooms/{room}', [RoomController::class, 'show'])->middleware(['throttle:api']);
 
 
 //
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/login', [AuthController::class, 'login'])->middleware(['throttle:api']);
+Route::post('/signup', [AuthController::class, 'signup'])->middleware(['throttle:api']);
+
+# Потом надо будет все поместить под auth:sanctum
+Route::get('/logout', [AuthController::class, 'logout'])->middleware('throttle:api', 'auth:sanctum');
 //
 //Route::get('/rooms/{id}/feedback', [FeedbackController::class, 'show'])
 //    ->where('id', '[0-9]+');
@@ -68,7 +71,7 @@ Route::post('/signup', [AuthController::class, 'signup']);
    //    ->where('id', '[0-9]+');
 //
    // выход
-//    Route::get('/logout', [AuthController::class, 'logout']);
+
 //});
 
 
