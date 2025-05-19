@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
-use App\Services\RoomSortService;
+use App\Actions\RoomSortAction;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -13,9 +13,9 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(RoomSortService $sortService)
+    public function index()
     {
-        return $sortService->sorted();
+        return RoomSortAction::execute();
     }
 
     /**

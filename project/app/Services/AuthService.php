@@ -17,7 +17,7 @@ class AuthService
         User::create($request->validated());
         $user = User::query()->where('email', $request->email)->first();
         return response()->json([
-            'token' => $user->createToken('Token: ')->plainTextToken,
+            'token' => $user->createToken('token')->plainTextToken,
         ]
         );
     }
@@ -30,7 +30,7 @@ class AuthService
         $user = User::query()->where('email', $request->email)->first();
         $user->tokens()->delete();
         return response()->json([
-            'token' => $user->createToken('Token: ')->plainTextToken,
+            'token' => $user->createToken('token')->plainTextToken,
         ]);
     }
 }

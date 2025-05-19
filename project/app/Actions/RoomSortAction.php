@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Services;
+namespace App\Actions;
 
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 
-class RoomSortService
+class RoomSortAction
 {
-    public function sorted()
+    public static function execute()
     {
         $query = Room::query();
 

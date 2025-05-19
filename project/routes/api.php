@@ -6,23 +6,29 @@ use App\Http\Controllers\Api\MainPageController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
 
+Route::middleware('throttle:api')->group(function () {
 
-// Гость
-Route::get('/main', [MainPageController::class, 'index'])->middleware(['throttle:api']);
+    // Гость
+    Route::get('/main', [MainPageController::class, 'index'])->middleware(['throttle:api']);
 
-Route::get('/rooms', [RoomController::class, 'index'])->middleware(['throttle:api']);
+    Route::get('/rooms', [RoomController::class, 'index'])->middleware(['throttle:api']);
 
-Route::get('/rooms/amenities', [AmenityController::class, 'index'])->middleware(['throttle:api']);
+    Route::get('/rooms/amenities', [AmenityController::class, 'index'])->middleware(['throttle:api']);
 
-Route::get('/rooms/{room}', [RoomController::class, 'show'])->middleware(['throttle:api']);
+    Route::get('/rooms/{room}', [RoomController::class, 'show'])->middleware(['throttle:api']);
 
 
-//
-Route::post('/login', [AuthController::class, 'login'])->middleware(['throttle:api']);
-Route::post('/signup', [AuthController::class, 'signup'])->middleware(['throttle:api']);
+    // Для авторизованного
+    Route::middleware('auth:sanctum')->group(function () {
 
-# Потом надо будет все поместить под auth:sanctum
-Route::get('/logout', [AuthController::class, 'logout'])->middleware('throttle:api', 'auth:sanctum');
+        Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/signup', [AuthController::class, 'signup']);
+        Route::get('/logout', [AuthController::class, 'logout']);
+
+
+    });
+
+});
 //
 //Route::get('/rooms/{id}/feedback', [FeedbackController::class, 'show'])
 //    ->where('id', '[0-9]+');
@@ -32,7 +38,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->middleware('throttle:a
 //    ->name('login');
 //
 //
-//Route::middleware('auth:sanctum')->group(function () {
 //
    // Пользователь
 //    Route::post('rooms/{id}/booking', [BookingController::class, 'store'])

@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'phone' => 'string|max:15|unique:users',
+            'phone' => 'required|string|max:15|unique:users',
         ];
     }
 
@@ -44,13 +44,13 @@ class StoreUserRequest extends FormRequest
             'password.required' => 'Поле "Пароль" обязательно для заполнения.',
             'password.min' => 'Минимальная длина пароля - 8 символов.',
 
-            'phone.unique' => 'Поле "Телефон" обязательно для заполнения.',
+            'phone.unique' => 'Номер телефона уже занят.',
+            'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
             'phone.max' => 'Максимальная длина номера телефона - 15 цифр.',
 
             'avatar.image' => 'Аватар должен быть изображением.',
             'avatar.mimes' => 'Формат изображения должен быть jpeg, png, jpg.',
             'avatar.max' => 'Максимальный размер изображения - 2 МБ.',
-
         ];
     }
 }
