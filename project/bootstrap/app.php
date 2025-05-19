@@ -1,9 +1,12 @@
 <?php
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
@@ -23,6 +26,24 @@ return Application::configure(basePath: dirname(__DIR__))
                     'message' => 'Not found'
                 ], 404);
             } return null;
+        });
+
+        $exceptions->renderable(function (AuthenticationException $e, $request) {
+            return response()->json([
+                'message' => 'Login failed',
+            ], 403);
+        });
+
+        $exceptions->renderable(function (MethodNotAllowedHttpException $e, $request) {
+            return response()->json([
+                'message' => 'Method not allowed',
+            ], 405);
+        });
+
+        $exceptions->renderable(function (AccessDeniedHttpException $e, $request) {
+            return response()->json([
+                'message' => 'Forbidden',
+            ], 403);
         });
     })
     ->create();

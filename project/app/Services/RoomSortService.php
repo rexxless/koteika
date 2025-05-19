@@ -8,19 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 class RoomSortService
 {
-    /**
-     * Create a new class instance.
-     */
     public function sorted()
     {
         $query = Room::query();
 
         if (request()->has('amenities')) {
-            $amenities = explode(',', request()->amenities);
-            $query->whereHas('amenities', function ($q) use ($amenities) {
-                $q->whereIn('amenities.name', $amenities);
-            });
+            $amenities = explode('-', request()->amenities);
+
+            foreach ($amenities as $amenity) {
+                $query->whereHas('amenities', function ($q) use ($amenity) {
+                    $q->where('amenities.name', $amenity);
+                });
+            }
         }
+
 
         if (request()->has('min_price')) {
             $min_price = request()->min_price;

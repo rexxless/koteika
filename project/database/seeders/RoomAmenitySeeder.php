@@ -16,7 +16,7 @@ class RoomAmenitySeeder extends Seeder
     {
         $amenities = Amenity::all();
         Room::all()->each(function ($room) use ($amenities) {
-            RoomAmenity::factory(3)->create([
+            RoomAmenity::factory()->create([
                 'room_id' => $room->id,
                 'name' => $amenities->random()->name,
             ]);

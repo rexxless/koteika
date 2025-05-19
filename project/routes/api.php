@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AmenityController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\MainPageController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +18,8 @@ Route::get('/rooms/{room}', [RoomController::class, 'show']);
 
 
 //
-//Route::post('/login', [AuthController::class, 'login']);
-//Route::post('/signup', [AuthController::class, 'signup']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/signup', [AuthController::class, 'signup']);
 //
 //Route::get('/rooms/{id}/feedback', [FeedbackController::class, 'show'])
 //    ->where('id', '[0-9]+');
