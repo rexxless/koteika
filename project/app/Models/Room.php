@@ -15,10 +15,11 @@ class Room extends Model
         return $this->hasMany(Feedback::class);
     }
 
-    public function amenities():HasMany
+    public function amenities()
     {
-        return $this->hasMany(RoomAmenity::class); # скорее всего неверная связь. надо проверить структуру удобств
+        return $this->belongsToMany(Amenity::class, 'room_amenities', 'room_id', 'name', 'id', 'name');
     }
+
     protected $fillable =[
         'title',
         'description',

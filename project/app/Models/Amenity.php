@@ -8,14 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Amenity extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'link',
-    ];
 
     protected $primaryKey = 'name';
     public $incrementing = false;
     protected $keyType = 'string';
+
+    protected $fillable = [
+        'name',
+        'link'
+    ];
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class);
+    }
 
     public $timestamps = false;
 }

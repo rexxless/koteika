@@ -13,9 +13,9 @@ class RoomFactory extends Factory
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomNumber(4),
             'showcase' => $this->faker->boolean(0),
-            'width' => $this->faker->randomNumber(),
-            'height' => $this->faker->randomNumber(),
-            'length' => $this->faker->randomNumber()
+            'width' => $this->faker->numberBetween(1,10),
+            'height' => $this->faker->numberBetween(2,3),
+            'length' => $this->faker->numberBetween(1,10)
         ];
     }
 }
