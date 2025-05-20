@@ -40,8 +40,7 @@ Route::middleware('throttle:api')->group(function () {
 //
 //
    // Пользователь
-//    Route::post('rooms/{id}/booking', [BookingController::class, 'store'])
-//        ->where('id', '[0-9]+');
+
 //    Route::get('/bookings', [BookingController::class, 'show']);
 //    Route::delete('/bookings/{id}', [BookingController::class, 'destroy'])
 //        ->where('id', '[0-9]+');
