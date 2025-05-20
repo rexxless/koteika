@@ -9,20 +9,23 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('throttle:api')->group(function () {
 
     // Гость
-    Route::get('/main', [MainPageController::class, 'index'])->middleware(['throttle:api']);
+    Route::get('/main', [MainPageController::class, 'index']);
 
-    Route::get('/rooms', [RoomController::class, 'index'])->middleware(['throttle:api']);
+    Route::get('/rooms', [RoomController::class, 'index']);
 
-    Route::get('/rooms/amenities', [AmenityController::class, 'index'])->middleware(['throttle:api']);
+    Route::get('/rooms/amenities', [AmenityController::class, 'index']);
 
-    Route::get('/rooms/{room}', [RoomController::class, 'show'])->middleware(['throttle:api']);
+    Route::get('/rooms/{room}', [RoomController::class, 'show']);
+
+    Route::post('/login', [AuthController::class, 'login']);
+
+    Route::post('/signup', [AuthController::class, 'signup']);
 
 
     // Для авторизованного
     Route::middleware('auth:sanctum')->group(function () {
 
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::post('/signup', [AuthController::class, 'signup']);
+
         Route::get('/logout', [AuthController::class, 'logout']);
 
 
