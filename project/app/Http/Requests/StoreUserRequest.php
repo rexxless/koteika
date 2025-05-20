@@ -23,8 +23,8 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
-            'name' => ['required', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u'],
-            'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/'],
+            'name' => ['required', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u', 'max:255'],
+            'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:8'],
         ];
@@ -38,11 +38,13 @@ class StoreUserRequest extends FormRequest
             'avatar.mimes' => 'Аватар должен быть в формате jpeg или png.',
             'avatar.max' => 'Размер аватара не должен превышать 2 МБ.',
 
+            'name.max' => 'Максимальная длина имени - 255 символов.',
             'name.required' => 'Поле "Ваше имя" обязательно для заполнения.',
             'name.regex' => 'Имя может содержать только кириллические буквы, пробелы, точки и тире.',
 
             'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
             'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
+            'phone.unique' => 'Такой номер телефона уже зарегистрирован',
 
             'email.required' => 'Поле "E-mail" обязательно для заполнения.',
             'email.email' => 'Введите корректный e-mail.',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\DescriptionRequiresTitle;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreFeedbackRequest extends FormRequest
@@ -23,9 +24,21 @@ class StoreFeedbackRequest extends FormRequest
     {
         return [
             'rate' => 'required|integer|between:1,5',
-            'title' => 'string|max:255|nullable',
+            'title' => 'nullable|string|max:255',
             'description' => 'string|nullable',
         ];
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $title = $this->input('title');
+            $description = $this->input('description');
+
+            if (! (new DescriptionRequiresTitle($title, $description))->passes('', '')) {
+                $validator->errors()->add('check_in', 'Комната уже забронирована на эту дату.');
+            }
+        });
     }
 
     public function messages(): array

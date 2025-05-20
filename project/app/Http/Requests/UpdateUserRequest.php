@@ -22,30 +22,26 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'name' => 'nullable|string|max:255',
-            'email' => 'nullable|string|email|max:255|unique:users',
-            'password' => 'nullable|string|min:8',
-            'phone' => 'nullable|string|max:15|unique:users',
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
+            'name' => ['nullable', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u', 'max:255'],
+            'phone' => ['nullable', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
+            'email' => ['nullable', 'email', 'unique:users,email'],
+            'password' => ['nullable', 'min:8'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'email.required' => 'Поле "Почта" обязательно для заполнения.',
             'email.email' => 'Введена неверная электронная почта.',
             'email.unique' => 'Почта уже занята.',
-            'email.max' => 'Максимальная длина почты - 255 символов.',
 
-            'name.required' => 'Поле "Имя" обязательно для заполнения.',
             'name.max' => 'Максимальная длина имени - 255 символов.',
+            'name.regex' => 'Имя может содержать только кириллические буквы, пробелы, точки и тире.',
 
-            'password.required' => 'Поле "Пароль" обязательно для заполнения.',
             'password.min' => 'Минимальная длина пароля - 8 символов.',
 
             'phone.unique' => 'Номер телефона уже занят.',
-            'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
             'phone.max' => 'Максимальная длина номера телефона - 15 цифр.',
 
             'avatar.image' => 'Аватар должен быть изображением.',
