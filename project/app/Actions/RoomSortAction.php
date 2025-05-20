@@ -22,7 +22,6 @@ class RoomSortAction
             }
         }
 
-
         if (request()->has('min_price')) {
             $min_price = request()->min_price;
             $query->where('price', '>', $min_price);

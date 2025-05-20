@@ -25,6 +25,8 @@ Route::middleware('throttle:api')->group(function () {
         Route::post('/signup', [AuthController::class, 'signup']);
         Route::get('/logout', [AuthController::class, 'logout']);
 
+        // Пользователь
+        Route::patch('/profile', [AuthController::class, 'update']);
 
     });
 
@@ -49,7 +51,6 @@ Route::middleware('throttle:api')->group(function () {
 //    Route::post('rooms/{id}/feedback', [FeedbackController::class, 'store'])
 //        ->where('id', '[0-9]+');
 //
-//    Route::patch('/profile', [AuthController::class, 'update']);
 //
    // Админ
 //    Route::patch('/main', [MainPageController::class, 'update']);
