@@ -8,6 +8,7 @@ use App\Models\Feedback;
 use App\Models\Room;
 use App\Services\FeedbackService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FeedbackController extends Controller
 {
@@ -32,6 +33,7 @@ class FeedbackController extends Controller
      */
     public function store(Room $room, StoreFeedbackRequest $request, FeedbackService $feedbackService)
     {
+        Gate::authorize('create', Feedback::class);
         return $feedbackService->store($room, $request);
     }
 
