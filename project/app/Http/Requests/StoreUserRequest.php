@@ -22,35 +22,36 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'phone' => 'required|string|max:15|unique:users',
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
+            'name' => ['required', 'regex:/^[А-Яа-яЁё\s\.\-]+$/u'],
+            'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:8'],
         ];
     }
+
 
     public function messages(): array
     {
         return [
-            'email.required' => 'Поле "Почта" обязательно для заполнения.',
-            'email.email' => 'Введена неверная электронная почта.',
-            'email.unique' => 'Почта уже занята.',
-            'email.max' => 'Максимальная длина почты - 255 символов.',
+            'avatar.image' => 'Аватар должен быть изображением.',
+            'avatar.mimes' => 'Аватар должен быть в формате jpeg или png.',
+            'avatar.max' => 'Размер аватара не должен превышать 2 МБ.',
 
-            'name.required' => 'Поле "Имя" обязательно для заполнения.',
-            'name.max' => 'Максимальная длина имени - 255 символов.',
+            'name.required' => 'Поле "Ваше имя" обязательно для заполнения.',
+            'name.regex' => 'Имя может содержать только кириллические буквы, пробелы, точки и тире.',
+
+            'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
+            'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
+
+            'email.required' => 'Поле "E-mail" обязательно для заполнения.',
+            'email.email' => 'Введите корректный e-mail.',
+            'email.unique' => 'Такой e-mail уже зарегистрирован.',
 
             'password.required' => 'Поле "Пароль" обязательно для заполнения.',
-            'password.min' => 'Минимальная длина пароля - 8 символов.',
-
-            'phone.unique' => 'Номер телефона уже занят.',
-            'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
-            'phone.max' => 'Максимальная длина номера телефона - 15 цифр.',
-
-            'avatar.image' => 'Аватар должен быть изображением.',
-            'avatar.mimes' => 'Формат изображения должен быть jpeg, png, jpg.',
-            'avatar.max' => 'Максимальный размер изображения - 2 МБ.',
+            'password.min' => 'Пароль должен содержать не менее 8 символов.',
         ];
     }
+
+
 }

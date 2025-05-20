@@ -31,6 +31,7 @@ class Feedback extends Model
         'room_id'
     ];
 
+
     public $timestamps = false;
 
 }

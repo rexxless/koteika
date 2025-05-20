@@ -3,22 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRoomRequest;
-use App\Http\Resources\RoomResource;
-use App\Models\Room;
-use App\Actions\RoomSortAction;
-use App\Services\RoomService;
+use App\Http\Requests\StoreBookingRequest;
+use App\Models\Booking;
+use App\Services\BookingService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-class RoomController extends Controller
+class BookingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return RoomSortAction::execute();
+        //
     }
 
     /**
@@ -32,24 +29,23 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRoomRequest $request, RoomService $roomService)
+    public function store(StoreBookingRequest $request, BookingService $bookingService)
     {
-        Gate::authorize('create', Room::class);
-        return $roomService->store($request);
+        return $bookingService->create($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show()
     {
-        return RoomResource::make($room);
+        return Booking::query()->where('user_id', auth()->id())->select(['id', 'room_id', 'check_in', 'check_out'])->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit(Booking $booking)
     {
         //
     }
@@ -57,7 +53,7 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Booking $booking)
     {
         //
     }
@@ -65,8 +61,8 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy(Booking $booking, BookingService $bookingService)
     {
-        //
+       return $bookingService->destroy($booking);
     }
 }

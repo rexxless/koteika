@@ -12,6 +12,10 @@ docker compose exec backend php artisan key:generate
 docker compose exec backend php artisan migrate
 ```
 
+Для заполнения БД тестовыми данными необходимо ввести следующую команду:
+```shell
+docker compose exec backend php artisan db:seed
+```
 
 Для всех последующих запусков достаточно скопировать в терминал следующее:
 ```shell

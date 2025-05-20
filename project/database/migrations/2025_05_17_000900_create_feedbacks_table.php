@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->smallInteger('rate');
             $table->foreignId('author')->constrained('users');
-            $table->string('title');
-            $table->text('description');
+            $table->string('title')->nullable();
+            $table->text('description')->nullable();
             $table->foreignId('room_id')->constrained('rooms');
         });
     }

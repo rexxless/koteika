@@ -3,22 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreRoomRequest;
-use App\Http\Resources\RoomResource;
+use App\Http\Requests\StoreFeedbackRequest;
+use App\Models\Feedback;
 use App\Models\Room;
-use App\Actions\RoomSortAction;
-use App\Services\RoomService;
+use App\Services\FeedbackService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
-class RoomController extends Controller
+class FeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return RoomSortAction::execute();
+        //
     }
 
     /**
@@ -32,10 +30,9 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRoomRequest $request, RoomService $roomService)
+    public function store(Room $room, StoreFeedbackRequest $request, FeedbackService $feedbackService)
     {
-        Gate::authorize('create', Room::class);
-        return $roomService->store($request);
+        return $feedbackService->store($room, $request);
     }
 
     /**
@@ -43,13 +40,13 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        return RoomResource::make($room);
+       return $room->feedbacks()->select(['author', 'rate', 'title', 'description'])->get();
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Room $room)
+    public function edit(Feedback $feedback)
     {
         //
     }
@@ -57,7 +54,7 @@ class RoomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(Request $request, Feedback $feedback)
     {
         //
     }
@@ -65,7 +62,7 @@ class RoomController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy(Feedback $feedback)
     {
         //
     }
