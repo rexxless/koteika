@@ -32,6 +32,16 @@ class RoomSortAction
             $query->where('price', '<', $max_price);
         }
 
+        if (request()->has('min_square')) {
+            $min_square = request()->min_square;
+            $query->where('width * length', '>', $min_square);
+        }
+
+        if (request()->has('max_square')) {
+            $max_square = request()->max_square;
+            $query->where('width * length', '<', $max_square);
+        }
+
         if (request()-> has('sortby')) {
             if (request()->sortby === 'price_desc') {
                 $query->orderByDesc('price');
