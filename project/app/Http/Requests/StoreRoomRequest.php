@@ -30,7 +30,7 @@ class StoreRoomRequest extends FormRequest
             'price' => ['required', 'integer', 'min:0'],
             'photos' => ['nullable', 'array', 'max:5'],
             'photos.*' => ['image', 'mimes:jpeg,png', 'max:2048'], // размер в КБ
-            'featured' => ['nullable', 'boolean'],
+            'showcase' => ['nullable', 'boolean'],
         ];
     }
 
