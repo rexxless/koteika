@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\MainPageController;
 use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('throttle:api')->group(function () {
@@ -35,7 +36,7 @@ Route::middleware('throttle:api')->group(function () {
         Route::get('/bookings', [BookingController::class, 'show']);
         Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
         Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
-        Route::patch('/profile', [AuthController::class, 'update']);
+        Route::patch('/profile', [UserController::class, 'update']);
     });
 
 });

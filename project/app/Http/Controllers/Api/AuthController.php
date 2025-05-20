@@ -21,11 +21,6 @@ class AuthController extends Controller
         return $authService->login($request);
     }
 
-    public function update(Request $request, AuthService $authService)
-    {
-
-    }
-
     public function logout(Request $request)
     {
         Auth::user()->currentAccessToken()->delete();
