@@ -39,22 +39,8 @@ Route::middleware('throttle:api')->group(function () {
     });
 
 });
-//
-//
-// ошибка если неавторизованный пользователь
-//Route::get('/unauthorized', [AuthController::class, 'unauthorized'])
-//    ->name('login');
-//
-//
-//
-   // Пользователь
 
 
-
-//
-
-//
-//
    // Админ
 //    Route::patch('/main', [MainPageController::class, 'update']);
 //
@@ -65,9 +51,9 @@ Route::middleware('throttle:api')->group(function () {
 //    Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 //
 //    Route::patch('/rooms/{room}', [RoomController::class, 'update'])
+
 //    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])
 
-//
 //    Route::get('/bookings', [BookingController::class, 'index']);
 //
    // тут удаление брони от админа, точно такой же роут есть от лица юзера, разграничивать будем через политику

@@ -23,7 +23,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'avatar' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
-            'name' => ['required', 'regex:/^[А-Яа-яЁё\s\.\-]+$/u'],
+            'name' => ['required', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u'],
             'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:8'],
