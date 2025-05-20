@@ -3,13 +3,28 @@
 namespace App\Services;
 
 use App\Http\Requests\StoreBookingRequest;
+use App\Http\Resources\BookingResource;
+use App\Http\Resources\UserBookingResource;
 use App\Models\Booking;
 use App\Models\Pet;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class BookingService
 {
+    public function index()
+    {
+        $bookings = Booking::with('pets')->get();
+        return BookingResource::collection($bookings);
+    }
+    public function show()
+    {
+        $userId = auth()->id();
+        $bookings = Booking::with('pets')->where('user_id', $userId)->get();
+
+        return UserBookingResource::collection($bookings);
+    }
     public function create(StoreBookingRequest $request)
     {
         $data = $request->only(['room_id', 'check_in', 'check_out']);
@@ -28,7 +43,9 @@ class BookingService
             ]);
         }
 
-        return response()->json('Бронь успешно создана', 201);
+        return response()->json([
+            'message' => 'Бронь успешно создана'
+        ], 201);
     }
 
     public function destroy(Booking $booking)
@@ -41,6 +58,16 @@ class BookingService
             return response()->json(['message'=> 'Бронь уже подтверждена, для удаления свяжитесь с администратором.'], 409);
         }
 
+        Pet::query()->where('booking_id', $booking->id)->delete();
+        $booking->delete();
+        return response()->json(['message' => 'Бронь успешно удалена.']);
+    }
+
+    public function adminDestroy(Booking $booking)
+    {
+        if ($booking->approved) {
+            return response()->json(['message'=> 'Нельзя удалить подтверждённую бронь.'], 409);
+        }
         Pet::query()->where('booking_id', $booking->id)->delete();
         $booking->delete();
         return response()->json(['message' => 'Бронь успешно удалена.']);

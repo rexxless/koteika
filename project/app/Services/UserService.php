@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -34,7 +35,7 @@ class UserService
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
         $user->save();

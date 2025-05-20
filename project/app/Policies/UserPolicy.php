@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Models\Room;
 use App\Models\User;
 
 class UserPolicy
@@ -11,7 +10,7 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Room $room): bool
+    public function update(User $user): bool
     {
         return !$user->is_admin;
     }

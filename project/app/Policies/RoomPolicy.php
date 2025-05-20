@@ -29,7 +29,7 @@ class RoomPolicy
      */
     public function create(User $user): bool
     {
-        return $user->is_admin == true;
+        return $user->is_admin;
     }
 
     /**
@@ -37,7 +37,7 @@ class RoomPolicy
      */
     public function update(User $user, Room $room): bool
     {
-        return $user->is_admin == true;
+        return $user->is_admin;
     }
 
     /**
@@ -45,7 +45,7 @@ class RoomPolicy
      */
     public function delete(User $user, Room $room): bool
     {
-        return $user->is_admin == true;
+        return $user->is_admin;
     }
 
 }

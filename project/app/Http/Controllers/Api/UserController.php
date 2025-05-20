@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -29,7 +29,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserService $userService)
+    public function update(UpdateUserRequest $request, UserService $userService)
     {
         Gate::authorize('update', User::class);
         return $userService->update($request);

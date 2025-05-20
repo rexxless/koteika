@@ -24,7 +24,7 @@ class AuthService
         if (!Auth::attempt($request->only(['email', 'password']))) {
             return response()->json(['error' => 'Неправильный логин или пароль'], 401);
         }
-        $user = User::query()->where('email', $request->email)->first();
+        $user = Auth::user();
         $user->tokens()->delete();
         return response()->json([
             'token' => $user->createToken('token')->plainTextToken,

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
 use App\Services\BookingService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class BookingController extends Controller
 {
@@ -31,15 +32,21 @@ class BookingController extends Controller
      */
     public function store(StoreBookingRequest $request, BookingService $bookingService)
     {
+        Gate::authorize('create', Booking::class);
         return $bookingService->create($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(BookingService $bookingService, Booking $booking)
     {
-        return Booking::query()->where('user_id', auth()->id())->select(['id', 'room_id', 'check_in', 'check_out'])->get();
+        // тут или пользователь смотрит свои брони, или админ смотрит все брони
+        if (auth()->user()->can('view', $booking)) {
+            return $bookingService->show();
+        } else if (auth()->user()->can('viewAll', $booking)) {
+            return $bookingService->index();
+        } abort(403);
     }
 
     /**
@@ -63,6 +70,11 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking, BookingService $bookingService)
     {
-       return $bookingService->destroy($booking);
+        // тут или пользователь удаляет свою бронь, или админ удаляет любую
+        if (auth()->user()->can('destroy', $booking)) {
+            return $bookingService->destroy($booking);
+        } else if (auth()->user()->can('adminDestroy', $booking)) {
+            return $bookingService->adminDestroy($booking);
+        } abort(403);
     }
 }
