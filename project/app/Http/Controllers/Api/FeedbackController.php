@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreFeedbackRequest;
 use App\Models\Feedback;
 use App\Models\Room;
+use App\Services\FeedbackService;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -28,9 +30,9 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Room $room, StoreFeedbackRequest $request, FeedbackService $feedbackService)
     {
-        //
+        return $feedbackService->store($room, $request);
     }
 
     /**
