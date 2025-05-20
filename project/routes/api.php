@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AmenityController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\MainPageController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,8 @@ Route::middleware('throttle:api')->group(function () {
 
     Route::post('/signup', [AuthController::class, 'signup']);
 
+    Route::get('/rooms/{room}/feedback', [FeedbackController::class, 'show']);
+
 
     // Для авторизованного
     Route::middleware('auth:sanctum')->group(function () {
@@ -36,8 +39,6 @@ Route::middleware('throttle:api')->group(function () {
 
 });
 //
-//Route::get('/rooms/{id}/feedback', [FeedbackController::class, 'show'])
-//    ->where('id', '[0-9]+');
 //
 // ошибка если неавторизованный пользователь
 //Route::get('/unauthorized', [AuthController::class, 'unauthorized'])
@@ -48,11 +49,9 @@ Route::middleware('throttle:api')->group(function () {
    // Пользователь
 
 //    Route::get('/bookings', [BookingController::class, 'show']);
-//    Route::delete('/bookings/{id}', [BookingController::class, 'destroy'])
-//        ->where('id', '[0-9]+');
+//    Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
 //
-//    Route::post('rooms/{id}/feedback', [FeedbackController::class, 'store'])
-//        ->where('id', '[0-9]+');
+//    Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
 //
 //    Route::patch('/profile', [AuthController::class, 'update']);
 //
@@ -61,24 +60,18 @@ Route::middleware('throttle:api')->group(function () {
 //
 //    Route::post('/rooms/amenities', [AmenityController::class, 'store']);
 //    Route::patch('rooms/amenities/{amenity}', [AmenityController::class, 'update'])
-//        ->where('amenity', '[0-9]+');
 //    Route::delete('/rooms/amenities/{amenity}', [AmenityController::class, 'destroy'])
-//        ->where('amenity', '[0-9]+');
 //
-//    Route::post('/bookings/{id}', [BookingController::class, 'approved'])
-//        ->where('id', '[0-9]+');
+//    Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 //
-//    Route::patch('/rooms/{id}', [RoomController::class, 'update'])
-//        ->where('id', '[0-9]+');
-//    Route::delete('/rooms/{id}', [RoomController::class, 'destroy'])
-//        ->where('id', '[0-9]+');
+//    Route::patch('/rooms/{room}', [RoomController::class, 'update'])
+//    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])
 
 //
 //    Route::get('/bookings', [BookingController::class, 'index']);
 //
    // тут удаление брони от админа, точно такой же роут есть от лица юзера, разграничивать будем через политику
-   //Route::delete('/bookings/{id}', [BookingController::class, 'destroy'])
-   //    ->where('id', '[0-9]+');
+   //Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])
 //
    // выход
 
