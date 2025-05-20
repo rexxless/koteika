@@ -32,6 +32,7 @@ class User extends Authenticatable
 
     protected $hidden = [
         'is_admin',
+        'password'
     ];
 
     protected function casts()

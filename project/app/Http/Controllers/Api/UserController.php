@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -32,7 +33,8 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, UserService $userService)
     {
         Gate::authorize('update', User::class);
-        return $userService->update($request);
+        $user = Auth::user();
+        return $userService->update($request, $user);
     }
 
     /**
