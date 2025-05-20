@@ -61,8 +61,8 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Booking $booking)
+    public function destroy(Booking $booking, BookingService $bookingService)
     {
-        //
+       return $bookingService->destroy($booking);
     }
 }

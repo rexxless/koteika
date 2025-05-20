@@ -34,8 +34,7 @@ Route::middleware('throttle:api')->group(function () {
         Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
         Route::post('rooms', [RoomController::class, 'store']);
         Route::get('/bookings', [BookingController::class, 'show']);
-
-
+        Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
     });
 
 });
@@ -50,7 +49,7 @@ Route::middleware('throttle:api')->group(function () {
    // Пользователь
 
 
-//    Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
+
 //
 //    Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
 //

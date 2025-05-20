@@ -30,4 +30,19 @@ class BookingService
 
         return response()->json('Бронь успешно создана', 201);
     }
+
+    public function destroy(Booking $booking)
+    {
+        if ($booking->user_id != Auth::id()) {
+            return response()->json(['message'=> 'Вы не можете удалять чужие брони.'], 409);
+        }
+
+        if ($booking->approved) {
+            return response()->json(['message'=> 'Бронь уже подтверждена, для удаления свяжитесь с администратором.'], 409);
+        }
+
+        Pet::query()->where('booking_id', $booking->id)->delete();
+        $booking->delete();
+        return response()->json(['message' => 'Бронь успешно удалена.']);
+    }
 }
