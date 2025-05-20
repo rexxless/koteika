@@ -14,15 +14,18 @@ Route::middleware('throttle:api')->group(function () {
     // Гость
     Route::get('/main', [MainPageController::class, 'index']);
 
+
     Route::get('/rooms', [RoomController::class, 'index']);
 
     Route::get('/rooms/amenities', [AmenityController::class, 'index']);
 
     Route::get('/rooms/{room}', [RoomController::class, 'show']);
 
+
     Route::post('/login', [AuthController::class, 'login']);
 
     Route::post('/signup', [AuthController::class, 'signup']);
+
 
     Route::get('/rooms/{room}/feedback', [FeedbackController::class, 'show']);
 
@@ -30,15 +33,24 @@ Route::middleware('throttle:api')->group(function () {
     // Для авторизованного
     Route::middleware('auth:sanctum')->group(function () {
 
-        Route::get('/logout', [AuthController::class, 'logout']);
+        // Пользователь
         Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
-        Route::post('rooms', [RoomController::class, 'store']);
-        Route::get('/bookings', [BookingController::class, 'show']);
-        Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
-        Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
-        Route::patch('/profile', [UserController::class, 'update']);
-    });
 
+        Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
+
+        Route::patch('/profile', [UserController::class, 'update']);
+
+        // Админ
+        Route::post('rooms', [RoomController::class, 'store']);
+
+        // Пользователь | Админ
+        Route::get('/bookings', [BookingController::class, 'show']);
+
+        Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
+
+        // Выход
+        Route::get('/logout', [AuthController::class, 'logout']);
+    });
 });
 
 

@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthService
 {
-    /**
-     * Create a new class instance.
-     */
     public function signup(StoreUserRequest $request)
     {
         User::create($request->validated());
