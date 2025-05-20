@@ -29,13 +29,13 @@ Route::middleware('throttle:api')->group(function () {
     // Для авторизованного
     Route::middleware('auth:sanctum')->group(function () {
 
-
         Route::get('/logout', [AuthController::class, 'logout']);
         Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
         Route::post('rooms', [RoomController::class, 'store']);
         Route::get('/bookings', [BookingController::class, 'show']);
         Route::delete('/bookings/{booking}', [BookingController::class, 'destroy']);
         Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
+        Route::patch('/profile', [AuthController::class, 'update']);
     });
 
 });
@@ -54,7 +54,6 @@ Route::middleware('throttle:api')->group(function () {
 //
 
 //
-//    Route::patch('/profile', [AuthController::class, 'update']);
 //
    // Админ
 //    Route::patch('/main', [MainPageController::class, 'update']);
