@@ -17,7 +17,6 @@ class Pet extends Model
     }
     protected $fillable = [
         'name',
-        'animal',
         'booking_id'
     ];
 

@@ -10,7 +10,6 @@ class PetFactory extends Factory
     {
         return [
             'name' => $this->faker->firstName(),
-            'animal' => $this->faker->randomElement(['dog', 'cat', 'bird', 'other']),
             'booking_id' => \App\Models\Booking::factory(),
         ];
     }

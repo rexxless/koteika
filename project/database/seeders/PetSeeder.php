@@ -18,7 +18,6 @@ class PetSeeder extends Seeder
             Pet::factory()->create([
                 'booking_id' => $booking->id,
                 'name' => fake('ru_RU')->firstName(),
-                'animal' => fake('ru_RU')->randomElement(['собака', 'кошка', 'попугай']),
             ]);
         });
     }

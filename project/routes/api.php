@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AmenityController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\MainPageController;
 use App\Http\Controllers\Api\RoomController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::middleware('throttle:api')->group(function () {
 
 
         Route::get('/logout', [AuthController::class, 'logout']);
-
+        Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
 
     });
 

@@ -19,12 +19,14 @@ class Booking extends Model
         'room_id',
         'check_in',
         'check_out',
+        'pets',
         'user_id',
     ];
 
     protected $hidden = [
         'approved'
     ];
+
     public $timestamps = false;
 
 }
