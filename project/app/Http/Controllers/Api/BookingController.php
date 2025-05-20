@@ -37,9 +37,9 @@ class BookingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Booking $booking)
+    public function show()
     {
-        //
+        return Booking::query()->where('user_id', auth()->id())->select(['id', 'room_id', 'check_in', 'check_out'])->get();
     }
 
     /**
