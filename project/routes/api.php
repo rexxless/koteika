@@ -29,6 +29,8 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::get('/logout', [AuthController::class, 'logout']);
         Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
+        Route::post('rooms', [RoomController::class, 'store']);
+
 
     });
 
@@ -70,7 +72,7 @@ Route::middleware('throttle:api')->group(function () {
 //        ->where('id', '[0-9]+');
 //    Route::delete('/rooms/{id}', [RoomController::class, 'destroy'])
 //        ->where('id', '[0-9]+');
-//    Route::post('/rooms', [RoomController::class, 'store']);
+
 //
 //    Route::get('/bookings', [BookingController::class, 'index']);
 //
