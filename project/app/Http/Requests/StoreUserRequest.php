@@ -22,39 +22,36 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
-            'phone' => 'required|string|max:15|unique:users',
+            'avatar' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
+            'name' => ['required', 'regex:/^[А-Яа-яЁё\s\.\-]+$/u'],
+            'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:8'],
         ];
     }
+
 
     public function messages(): array
     {
         return [
             'avatar.image' => 'Аватар должен быть изображением.',
-            'avatar.mimes' => 'Аватар должен быть в формате: jpeg, png, jpg.',
+            'avatar.mimes' => 'Аватар должен быть в формате jpeg или png.',
             'avatar.max' => 'Размер аватара не должен превышать 2 МБ.',
 
-            'name.required' => 'Поле "Имя" обязательно для заполнения.',
-            'name.string' => 'Поле "Имя" должно быть строкой.',
-            'name.max' => 'Имя не должно превышать 255 символов.',
-
-            'email.required' => 'Поле "Email" обязательно для заполнения.',
-            'email.email' => 'Неверный адрес электронной почты.',
-            'email.max' => 'Email не должен превышать 255 символов.',
-            'email.unique' => 'Этот Email уже зарегистрирован.',
-
-            'password.required' => 'Поле "Пароль" обязательно для заполнения.',
-            'password.string' => 'Пароль должен быть строкой.',
-            'password.min' => 'Пароль должен содержать не менее 8 символов.',
+            'name.required' => 'Поле "Ваше имя" обязательно для заполнения.',
+            'name.regex' => 'Имя может содержать только кириллические буквы, пробелы, точки и тире.',
 
             'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
-            'phone.string' => 'Телефон должен быть строкой.',
-            'phone.max' => 'Телефон не должен превышать 15 символов.',
-            'phone.unique' => 'Этот номер телефона уже зарегистрирован.',
+            'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
+
+            'email.required' => 'Поле "E-mail" обязательно для заполнения.',
+            'email.email' => 'Введите корректный e-mail.',
+            'email.unique' => 'Такой e-mail уже зарегистрирован.',
+
+            'password.required' => 'Поле "Пароль" обязательно для заполнения.',
+            'password.min' => 'Пароль должен содержать не менее 8 символов.',
         ];
     }
+
 
 }
