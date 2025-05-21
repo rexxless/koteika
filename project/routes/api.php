@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\MainPageController;
 use App\Http\Controllers\Api\RoomController;
+use App\Http\Controllers\Api\SocialLinkController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,9 @@ Route::middleware('throttle:api')->group(function () {
         Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 
         Route::patch('/main', [MainPageController::class, 'update']);
+
+        Route::post('/main/social_links', [SocialLinkController::class, 'store']);
+        Route::delete('/main/social_links/{link}', [SocialLinkController::class, 'destroy']);
 
         // Пользователь | Админ
         Route::get('/bookings', [BookingController::class, 'show']);
