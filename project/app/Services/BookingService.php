@@ -65,11 +65,18 @@ class BookingService
 
     public function adminDestroy(Booking $booking)
     {
-        if ($booking->approved) {
-            return response()->json(['message'=> 'Нельзя удалить подтверждённую бронь.'], 409);
-        }
         Pet::query()->where('booking_id', $booking->id)->delete();
         $booking->delete();
         return response()->json(['message' => 'Бронь успешно удалена.']);
+    }
+
+    public function approve(Booking $booking)
+    {
+        if ($booking->approved) {
+            return response()->json(['message' => 'Бронь уже подтверждена.'], 409);
+        }
+        $booking->update(['approved' => true]);
+        $booking->save();
+        return response()->json(['message' => 'Бронь успешно подтверждена.']);
     }
 }

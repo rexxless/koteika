@@ -77,4 +77,10 @@ class BookingController extends Controller
             return $bookingService->adminDestroy($booking);
         } abort(403);
     }
+
+    public function approve(Booking $booking, BookingService $bookingService)
+    {
+        Gate::authorize('approve', $booking);
+        return $bookingService->approve($booking);
+    }
 }

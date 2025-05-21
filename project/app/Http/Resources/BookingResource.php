@@ -21,6 +21,7 @@ class BookingResource extends JsonResource
             'check_in' => $this->check_in,
             'check_out' => $this->check_out,
             'pets' => $this->whenLoaded('pets')->pluck('id')->toArray(),
+            'approved' => $this->approved
         ];
     }
 }

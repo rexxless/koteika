@@ -42,6 +42,7 @@ Route::middleware('throttle:api')->group(function () {
 
         // Админ
         Route::post('rooms', [RoomController::class, 'store']);
+        Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 
         // Пользователь | Админ
         Route::get('/bookings', [BookingController::class, 'show']);
@@ -61,7 +62,7 @@ Route::middleware('throttle:api')->group(function () {
 //    Route::patch('rooms/amenities/{amenity}', [AmenityController::class, 'update'])
 //    Route::delete('/rooms/amenities/{amenity}', [AmenityController::class, 'destroy'])
 //
-//    Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
+
 //
 //    Route::patch('/rooms/{room}', [RoomController::class, 'update'])
 

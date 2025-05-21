@@ -31,4 +31,9 @@ class BookingPolicy
     {
         return $user->is_admin;
     }
+
+    public function approve(User $user, Booking $room): bool
+    {
+        return $user->is_admin;
+    }
 }
