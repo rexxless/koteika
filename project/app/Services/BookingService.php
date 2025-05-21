@@ -76,7 +76,6 @@ class BookingService
             return response()->json(['message' => 'Бронь уже подтверждена.'], 409);
         }
         $booking->update(['approved' => true]);
-        $booking->save();
         return response()->json(['message' => 'Бронь успешно подтверждена.']);
     }
 }

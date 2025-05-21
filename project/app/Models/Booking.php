@@ -27,6 +27,7 @@ class Booking extends Model
         'check_out',
         'pets',
         'user_id',
+        'approved'
     ];
 
     public $timestamps = false;
