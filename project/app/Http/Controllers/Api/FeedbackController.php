@@ -31,10 +31,10 @@ class FeedbackController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Room $room, StoreFeedbackRequest $request, FeedbackService $feedbackService)
+    public function store(Feedback $feedback, StoreFeedbackRequest $request, FeedbackService $feedbackService)
     {
-        Gate::authorize('create', Feedback::class);
-        return $feedbackService->store($room, $request);
+        Gate::authorize('create', $feedback);
+        return $feedbackService->store($feedback, $request);
     }
 
     /**

@@ -43,6 +43,7 @@ class UpdateUserRequest extends FormRequest
 
             'phone.unique' => 'Номер телефона уже занят.',
             'phone.max' => 'Максимальная длина номера телефона - 15 цифр.',
+            'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
 
             'avatar.image' => 'Аватар должен быть изображением.',
             'avatar.mimes' => 'Формат изображения должен быть jpeg, png, jpg.',

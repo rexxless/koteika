@@ -36,7 +36,7 @@ class StoreFeedbackRequest extends FormRequest
             $description = $this->input('description');
 
             if (! (new DescriptionRequiresTitle($title, $description))->passes('', '')) {
-                $validator->errors()->add('check_in', 'Комната уже забронирована на эту дату.');
+                $validator->errors()->add('title', 'Введите заголовок отзыва.');
             }
         });
     }

@@ -19,7 +19,8 @@ class UserBookingResource extends JsonResource
             'room_id' => $this->room_id,
             'check_in' => $this->check_in,
             'check_out' => $this->check_out,
-            'pets' => $this->whenLoaded('pets')->pluck('id')->toArray(),
+            'pets' => $this->whenLoaded('pets')->pluck('name')->toArray(),
+            'approved' => $this->approved
         ];
     }
 }

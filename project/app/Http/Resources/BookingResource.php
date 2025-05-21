@@ -20,7 +20,7 @@ class BookingResource extends JsonResource
             'user_id' => $this->user_id,
             'check_in' => $this->check_in,
             'check_out' => $this->check_out,
-            'pets' => $this->whenLoaded('pets')->pluck('id')->toArray(),
+            'pets' => $this->whenLoaded('pets')->pluck('name')->toArray(),
             'approved' => $this->approved
         ];
     }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateMainDataRequest;
 use App\Models\Feedback;
 use App\Models\MainData;
 use App\Models\SocialLink;
+use Illuminate\Support\Facades\Gate;
 use App\Services\MainPageService;
 use Illuminate\Http\Request;
 
@@ -38,9 +40,10 @@ class MainPageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMainDataRequest $request, MainPageService $mainPageService)
     {
-        //
+        Gate::authorize('update', MainData::class);
+        return $mainPageService->update($request);
     }
 
     /**
