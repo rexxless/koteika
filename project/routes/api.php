@@ -15,13 +15,11 @@ Route::middleware('throttle:api')->group(function () {
     // Гость
     Route::get('/main', [MainPageController::class, 'index']);
 
-
     Route::get('/rooms', [RoomController::class, 'index']);
 
     Route::get('/rooms/amenities', [AmenityController::class, 'index']);
 
     Route::get('/rooms/{room}', [RoomController::class, 'show']);
-
 
     Route::post('/login', [AuthController::class, 'login']);
 
@@ -29,7 +27,6 @@ Route::middleware('throttle:api')->group(function () {
 
 
     Route::get('/rooms/{room}/feedback', [FeedbackController::class, 'show']);
-
 
     // Для авторизованного
     Route::middleware('auth:sanctum')->group(function () {
@@ -43,6 +40,7 @@ Route::middleware('throttle:api')->group(function () {
 
         // Админ
         Route::apiResource('/rooms', RoomController::class);
+
         Route::apiResource('/rooms/amenities', AmenityController::class);
 
         Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
@@ -50,6 +48,7 @@ Route::middleware('throttle:api')->group(function () {
         Route::patch('/main', [MainPageController::class, 'update']);
 
         Route::post('/main/social_links', [SocialLinkController::class, 'store']);
+
         Route::delete('/main/social_links/{link}', [SocialLinkController::class, 'destroy']);
 
         // Пользователь | Админ
