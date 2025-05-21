@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('amenities', function (Blueprint $table) {
             $table->string('name')->primary();
-            $table->text('link');
+            $table->text('icon');
         });
     }
 

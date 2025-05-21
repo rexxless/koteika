@@ -3,64 +3,48 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAmenityRequest;
+use App\Http\Requests\UpdateAmenityRequest;
 use App\Models\Amenity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AmenityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return Amenity::query()->get();
+        return response()->json(Amenity::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreAmenityRequest $request, Amenity $amenity)
     {
-        //
+        Gate::authorize('create', $amenity);
+        $amenity = Amenity::create($request->validated());
+        return response()->json([
+            'message' => 'Оснащение номера успешно добавлено.',
+            'amenity' => $amenity
+        ], 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Amenity $amenity)
     {
-        //
+        return response()->json($amenity);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Amenity $amenity)
+    public function update(UpdateAmenityRequest $request, Amenity $amenity)
     {
-        //
+        Gate::authorize('update', $amenity);
+        $amenity->update($request->validated());
+        return response()->json([
+            'message' => 'Оснащение номера успешно обновлено.',
+            'amenity' => $amenity
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Amenity $amenity)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Amenity $amenity)
     {
-        //
+        Gate::authorize('delete', $amenity);
+        $amenity->delete();
+        return response()->json(['message' => 'Оснащение номера удалено.']);
     }
 }

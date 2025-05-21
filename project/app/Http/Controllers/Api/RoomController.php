@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
 use App\Actions\RoomSortAction;
@@ -46,20 +47,18 @@ class RoomController extends Controller
         return RoomResource::make($room);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Room $room)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Room $room)
+    public function update(UpdateRoomRequest $request, Room $room)
     {
-        //
+        Gate::authorize('update', $room);
+        $room->update($request->validated());
+        return response()->json([
+            'message' => 'Комната успешно обновлена',
+            'room' => RoomResource::make($room)
+        ]);
     }
 
     /**
@@ -67,6 +66,8 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        //
+        Gate::authorize('destroy', $room);
+        $room->delete();
+        return response()->json(['message' => 'Комната успешно удалена']);
     }
 }

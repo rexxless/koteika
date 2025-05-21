@@ -10,7 +10,7 @@ class AmenityFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->word(),
-            'link' => $this->faker->imageUrl(),
+            'icon' => $this->faker->imageUrl(),
         ];
     }
 }

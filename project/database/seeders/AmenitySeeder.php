@@ -17,7 +17,7 @@ class AmenitySeeder extends Seeder
         foreach ($iconNames as $name) {
             Amenity::create([
                 'name' => $name,
-                'link' => fake()->imageUrl(),
+                'icon' => fake()->imageUrl(),
             ]);
         }
     }

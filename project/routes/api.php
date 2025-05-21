@@ -42,7 +42,8 @@ Route::middleware('throttle:api')->group(function () {
         Route::patch('/profile', [UserController::class, 'update']);
 
         // Админ
-        Route::post('rooms', [RoomController::class, 'store']);
+        Route::apiResource('/rooms', RoomController::class);
+        Route::apiResource('/rooms/amenities', AmenityController::class);
 
         Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 
@@ -60,27 +61,5 @@ Route::middleware('throttle:api')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout']);
     });
 });
-
-
-   // Админ
-//
-//    Route::post('/rooms/amenities', [AmenityController::class, 'store']);
-//    Route::patch('rooms/amenities/{amenity}', [AmenityController::class, 'update'])
-//    Route::delete('/rooms/amenities/{amenity}', [AmenityController::class, 'destroy'])
-//
-
-//
-//    Route::patch('/rooms/{room}', [RoomController::class, 'update'])
-
-//    Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])
-
-//    Route::get('/bookings', [BookingController::class, 'index']);
-//
-   // тут удаление брони от админа, точно такой же роут есть от лица юзера, разграничивать будем через политику
-   //Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])
-//
-   // выход
-
-//});
 
 
