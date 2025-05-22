@@ -11,4 +11,14 @@ class FeedbackPolicy
     {
         return !$user->is_admin;
     }
+
+    public function update(User $user, Feedback $feedback)
+    {
+        return !$user->is_admin;
+    }
+
+    public function delete(User $user, Feedback $feedback)
+    {
+        return $user->is_admin;
+    }
 }

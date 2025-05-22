@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFeedbackRequest;
+use App\Http\Requests\UpdateFeedbackRequest;
 use App\Models\Feedback;
 use App\Models\Room;
 use App\Services\FeedbackService;
@@ -13,28 +14,12 @@ use Illuminate\Support\Facades\Gate;
 class FeedbackController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Feedback $feedback, StoreFeedbackRequest $request, FeedbackService $feedbackService)
     {
         Gate::authorize('create', $feedback);
-        return $feedbackService->store($feedback, $request);
+        return $feedbackService->store($request);
     }
 
     /**
@@ -50,7 +35,8 @@ class FeedbackController extends Controller
      */
     public function update(Feedback $feedback, UpdateFeedbackRequest $request, FeedbackService $feedbackService)
     {
-        Gate::authorize('create', $feedback);
+        Gate::authorize('update', $feedback);
+        return $feedbackService->update($request);
     }
 
     /**
@@ -58,6 +44,8 @@ class FeedbackController extends Controller
      */
     public function destroy(Feedback $feedback)
     {
-        //
+        Gate::authorize('delete', $feedback);
+        $feedback->delete();
+        return response()->json(['message' => 'Отзыв успешно удалён']);
     }
 }
