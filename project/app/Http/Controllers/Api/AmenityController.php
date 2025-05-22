@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAmenityRequest;
 use App\Http\Requests\UpdateAmenityRequest;
 use App\Models\Amenity;
+use App\Services\AmenityService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,14 +17,10 @@ class AmenityController extends Controller
         return response()->json(Amenity::all());
     }
 
-    public function store(StoreAmenityRequest $request, Amenity $amenity)
+    public function store(StoreAmenityRequest $request, Amenity $amenity, AmenityService $service)
     {
         Gate::authorize('create', $amenity);
-        $amenity = Amenity::create($request->validated());
-        return response()->json([
-            'message' => 'Оснащение номера успешно добавлено.',
-            'amenity' => $amenity
-        ], 201);
+        return $service->store($request);
     }
 
     public function show(Amenity $amenity)

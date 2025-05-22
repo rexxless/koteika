@@ -15,7 +15,7 @@ class Amenity extends Model
 
     protected $fillable = [
         'name',
-        'link'
+        'icon'
     ];
 
     public function rooms()
