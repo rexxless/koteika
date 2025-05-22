@@ -17,7 +17,7 @@ class MainDataSeeder extends Seeder
             'title' => 'Гостиница Котейка',
             'city' => 'Москва',
             'slogan' => 'Лучшее место для вашего питомца!',
-            'phone' => '+7 495 123-45-67',
+            'phone' => '+7(495)123-45-67',
             'email' => 'info@koteika.ru',
             'address' => 'ул. Пушкина, д. 34',
             'working_time' => '10:00 - 21:00'
