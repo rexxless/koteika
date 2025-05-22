@@ -15,7 +15,7 @@ class BookingSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::query()->first();
+        $user = User::query()->where('id', 2)->first();
         Room::all()->each(function ($room) use ($user) {
             Booking::factory()->create([
                 'room_id' => $room->id,
