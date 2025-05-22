@@ -7,7 +7,6 @@ use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
 use App\Models\Room;
-use App\Actions\RoomSortAction;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -17,9 +16,9 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(RoomService $service)
     {
-        return RoomSortAction::execute();
+        return $service->sorted_search();
     }
 
     /**
