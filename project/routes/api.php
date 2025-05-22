@@ -39,9 +39,13 @@ Route::middleware('throttle:api')->group(function () {
         Route::patch('/profile', [UserController::class, 'update']);
 
         // Админ
-        Route::apiResource('/rooms', RoomController::class);
+        Route::post('/rooms', [RoomController::class, 'store']);
+        Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
+        Route::patch('/rooms/{room}', [RoomController::class, 'update']);
 
-        Route::apiResource('/rooms/amenities', AmenityController::class);
+        Route::post('/rooms/amenities', [AmenityController::class, 'store']);
+        Route::delete('/rooms/amenities/{amenity}', [AmenityController::class, 'destroy']);
+        Route::patch('/rooms/amenities/{amenity}', [AmenityController::class, 'update']);
 
         Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 
