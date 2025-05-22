@@ -41,8 +41,7 @@ class MainPageService
     public function update(UpdateMainDataRequest $request)
     {
         $mainData = MainData::query()->first();
-        
-        // Only update fields that are present in the request
+
         if ($request->has('header.title')) {
             $mainData->title = $request->input('header.title');
         }
@@ -64,7 +63,7 @@ class MainPageService
         if ($request->has('footer.email')) {
             $mainData->email = $request->input('footer.email');
         }
-        
+
         $mainData->save();
 
         if ($request->has('footer.social_links')) {
