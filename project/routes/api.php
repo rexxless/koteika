@@ -39,6 +39,8 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store'])
             ->where('room', '[0-9]+');
+        Route::patch('rooms/{room}/feedback', [FeedbackController::class, 'update'])
+            ->where('room', '[0-9]+');
 
         Route::patch('/profile', [UserController::class, 'update']);
 

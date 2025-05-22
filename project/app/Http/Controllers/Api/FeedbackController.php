@@ -46,19 +46,11 @@ class FeedbackController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Feedback $feedback)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Feedback $feedback)
+    public function update(Feedback $feedback, UpdateFeedbackRequest $request, FeedbackService $feedbackService)
     {
-        //
+        Gate::authorize('create', $feedback);
     }
 
     /**
