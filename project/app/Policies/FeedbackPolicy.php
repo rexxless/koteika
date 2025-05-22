@@ -19,6 +19,11 @@ class FeedbackPolicy
 
     public function delete(User $user, Feedback $feedback)
     {
+        return !$user->is_admin;
+    }
+
+    public function adminDelete(User $user, Feedback $feedback)
+    {
         return $user->is_admin;
     }
 }

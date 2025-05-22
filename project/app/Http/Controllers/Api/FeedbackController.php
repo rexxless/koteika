@@ -48,4 +48,9 @@ class FeedbackController extends Controller
         $feedback->delete();
         return response()->json(['message' => 'Отзыв успешно удалён']);
     }
+
+    public function adminDestroy(Feedback $feedback)
+    {
+        Gate::authorize('adminDelete', $feedback);
+    }
 }
