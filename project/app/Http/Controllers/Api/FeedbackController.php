@@ -27,7 +27,7 @@ class FeedbackController extends Controller
      */
     public function show(Room $room)
     {
-       return $room->feedbacks()->select(['author', 'rate', 'title', 'description'])->get();
+       return $room->feedbacks()->select(['id', 'author', 'rate', 'title', 'description'])->get();
     }
 
     /**
@@ -42,15 +42,15 @@ class FeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Feedback $feedback)
+    public function destroy(Request $request, Feedback $feedback, FeedbackService $feedbackService)
     {
         Gate::authorize('delete', $feedback);
-        $feedback->delete();
-        return response()->json(['message' => 'Отзыв успешно удалён']);
+        return $feedbackService->destroy($request);
     }
 
-    public function adminDestroy(Feedback $feedback)
+    public function adminDestroy(Request $request, Feedback $feedback, FeedbackService $feedbackService)
     {
         Gate::authorize('adminDelete', $feedback);
+        return $feedbackService->adminDestroy($request);
     }
 }

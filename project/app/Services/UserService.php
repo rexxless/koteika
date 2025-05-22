@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserService
 {
@@ -37,10 +38,21 @@ class UserService
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->all());
-        $user->save();
+        // Получаем все данные, кроме файла
+        $data = $request->validated();
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $path = $file->store('users/avatars/' . auth()->id(), 'public');
+
+            // Сохраняем только путь или URL
+            $data['avatar'] = Storage::url($path);
+        }
+
+        $user->update($data);
+
         return response()->json([
-            'message' => 'Данные обновлены.',
+            'message' => 'Данные обновлены',
             'user' => $user
         ]);
     }

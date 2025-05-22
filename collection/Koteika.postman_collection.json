@@ -71,6 +71,37 @@
 					"response": []
 				},
 				{
+					"name": "Список удобств",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/amenities",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"amenities"
+							]
+						},
+						"description": "#### Ответ:\n\n{\n\n\"id\": 1,\n\n\"name\": \"Wi-Fi\",\n\n\"icon\":\"wifi.jpg\"\n\n},\n\n{\n\n…\n\n},\n\n...\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
 					"name": "Конкретный номер",
 					"request": {
 						"method": "GET",
@@ -122,7 +153,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Иванов Иван Иванович\",\n    \"email\":\"admin@admin.ru\",\n    \"password\":\"admin\",\n    \"phone\":\"+71234567890\"\n}"
+							"raw": "{\n    \"name\":\"Иванов Иван Иванович\",\n    \"email\":\"zxc@asd.ru\",\n    \"password\":\"11111111\",\n    \"phone\":\"+7(123)456-78-90\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/signup",
@@ -217,7 +248,14 @@
 					"name": "Бронь номера",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -256,7 +294,14 @@
 					"name": "Просмотр всех броней пользователя",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "GET",
 						"header": [
@@ -289,7 +334,14 @@
 					"name": "Удалить бронь",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "DELETE",
 						"header": [
@@ -323,7 +375,14 @@
 					"name": "Оставить отзыв",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "POST",
 						"header": [
@@ -343,14 +402,14 @@
 							"raw": "{\n    \"rate\": 5,\n\t\"title\": \"Всё гуд\",\n\t\"description\": \"Услуга оказана качественно...\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/{id}/feedback",
+							"raw": "{{host}}/api/rooms/1/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"{id}",
+								"1",
 								"feedback"
 							]
 						},
@@ -411,7 +470,14 @@
 					"name": "Редактировать профиль",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [
@@ -452,8 +518,28 @@
 				{
 					"name": "Выход",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
 					},
 					"response": []
 				}
@@ -467,7 +553,14 @@
 					"name": "Редактировать главную страницу",
 					"request": {
 						"auth": {
-							"type": "noauth"
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
 						},
 						"method": "PATCH",
 						"header": [
@@ -499,6 +592,16 @@
 				{
 					"name": "Добавить вещь в список удобств",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -537,39 +640,18 @@
 					"response": []
 				},
 				{
-					"name": "Список удобств",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/rooms/amenities",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"rooms",
-								"amenities"
-							]
-						},
-						"description": "#### Ответ:\n\n{\n\n\"id\": 1,\n\n\"name\": \"Wi-Fi\",\n\n\"icon\":\"wifi.jpg\"\n\n},\n\n{\n\n…\n\n},\n\n...\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
-					},
-					"response": []
-				},
-				{
 					"name": "Редактировать вещь в списке удобств",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -602,6 +684,16 @@
 				{
 					"name": "Удалить вещь из списка удобств",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -634,6 +726,16 @@
 				{
 					"name": "Одобрение брони",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -665,6 +767,16 @@
 				{
 					"name": "Редактирование номера",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [
 							{
@@ -696,6 +808,16 @@
 				{
 					"name": "Удаление номера",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -758,6 +880,16 @@
 				{
 					"name": "Список броней",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -789,6 +921,16 @@
 				{
 					"name": "Удаление брони",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [
 							{
@@ -820,8 +962,27 @@
 				{
 					"name": "Добавление социальной сети",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"odnoklassniki\": \"https://ok.ru/koteika\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{host}}/api/main/social_links",
 							"host": [
@@ -909,7 +1070,7 @@
 		},
 		{
 			"key": "token",
-			"value": "2|WJMxMJu1VEfW240Dibr3lyzg2urEtEBIDd9o2HTddc025cfe",
+			"value": "5|0aiypM4YXuVoal3HA8ZbmSNZry8bNqTg1dTQWjDw8b51dc4b",
 			"type": "string"
 		}
 	]

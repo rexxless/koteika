@@ -34,12 +34,14 @@ Route::middleware('throttle:api')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
 
         // Пользователь
-        Route::post('rooms/{room}/booking', [BookingController::class, 'store'])
+        Route::post('/rooms/{room}/booking', [BookingController::class, 'store'])
             ->where('room', '[0-9]+');
 
-        Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store'])
+        Route::post('/rooms/{room}/feedback', [FeedbackController::class, 'store'])
             ->where('room', '[0-9]+');
-        Route::patch('rooms/{room}/feedback', [FeedbackController::class, 'update'])
+        Route::patch('/rooms/{room}/feedback', [FeedbackController::class, 'update'])
+            ->where('room', '[0-9]+');
+        Route::delete('/rooms/{room}/feedback', [FeedbackController::class, 'destroy'])
             ->where('room', '[0-9]+');
 
         Route::patch('/profile', [UserController::class, 'update']);
@@ -53,9 +55,12 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::post('/rooms/amenities', [AmenityController::class, 'store']);
         Route::delete('/rooms/amenities/{amenity}', [AmenityController::class, 'destroy'])
-            ->where('amenity', '[0-9]+');
+            ->where('/amenity', '[0-9]+');
         Route::patch('/rooms/amenities/{amenity}', [AmenityController::class, 'update'])
             ->where('amenity', '[0-9]+');
+
+        Route::delete('/feedback/{feedback_id}', [FeedbackController::class, 'adminDestroy'])
+            ->where('feedback_id', '[0-9]+');
 
         Route::post('/bookings/{booking}', [BookingController::class, 'approve'])
             ->where('booking', '[0-9]+');
