@@ -49,9 +49,12 @@ class UpdateMainDataRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            foreach ($this->input('footer.social_links') as $k => $v) {
-                if (! (new ExistsSocialNetwork($k))->passes('', '')) {
-                    $validator->errors()->add('footer.social_links', 'Изменять можно только существующие социальные сети.');
+            $socialLinks = $this->input('footer.social_links');
+            if (is_array($socialLinks)) {
+                foreach ($socialLinks as $k => $v) {
+                    if (! (new ExistsSocialNetwork($k))->passes('', '')) {
+                        $validator->errors()->add('footer.social_links', 'Изменять можно только существующие социальные сети.');
+                    }
                 }
             }
         });

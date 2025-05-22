@@ -40,20 +40,44 @@ class MainPageService
 
     public function update(UpdateMainDataRequest $request)
     {
-        MainData::query()->update([
-            'title' => $request->header['title'],
-            'city' => $request->header['city'],
-            'slogan' => $request->header['slogan'],
-            'address' => $request->footer['address'],
-            'working_time' => $request->footer['working_time'],
-            'phone' => $request->footer['phone'],
-            'email' => $request->footer['email'],
-        ]);
+        $mainData = MainData::query()->first();
+        
+        // Only update fields that are present in the request
+        if ($request->has('header.title')) {
+            $mainData->title = $request->input('header.title');
+        }
+        if ($request->has('header.city')) {
+            $mainData->city = $request->input('header.city');
+        }
+        if ($request->has('header.slogan')) {
+            $mainData->slogan = $request->input('header.slogan');
+        }
+        if ($request->has('footer.address')) {
+            $mainData->address = $request->input('footer.address');
+        }
+        if ($request->has('footer.working_time')) {
+            $mainData->working_time = $request->input('footer.working_time');
+        }
+        if ($request->has('footer.phone')) {
+            $mainData->phone = $request->input('footer.phone');
+        }
+        if ($request->has('footer.email')) {
+            $mainData->email = $request->input('footer.email');
+        }
+        
+        $mainData->save();
 
-        foreach ($request->footer['social_links'] as $socialNetwork => $url) {
-            SocialLink::query()
-                ->where('social_network', $socialNetwork)
-                ->update(['url' => $url]);
+        if ($request->has('footer.social_links')) {
+            $socialLinks = $request->input('footer.social_links');
+            if (is_array($socialLinks)) {
+                foreach ($socialLinks as $socialNetwork => $url) {
+                    if ($url !== null) {
+                        SocialLink::query()
+                            ->where('social_network', $socialNetwork)
+                            ->update(['url' => $url]);
+                    }
+                }
+            }
         }
 
         return response()->json([
