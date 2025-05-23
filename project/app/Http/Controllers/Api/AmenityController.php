@@ -28,10 +28,10 @@ class AmenityController extends Controller
         return response()->json($amenity);
     }
 
-    public function update(UpdateAmenityRequest $request, Amenity $amenity)
+    public function update(UpdateAmenityRequest $request, Amenity $amenity, AmenityService $service)
     {
         Gate::authorize('update', $amenity);
-        $amenity->update($request->validated());
+        $service->update($request, $amenity);
         return response()->json([
             'message' => 'Оснащение номера успешно обновлено.',
             'amenity' => $amenity
