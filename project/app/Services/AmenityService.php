@@ -33,7 +33,7 @@ class AmenityService
     public function update(UpdateAmenityRequest $request, Amenity $amenity)
     {
 
-        if ($request->has('name'))
+        if ($request->name !== null)
         {
             $data = $request->only(['name']);
         }
@@ -47,6 +47,7 @@ class AmenityService
         if ($request->hasFile('icon'))
         {
             $file = $request->file('icon');
+            Storage::delete('amenities/' . $data['name']);
             $path = $file->store('amenities/' . $data['name'], 'public');
             $data['icon'] = Storage::url($path);
         }

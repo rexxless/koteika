@@ -25,7 +25,6 @@ Route::middleware('throttle:api')->group(function () {
 
     Route::post('/signup', [AuthController::class, 'signup']);
 
-
     Route::get('/rooms/{room}/feedback', [FeedbackController::class, 'show']);
 
     // Для авторизованного
@@ -39,9 +38,15 @@ Route::middleware('throttle:api')->group(function () {
         Route::patch('/profile', [UserController::class, 'update']);
 
         // Админ
-        Route::apiResource('/rooms', RoomController::class);
+        Route::patch('/rooms/{room}', [RoomController::class, 'update']);
 
-        Route::apiResource('/rooms/amenities', AmenityController::class);
+        Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
+
+        Route::post('/rooms', [RoomController::class, 'store']);
+
+        Route::post('/rooms/amenities', [AmenityController::class, 'store']);
+
+        Route::patch('/rooms/amenities/{amenity}', [AmenityController::class, 'update']);
 
         Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 
