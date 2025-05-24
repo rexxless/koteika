@@ -62,12 +62,11 @@ services:
       dockerfile: ./deploy/node/Dockerfile
     container_name: frontend
     ports:
-      - "3000:3000"
+      - "5173:5173"
     restart: unless-stopped
     working_dir: /var/www
     volumes:
-      - ../backend:/var/www
-      - /var/www/node_modules
+      - ./frontend:/var/www
     networks:
       - app-network
 

@@ -2,12 +2,17 @@ FROM node:20
 
 WORKDIR /var/www
 
-COPY ./backend/package*.json ./
+# Copy package files from frontend
+COPY ./frontend/package*.json ./
 
+# Install frontend dependencies
 RUN npm install
 
-COPY ./backend .
+# Copy rest of the frontend code
+COPY ./frontend .
 
-EXPOSE 3000
+# Expose Vite's default dev port
+EXPOSE 5173
 
-CMD ["npm", "run", "dev"]
+# Run dev server accessible from outside container
+CMD ["npm", "run", "dev", "--", "--host"]
