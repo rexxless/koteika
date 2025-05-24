@@ -10,7 +10,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ../project:/var/www
+      - ../backend:/var/www
     networks:
       - app-network
 
@@ -21,7 +21,7 @@ services:
       - "80:80"
     volumes:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
-      - ../project:/var/www
+      - ../backend:/var/www
     depends_on:
       - backend
       - postgres
@@ -31,7 +31,7 @@ services:
   postgres:
     image: postgres:15-alpine
     env_file:
-      - ../project/.env
+      - ../backend/.env
     environment:
       - POSTGRES_DB=${DB_DATABASE}
       - POSTGRES_USER=${DB_USERNAME}
@@ -66,7 +66,7 @@ services:
     restart: unless-stopped
     working_dir: /var/www
     volumes:
-      - ../project:/var/www
+      - ../backend:/var/www
       - /var/www/node_modules
     networks:
       - app-network
