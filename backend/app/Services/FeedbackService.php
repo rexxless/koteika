@@ -32,21 +32,17 @@ class FeedbackService
         return response()->json(['message' => 'Отзыв успешно оставлен'], 201);
     }
 
-    public function update(UpdateFeedbackRequest $request)
+    public function update(Room $room, UpdateFeedbackRequest $request)
     {
-        $data = $request->validated();
-        $data['room_id'] = $request->room;
-        $data['author'] = auth()->id();
-
-        $feedback = Feedback::query()->where([
-            'room_id' => $data['room_id'],
-            'author' => $data['author'],
-        ]);
+        $feedback = $room->feedbacks()->where('author', auth()->id());
         if ($feedback->exists()) {
-            $feedback->update([$data]);
-            return response()->json(['message' => 'Отзыв успешно обновлён']);
+            $feedback->update($request->validated());
+            return response()->json([
+                'message' => 'Отзыв успешно обновлён.', 
+                'feedback' => $feedback->first()
+            ]);
         } else {
-            return response()->json(['message' => 'Вы не оставляли отзыв об этом номере'], 404);
+            return response()->json(['message' => 'Вы не оставляли отзыв об этом номере.'], 404);
         }
     }
 

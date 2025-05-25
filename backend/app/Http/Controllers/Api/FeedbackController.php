@@ -33,10 +33,10 @@ class FeedbackController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Feedback $feedback, UpdateFeedbackRequest $request, FeedbackService $feedbackService)
+    public function update(Room $room, Feedback $feedback, UpdateFeedbackRequest $request, FeedbackService $feedbackService)
     {
         Gate::authorize('update', $feedback);
-        return $feedbackService->update($request);
+        return $feedbackService->update($room, $request);
     }
 
     /**
