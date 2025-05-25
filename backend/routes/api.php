@@ -35,6 +35,8 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
 
+        Route::delete('rooms/{room}/feedback', [FeedbackController::class, 'destroy']);
+
         Route::get('/profile', [UserController::class, 'show']);
 
         Route::patch('/profile', [UserController::class, 'update']);

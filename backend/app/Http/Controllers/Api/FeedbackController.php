@@ -42,10 +42,11 @@ class FeedbackController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, Feedback $feedback, FeedbackService $feedbackService)
+    public function destroy(Room $room, Feedback $feedback, FeedbackService $feedbackService)
     {
         Gate::authorize('delete', $feedback);
-        return $feedbackService->destroy($request);
+        return $feedbackService->destroy($room);
+
     }
 
     public function adminDestroy(Request $request, Feedback $feedback, FeedbackService $feedbackService)

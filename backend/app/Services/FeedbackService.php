@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\StoreFeedbackRequest;
 use App\Http\Requests\UpdateFeedbackRequest;
 use App\Models\Feedback;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class FeedbackService
@@ -49,20 +50,18 @@ class FeedbackService
         }
     }
 
-    public function destroy(Request $request)
+    public function destroy(Room $room)
     {
-        $roomId = $request->room;
         $userId = auth()->id();
-        $feedback = Feedback::query()->where([
-            'room_id' => $roomId,
-            'author' => $userId,
-        ]);
-        if ($feedback->exists()) {
-            $feedback->delete();
-            return response()->json(['message' => 'Отзыв успешно удалён']);
-        } else {
-            return response()->json(['message' => 'Вы не оставляли отзыв об этом номере'], 404);
+        if ($room->feedbacks()->where('author', $userId)->delete() === 1)
+        {
+            return response()->json(['message' => 'Отзыв успешно удален']);
         }
+        else
+        {
+            return response()->json(['message' => 'Отзыв не найден'], 404);
+        }
+
     }
 
     public function adminDestroy(Request $request)
