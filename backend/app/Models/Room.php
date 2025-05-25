@@ -35,4 +35,19 @@ class Room extends Model
     ];
 
     public $timestamps = false;
+
+    /**
+     * Resolve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @param  string|null  $field
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        if (!is_numeric($value)) {
+            return null;
+        }
+        return parent::resolveRouteBinding($value, $field);
+    }
 }

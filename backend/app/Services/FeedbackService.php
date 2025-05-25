@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class FeedbackService
 {
+
+    public function show(Room $room)
+    {
+        return $room->feedbacks()->select(['id', 'author', 'rate', 'title', 'description'])->get();
+    }
     /**
      * Create a new class instance.
      */
@@ -38,7 +43,7 @@ class FeedbackService
         if ($feedback->exists()) {
             $feedback->update($request->validated());
             return response()->json([
-                'message' => 'Отзыв успешно обновлён.', 
+                'message' => 'Отзыв успешно обновлён.',
                 'feedback' => $feedback->first()
             ]);
         } else {

@@ -25,9 +25,9 @@ class FeedbackController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show(Room $room, FeedbackService $feedbackService)
     {
-       return $room->feedbacks()->select(['id', 'author', 'rate', 'title', 'description'])->get();
+       return $feedbackService->show($room);
     }
 
     /**
