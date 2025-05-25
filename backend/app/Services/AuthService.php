@@ -11,12 +11,29 @@ class AuthService
 {
     public function signup(StoreUserRequest $request)
     {
-        User::create($request->validated());
-        $user = User::query()->where('email', $request->email)->first();
+        $data = $request->validated();
+
+        unset($data['avatar']);
+
+        $user = User::create($data);
+
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $extension = $file->getClientOriginalExtension();
+
+            $path = $file->storeAs(
+                "avatars/{$user->id}",
+                'avatar.' . $extension,
+                'public'
+            );
+
+            $user->avatar = $path;
+            $user->save();
+        }
+
         return response()->json([
             'token' => $user->createToken('token')->plainTextToken,
-        ]
-        );
+        ]);
     }
 
     public function login(LoginUserRequest $request)
