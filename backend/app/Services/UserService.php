@@ -36,18 +36,29 @@ class UserService
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request)
     {
-        // Получаем все данные, кроме файла
+        $user = auth()->user();
         $data = $request->validated();
 
         if ($request->hasFile('avatar')) {
+            unset($data['avatar']);
             $file = $request->file('avatar');
-            $path = $file->store('users/avatars/' . auth()->id(), 'public');
+            if (Storage::exists('avatars/' . $user->id)){
+                Storage::delete('avatars/' . $user->id);
+            }
+            $extension = $file->getClientOriginalExtension();
 
-            // Сохраняем только путь или URL
-            $data['avatar'] = Storage::url($path);
-        }
+            $path = $file->storeAs(
+                    "avatars/{$user->id}",
+                    'avatar.' . $extension,
+                    'public'
+                    );
+
+            $user->avatar = $path;
+            $user->save();
+                }
+
 
         $user->update($data);
 

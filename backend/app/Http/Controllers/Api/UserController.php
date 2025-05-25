@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -32,9 +33,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, UserService $userService)
     {
-        Gate::authorize('update', User::class);
-        $user = Auth::user();
-        return $userService->update($request, $user);
+        Gate::authorize('update', auth()->user());
+        return $userService->update($request);
     }
 
     /**
