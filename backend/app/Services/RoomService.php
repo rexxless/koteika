@@ -102,6 +102,14 @@ class RoomService
             $query->orderBy('price');
         }
 
-        return RoomResource::collection($query->get());
+        // для плейсхолдеров на фронте
+        $maxAllowablePrice = $query->max('price');
+        $minAllowablePrice = $query->min('price');
+
+        return response()->json([
+            'rooms' => RoomResource::collection($query->get()),
+            'max_allowable_price' => $maxAllowablePrice,
+            'min_allowable_price' => $minAllowablePrice,
+        ]);
     }
 }
