@@ -978,6 +978,97 @@
 					"response": []
 				},
 				{
+					"name": "Добавить фото для номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/rooms/1/photos",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"1",
+								"photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить фото для номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/rooms/1/photos/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"1",
+								"photos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Список броней",
 					"request": {
 						"auth": {
@@ -1210,7 +1301,7 @@
 		},
 		{
 			"key": "token",
-			"value": "2|5fEwaCanv5ooxjqIXtMV4UiRY7KYiFMgvPvA1kZx043982dc",
+			"value": "3|GbKyrsY8UyazQYOcARFRW44RAyIeSgs51DE5cWlia083e1e2",
 			"type": "string"
 		}
 	]
