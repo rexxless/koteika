@@ -28,8 +28,6 @@ class UpdateRoomRequest extends FormRequest
             'width' => ['nullable', 'integer', 'min:1'],
             'amenities' => ['nullable', 'array', 'exists:amenities,name'],
             'price' => ['nullable', 'integer', 'min:0'],
-            'photos' => ['sometimes', 'array', 'max:5'],
-            'photos.*' => ['image', 'mimes:jpeg,png', 'max:2048'], // размер в КБ
             'showcase' => ['nullable', 'boolean'],
         ];
     }
@@ -53,12 +51,6 @@ class UpdateRoomRequest extends FormRequest
 
             'price.integer' => 'Поле price должно быть целым числом.',
             'price.min' => 'Цена не может быть отрицательной.',
-
-            'photos.array' => 'Поле photos должно быть массивом.',
-            'photos.max' => 'Можно загрузить не более 5 фотографий.',
-            'photos.*.image' => 'Каждый файл должен быть изображением.',
-            'photos.*.mimes' => 'Фотографии должны быть в формате jpeg или png.',
-            'photos.*.max' => 'Размер каждой фотографии не должен превышать 2 МБ.',
 
             'showcase.boolean' => 'Поле showcase должно быть логическим значением (true или false).',
         ];

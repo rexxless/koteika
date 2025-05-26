@@ -20,6 +20,11 @@ class Room extends Model
         return $this->belongsToMany(Amenity::class, 'room_amenities', 'room_id', 'name', 'id', 'name');
     }
 
+    public function photos()
+    {
+        return $this->hasMany(Photo::class);
+    }
+
     protected $fillable =[
         'title',
         'description',

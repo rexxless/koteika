@@ -35,7 +35,7 @@ class RoomController extends Controller
     public function store(StoreRoomRequest $request, RoomService $roomService, Room $room)
     {
         Gate::authorize('create', $room);
-        return $roomService->store($request);
+        return $roomService->store($request, $room);
     }
 
     /**

@@ -15,9 +15,13 @@ class RoomService
     /**
      * Create a new class instance.
      */
-    public function store(StoreRoomRequest $request)
+    public function store(StoreRoomRequest $request, Room $room)
     {
         $room = Room::create($request->except('amenities'));
+
+        $photoService = new PhotoService();
+        $photoService->store($request, $room);
+
         foreach ($request->amenities as $amenity) {
             RoomAmenity::create([
                 'name' => $amenity,
