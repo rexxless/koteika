@@ -28,9 +28,9 @@ class UserService
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
-        //
+        return auth()->user();
     }
 
     /**
@@ -57,7 +57,7 @@ class UserService
 
             $user->avatar = $path;
             $user->save();
-                }
+        }
 
 
         $user->update($data);

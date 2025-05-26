@@ -6,18 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(UserService  $userService)
     {
-        return auth()->user();
+        return $userService->show();
     }
 
     /**

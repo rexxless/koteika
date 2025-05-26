@@ -7,41 +7,35 @@ use App\Http\Requests\StoreAmenityRequest;
 use App\Http\Requests\UpdateAmenityRequest;
 use App\Models\Amenity;
 use App\Services\AmenityService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class AmenityController extends Controller
 {
-    public function index()
+    public function index(AmenityService $amenityService)
     {
-        return response()->json(Amenity::all());
+        return $amenityService->index();
     }
 
-    public function store(StoreAmenityRequest $request, Amenity $amenity, AmenityService $service)
+    public function store(StoreAmenityRequest $request, Amenity $amenity, AmenityService $amenityService)
     {
         Gate::authorize('create', $amenity);
-        return $service->store($request);
+        return $amenityService->store($request);
     }
 
-    public function show(Amenity $amenity)
+    public function show(Amenity $amenity, AmenityService $amenityService)
     {
-        return response()->json($amenity);
+        return $amenityService->show($amenity);
     }
 
-    public function update(UpdateAmenityRequest $request, Amenity $amenity, AmenityService $service)
+    public function update(UpdateAmenityRequest $request, Amenity $amenity, AmenityService $amenityService)
     {
         Gate::authorize('update', $amenity);
-        $service->update($request, $amenity);
-        return response()->json([
-            'message' => 'Оснащение номера успешно обновлено.',
-            'amenity' => $amenity
-        ]);
+        return $amenityService->update($request, $amenity);
     }
 
-    public function destroy(Amenity $amenity)
+    public function destroy(Amenity $amenity, AmenityService $amenityService)
     {
         Gate::authorize('delete', $amenity);
-        $amenity->delete();
-        return response()->json(['message' => 'Оснащение номера удалено.']);
+        return $amenityService->destroy($amenity);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -45,6 +46,14 @@ class AuthService
         $user->tokens()->delete();
         return response()->json([
             'token' => $user->createToken('token')->plainTextToken,
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'Успешный выход.'
         ]);
     }
 }

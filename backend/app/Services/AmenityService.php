@@ -10,9 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class AmenityService
 {
-    /**
-     * Create a new class instance.
-     */
+
+    public function index()
+    {
+        return response()->json(Amenity::all());
+    }
+
     public function store(StoreAmenityRequest $request)
     {
         $data = $request->only(['name']);
@@ -28,6 +31,11 @@ class AmenityService
             'message' => 'Оснащение номера успешно добавлено',
             'amenity' => $amenity
         ], 201);
+    }
+
+    public function show(Amenity $amenity)
+    {
+        return response()->json($amenity);
     }
 
     public function update(UpdateAmenityRequest $request, Amenity $amenity)
@@ -53,8 +61,15 @@ class AmenityService
         }
 
         $amenity->update($data);
-        return response()->json(['amenity' => $amenity]);
+        return response()->json([
+            'message' => 'Оснащение номера успешно обновлено.',
+            'amenity' => $amenity
+        ]);
     }
 
-
+    public function destroy(Amenity $amenity)
+    {
+        $amenity->delete();
+        return response()->json(['message' => 'Оснащение номера удалено.']);
+    }
 }
