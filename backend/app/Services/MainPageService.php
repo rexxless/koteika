@@ -7,7 +7,6 @@ use App\Models\Feedback;
 use App\Models\MainData;
 use App\Models\Room;
 use App\Models\SocialLink;
-use Illuminate\Http\Request;
 
 class MainPageService
 {
