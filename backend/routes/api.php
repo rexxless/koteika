@@ -17,8 +17,6 @@ Route::middleware('throttle:api')->group(function () {
 
     Route::get('/rooms', [RoomController::class, 'index']);
 
-    Route::get('/rooms/amenities', [AmenityController::class, 'index']);
-
     Route::get('/rooms/{room}', [RoomController::class, 'show']);
 
     Route::post('/login', [AuthController::class, 'login']);
@@ -44,6 +42,8 @@ Route::middleware('throttle:api')->group(function () {
         Route::patch('/profile', [UserController::class, 'update']);
 
         // Админ
+        Route::get('/rooms/amenities', [AmenityController::class, 'index']);
+
         Route::patch('/rooms/{room}', [RoomController::class, 'update']);
 
         Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);

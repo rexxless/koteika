@@ -18,7 +18,7 @@ class RoomController extends Controller
      */
     public function index(RoomService $roomService)
     {
-        return $roomService->sorted_search();
+        return $roomService->index();
     }
 
     /**

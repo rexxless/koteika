@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Photo;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -15,10 +16,13 @@ class RoomResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'preview' => Photo::query()->where('room_id', $this->id)
+                ->first(['id', 'link']),
+            'photos' => Photo::query()->where('room_id', $this->id)
+                ->get(['id', 'link']),
             'description' => $this->description,
             'price' => $this->price,
             'square' => $this->length * $this->width,

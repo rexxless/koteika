@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Gate;
 
 class AmenityController extends Controller
 {
-    public function index(AmenityService $amenityService)
+    public function index(Amenity $amenity, AmenityService $amenityService)
     {
+        Gate::authorize('index', $amenity);
         return $amenityService->index();
     }
 

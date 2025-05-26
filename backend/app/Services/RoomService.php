@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
+use App\Models\Amenity;
 use App\Models\Room;
 use App\Models\RoomAmenity;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +52,7 @@ class RoomService
         return response()->json(['message' => 'Комната успешно удалена']);
     }
 
-    public function sorted_search()
+    public function index()
     {
         $query = Room::query();
 
@@ -105,11 +106,17 @@ class RoomService
         // для плейсхолдеров на фронте
         $maxAllowablePrice = $query->max('price');
         $minAllowablePrice = $query->min('price');
+        $allowableSquares = Room::query()
+            ->selectRaw('width * length AS square')
+            ->distinct()
+            ->pluck('square');
 
         return response()->json([
             'rooms' => RoomResource::collection($query->get()),
-            'max_allowable_price' => $maxAllowablePrice,
             'min_allowable_price' => $minAllowablePrice,
+            'max_allowable_price' => $maxAllowablePrice,
+            'allowable_squares' => $allowableSquares,
+            'amenities' => Amenity::all()
         ]);
     }
 }

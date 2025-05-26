@@ -13,7 +13,7 @@ class AmenityService
 
     public function index()
     {
-        return response()->json(Amenity::all());
+        return Amenity::all();
     }
 
     public function store(StoreAmenityRequest $request)
