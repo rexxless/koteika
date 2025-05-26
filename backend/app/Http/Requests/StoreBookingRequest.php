@@ -49,20 +49,20 @@ class StoreBookingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'room_id.required' => 'Поле "Номер комнаты" обязательно.',
+            'room_id.required' => 'Поле room_id обязательно.',
             'room_id.exists' => 'Указанный номер комнаты не найден.',
 
-            'check_in.required' => 'Поле "Дата заезда" обязательно.',
-            'check_in.date' => 'Поле "Дата заезда" должно быть корректной датой.',
+            'check_in.required' => 'Поле check_in обязательно.',
+            'check_in.date' => 'Поле check_in должно быть корректной датой.',
             'check_in.date_format' => 'Дата заезда должна быть в формате дд-мм-гггг.',
 
-            'check_out.required' => 'Поле "Дата выезда" обязательно.',
-            'check_out.date' => 'Поле "Дата выезда" должно быть корректной датой.',
+            'check_out.required' => 'Поле check_out обязательно.',
+            'check_out.date' => 'Поле check_out должно быть корректной датой.',
             'check_out.date_format' => 'Дата выезда должна быть в формате дд-мм-гггг.',
             'check_out.after' => 'Дата выезда должна быть позже даты заезда.',
 
             'pets.required' => 'Укажите хотя бы одного питомца.',
-            'pets.array' => 'Поле "Питомцы" должно быть массивом.',
+            'pets.array' => 'Поле pets должно быть массивом.',
             'pets.min' => 'Необходимо указать хотя бы одного питомца.',
             'pets.max' => 'Можно указать не более 4 питомцев.',
 

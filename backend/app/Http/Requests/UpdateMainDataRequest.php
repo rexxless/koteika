@@ -68,32 +68,32 @@ class UpdateMainDataRequest extends FormRequest
     public function messages()
     {
         return [
-            'header.array' => 'Поле "header" должно быть массивом.',
+            'header.array' => 'Поле header должно быть массивом.',
 
-            'header.title.string' => 'Поле "title" должно быть строкой.',
-            'header.title.max' => 'Поле "title" не должно превышать 255 символов.',
+            'header.title.string' => 'Поле title должно быть строкой.',
+            'header.title.max' => 'Поле title не должно превышать 255 символов.',
 
-            'header.city.string' => 'Поле "city" должно быть строкой.',
-            'header.city.max' => 'Поле "city" не должно превышать 255 символов.',
+            'header.city.string' => 'Поле city должно быть строкой.',
+            'header.city.max' => 'Поле city не должно превышать 255 символов.',
 
-            'header.slogan.string' => 'Поле "slogan" должно быть строкой.',
-            'header.slogan.max' => 'Поле "slogan" не должно превышать 255 символов.',
+            'header.slogan.string' => 'Поле slogan должно быть строкой.',
+            'header.slogan.max' => 'Поле slogan не должно превышать 255 символов.',
 
 
-            'footer.array' => 'Поле "footer" должно быть массивом.',
+            'footer.array' => 'Поле footer должно быть массивом.',
 
-            'footer.address.string' => 'Поле "address" должно быть строкой.',
+            'footer.address.string' => 'Поле address должно быть строкой.',
 
-            'footer.working_time.string' => 'Поле "working_time" должно быть строкой.',
-            'footer.working_time.max' => 'Поле "working_time" не должно превышать 255 символов.',
+            'footer.working_time.string' => 'Поле working_time должно быть строкой.',
+            'footer.working_time.max' => 'Поле working_time не должно превышать 255 символов.',
 
             'footer.phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
 
-            'footer.email.email' => 'Поле "email" должно быть корректным email-адресом.',
+            'footer.email.email' => 'Поле email должно быть корректным email-адресом.',
 
-            'footer.social_links.array' => 'Поле "social_networks" должно быть ассоциативным массивом.',
+            'footer.social_links.array' => 'Поле social_networks должно быть ассоциативным массивом.',
 
-            'footer.social_links.*.url' => 'Значение должно быть корректным URL.',
+            'footer.social_links.*.url' => 'Значение url должно быть корректным URL.',
         ];
     }
 }

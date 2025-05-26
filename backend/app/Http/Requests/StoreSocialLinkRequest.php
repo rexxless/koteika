@@ -30,11 +30,11 @@ class StoreSocialLinkRequest extends FormRequest
     public function messages(): array
     {
         return [
-            "social_network.required" => 'Поле "social_network" обязательно для заполнения.',
+            "social_network.required" => 'Поле social_network обязательно для заполнения.',
             "social_network.string" => "Название социальной сети должно быть строкой",
             "social_network.max" => "Максимальная длина названия социальной сети 255 символов.",
 
-            "url.required" => 'Поле "URL" обязательно для заполнения.',
+            "url.required" => 'Поле url обязательно для заполнения.',
             "url.url" => 'Введите корректный URL-адрес.',
         ];
     }
