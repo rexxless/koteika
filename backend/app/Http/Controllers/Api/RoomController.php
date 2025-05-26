@@ -16,9 +16,9 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(RoomService $service)
+    public function index(RoomService $roomService)
     {
-        return $service->sorted_search();
+        return $roomService->sorted_search();
     }
 
     /**
@@ -32,41 +32,36 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRoomRequest $request, RoomService $roomService)
+    public function store(StoreRoomRequest $request, RoomService $roomService, Room $room)
     {
-        Gate::authorize('create', Room::class);
+        Gate::authorize('create', $room);
         return $roomService->store($request);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Room $room)
+    public function show(Room $room, RoomService $roomService)
     {
-        return RoomResource::make($room);
+        return $roomService->show($room);
     }
 
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateRoomRequest $request, Room $room)
+    public function update(UpdateRoomRequest $request, Room $room, RoomService $roomService)
     {
         Gate::authorize('update', $room);
-        $room->update($request->validated());
-        return response()->json([
-            'message' => 'Комната успешно обновлена',
-            'room' => RoomResource::make($room)
-        ]);
+        return $roomService->update($request, $room);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Room $room)
+    public function destroy(Room $room, RoomService $roomService)
     {
         Gate::authorize('destroy', $room);
-        $room->delete();
-        return response()->json(['message' => 'Комната успешно удалена']);
+        return $roomService->destroy($room);
     }
 }

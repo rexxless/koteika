@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
-use App\Models\Amenity;
 use App\Models\Room;
 use App\Models\RoomAmenity;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +29,26 @@ class RoomService
             'room_id' => $room->id,
             'message' => 'Комната создана успешно.',
             ]);
+    }
+
+    public function show(Room $room)
+    {
+        return RoomResource::make($room);
+    }
+
+    public function update(UpdateRoomRequest $request, Room $room)
+    {
+        $room->update($request->validated());
+        return response()->json([
+            'message' => 'Комната успешно обновлена',
+            'room' => RoomResource::make($room)
+        ]);
+    }
+
+    public function destroy(Room $room)
+    {
+        $room->delete();
+        return response()->json(['message' => 'Комната успешно удалена']);
     }
 
     public function sorted_search()
