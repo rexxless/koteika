@@ -13,14 +13,14 @@ class DestroyAvatarAction
     {
         $user = auth()->user();
         $path = $user->avatar;
-        
+
         if ($path) {
             Storage::delete($path);
             $user->avatar = null;
             $user->save();
             return response()->json(['message' => 'Аватар успешно удален.']);
         } else {
-            return response()->json(['message' => 'У пользователя отсутствует аватар.'], 404);
+            return response()->json(['message' => 'У вас отсутствует аватар.'], 404);
         }
     }
 }
