@@ -28,8 +28,7 @@ class StoreRoomRequest extends FormRequest
             'height' => ['required', 'integer', 'min:1', 'max:200'],
             'width' => ['required', 'integer', 'min:1', 'max:200'],
             'amenities' => ['sometimes', 'array', 'exists:amenities,name'],
-            'amenities.*' => [],
-            'price' => ['required', 'integer', 'min:0', 'max:1000000000'],
+            'price' => ['required', 'integer', 'min:0', 'max:100000'],
             'photos' => ['sometimes', 'array', 'max:5'],
             'photos.*' => ['image', 'mimes:jpeg,png', 'max:2048'], // размер в КБ
             'showcase' => ['nullable', 'boolean'],

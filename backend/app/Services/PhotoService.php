@@ -12,14 +12,11 @@ use Illuminate\Support\Facades\Storage;
 class PhotoService
 {
     public function store($request, Room $room)
-        /* Не указываю тип для $request,
-        т.к. загрузка может быть при создании комнаты (StoreRoomRequest),
-        или при добавлении к существующей комнате фото (UpdateRoomRequest) */
     {
-        $files = $request->file('photos');
+        $files = $request-file('photos');
 
         foreach ($files as $file) {
-            // Сохраняем фото в БД, чтобы получить ID
+
             $photo = $room->photos()->create([
                 'link' => '.',
             ]); // создаём запись, получаем ID
@@ -36,7 +33,7 @@ class PhotoService
         }
 
         return response()->json([
-            'message' => 'Загрузка фото прошла успешно',
+            'message' => 'Загрузка фото прошла успешно.',
             'room' => new RoomResource($room)
         ], 201);
     }
@@ -45,20 +42,18 @@ class PhotoService
     {
         $path = $photo->link;
 
-        // Удаляем запись из БД
         $photo->delete();
 
-        // Удаляем файл, если он существует
         if ($path && Storage::disk('public')->exists($path)) {
             Storage::disk('public')->delete($path);
         } else {
             return response()->json([
-                'message' => 'Файл не найден в хранилище',
+                'message' => 'Фотография не найдена.',
             ], 404);
         }
 
         return response()->json([
-            'message' => 'Фотография успешно удалена'
+            'message' => 'Фотография успешно удалена.'
         ]);
     }
 }
