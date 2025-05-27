@@ -12,15 +12,15 @@ class DestroyAvatarAction
     public function handle()
     {
         $user = auth()->user();
-        if (Storage::exists('avatars/' . $user->id)){
-            Storage::delete('avatars/' . $user->id);
+        $path = $user->avatar;
+        
+        if ($path) {
+            Storage::delete($path);
             $user->avatar = null;
             $user->save();
             return response()->json(['message' => 'Аватар успешно удален.']);
-        } else
-        {
+        } else {
             return response()->json(['message' => 'У пользователя отсутствует аватар.'], 404);
         }
-
     }
 }
