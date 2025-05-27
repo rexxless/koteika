@@ -40,7 +40,6 @@ class UserService
     {
         $user = auth()->user();
         $data = $request->validated();
-
         if ($request->hasFile('avatar')) {
             unset($data['avatar']);
             $file = $request->file('avatar');
@@ -59,8 +58,8 @@ class UserService
             $user->save();
         }
 
-
         $user->update($data);
+        $user->save();
 
         return response()->json([
             'message' => 'Данные обновлены',

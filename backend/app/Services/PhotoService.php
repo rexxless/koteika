@@ -14,7 +14,7 @@ class PhotoService
     public function store($request, Room $room)
         /* Не указываю тип для $request,
         т.к. загрузка может быть при создании комнаты (StoreRoomRequest),
-        или при добавлении к существующей комнате фото */
+        или при добавлении к существующей комнате фото (UpdateRoomRequest) */
     {
         $files = $request->file('photos');
 

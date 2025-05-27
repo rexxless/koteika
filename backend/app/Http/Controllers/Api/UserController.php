@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserService  $userService)
+    public function show(UserService $userService)
     {
         return $userService->show();
     }
