@@ -14,8 +14,8 @@ class DestroyAvatarAction
         $user = auth()->user();
         $path = $user->avatar;
 
-        if ($path) {
-            Storage::delete($path);
+        if ($path && Storage::disk('public')->exists($path)) {
+            Storage::disk('public')->delete($path);
             $user->avatar = null;
             $user->save();
             return response()->json(['message' => 'Аватар успешно удален.']);
