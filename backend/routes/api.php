@@ -42,6 +42,8 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::patch('/profile', [UserController::class, 'update']);
 
+        Route::delete('/profile/avatar', [UserController::class, 'destroyAvatar']);
+
         // Админ
         Route::get('/rooms/amenities', [AmenityController::class, 'index']);
 
