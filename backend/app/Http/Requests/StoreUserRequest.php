@@ -37,6 +37,7 @@ class StoreUserRequest extends FormRequest
             'avatar.image' => 'Аватар должен быть изображением.',
             'avatar.mimes' => 'Аватар должен быть в формате jpeg или png.',
             'avatar.max' => 'Размер аватара не должен превышать 2 МБ.',
+            'avatar.*' => 'Не удалось загрузить аватар',
 
             'name.max' => 'Максимальная длина имени - 255 символов.',
             'name.required' => 'Поле name обязательно для заполнения.',

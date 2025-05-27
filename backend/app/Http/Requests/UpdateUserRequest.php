@@ -22,7 +22,6 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => ['nullable', 'image', 'mimes:jpeg,png', 'max:2048'],
             'name' => ['nullable', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u', 'max:255'],
             'phone' => ['nullable', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
             'email' => ['nullable', 'email', 'unique:users,email'],
@@ -44,10 +43,6 @@ class UpdateUserRequest extends FormRequest
             'phone.unique' => 'Номер телефона уже занят.',
             'phone.max' => 'Максимальная длина номера телефона - 15 цифр.',
             'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
-
-            'avatar.image' => 'Аватар должен быть изображением.',
-            'avatar.mimes' => 'Формат изображения должен быть jpeg, png, jpg.',
-            'avatar.max' => 'Максимальный размер изображения - 2 МБ.',
         ];
     }
 }

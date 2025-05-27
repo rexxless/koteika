@@ -13,7 +13,7 @@ class AuthService
     public function signup(StoreUserRequest $request)
     {
         $data = $request->validated();
-
+        return $data;
         unset($data['avatar']);
 
         $user = User::create($data);

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AmenityController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\AvatarController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\FeedbackController;
 use App\Http\Controllers\Api\MainPageController;
@@ -32,38 +33,28 @@ Route::middleware('throttle:api')->group(function () {
         // Пользователь
         Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
 
-        Route::post('rooms/{room}/feedback', [FeedbackController::class, 'store']);
+        Route::apiResource('/rooms/{room}/feedback', FeedbackController::class)
+            ->only(['store', 'update', 'destroy']);
 
-        Route::patch('rooms/{room}/feedback', [FeedbackController::class, 'update']);
+        Route::apiResource('/profile', UserController::class)
+            ->only(['show', 'update']);
 
-        Route::delete('rooms/{room}/feedback', [FeedbackController::class, 'destroy']);
+        Route::post('/profile/avatar', [AvatarController::class, 'store']);
 
-        Route::get('/profile', [UserController::class, 'show']);
-
-        Route::patch('/profile', [UserController::class, 'update']);
-
-        Route::delete('/profile/avatar', [UserController::class, 'destroyAvatar']);
+        Route::delete('/profile/avatar', [AvatarController::class, 'destroy']);
 
         // Админ
-        Route::get('/rooms/amenities', [AmenityController::class, 'index']);
+        Route::apiResource('/amenities', AmenityController::class);
 
-        Route::patch('/rooms/{room}', [RoomController::class, 'update']);
-
-        Route::delete('/rooms/{room}', [RoomController::class, 'destroy']);
-
-        Route::post('/rooms', [RoomController::class, 'store']);
-
-        Route::post('/rooms/amenities', [AmenityController::class, 'store']);
-
-        Route::patch('/rooms/amenities/{amenity}', [AmenityController::class, 'update']);
+        Route::apiResource('/rooms', RoomController::class)
+            ->only(['store', 'update', 'destroy']);
 
         Route::post('/bookings/{booking}', [BookingController::class, 'approve']);
 
         Route::patch('/main', [MainPageController::class, 'update']);
 
-        Route::post('/main/social_links', [SocialLinkController::class, 'store']);
-
-        Route::delete('/main/social_links/{link}', [SocialLinkController::class, 'destroy']);
+        Route::apiResource('/main/social_links', SocialLinkController::class)
+            ->only(['store', 'destroy']);
 
         Route::post('/rooms/{room}/photos', [PhotoController::class, 'store']);
 
@@ -78,5 +69,3 @@ Route::middleware('throttle:api')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout']);
     });
 });
-
-

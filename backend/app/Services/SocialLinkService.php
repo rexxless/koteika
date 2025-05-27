@@ -19,9 +19,9 @@ class SocialLinkService
         ], 201);
     }
 
-    public function destroy(string $id)
+    public function destroy(SocialLink $social_link)
     {
-        SocialLink::query()->where('id', $id)->delete();
+        $social_link->delete();
         return response([
             'message' => 'Социальная сеть успешно удалена.'
         ]);

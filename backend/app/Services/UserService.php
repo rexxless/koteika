@@ -49,17 +49,16 @@ class UserService
             $extension = $file->getClientOriginalExtension();
 
             $path = $file->storeAs(
-                    "avatars/{$user->id}",
-                    'avatar.' . $extension,
-                    'public'
-                    );
+                "avatars/{$user->id}",
+                'avatar.' . $extension,
+                'public'
+            );
 
             $user->avatar = $path;
             $user->save();
         }
 
         $user->update($data);
-        $user->save();
 
         return response()->json([
             'message' => 'Данные обновлены',
