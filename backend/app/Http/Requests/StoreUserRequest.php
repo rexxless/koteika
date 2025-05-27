@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u', 'max:255'],
             'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
+            'password' => ['required', 'min:8', 'max:30', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
         ];
     }
 
@@ -44,15 +44,15 @@ class StoreUserRequest extends FormRequest
             'name.required' => 'Поле name обязательно для заполнения.',
             'name.regex' => 'Имя может содержать только кириллические буквы, пробелы, точки и тире.',
 
-            'phone.required' => 'Поле phone обязательно для заполнения.',
+            'phone.required' => 'Поле "Телефон" обязательно для заполнения.',
             'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
-            'phone.unique' => 'Такой номер телефона уже зарегистрирован',
+            'phone.unique' => 'Пользователь с такими данными уже существует.',
 
-            'email.required' => 'Поле email обязательно для заполнения.',
-            'email.email' => 'Введите корректный e-mail.',
-            'email.unique' => 'Такой e-mail уже зарегистрирован.',
+            'email.required' => 'Поле "Почта" обязательно для заполнения.',
+            'email.email' => 'Введена неверная электронная почта.',
+            'email.unique' => 'Пользователь с такими данными уже существует.',
 
-            'password.required' => 'Поле password обязательно для заполнения.',
+            'password.required' => 'Поле "Пароль" обязательно для заполнения.',
             'password.min' => 'Пароль должен содержать не менее 8 символов.',
             'password.regex' => 'Пароль может содержать только английские буквы, цифры и специальные символы.',
         ];

@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
             'name' => ['nullable', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u', 'max:255'],
             'phone' => ['nullable', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
             'email' => ['nullable', 'email', 'unique:users,email'],
-            'password' => ['nullable', 'min:8'],
+            'password' => ['required', 'min:8', 'max:30', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
         ];
     }
 
@@ -33,14 +33,14 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'email.email' => 'Введена неверная электронная почта.',
-            'email.unique' => 'Почта уже занята.',
+            'email.unique' => 'Пользователь с такими данными уже существует.',
 
             'name.max' => 'Максимальная длина имени - 255 символов.',
             'name.regex' => 'Имя может содержать только кириллические буквы, пробелы, точки и тире.',
 
             'password.min' => 'Минимальная длина пароля - 8 символов.',
 
-            'phone.unique' => 'Номер телефона уже занят.',
+            'phone.unique' => 'Пользователь с такими данными уже существует.',
             'phone.max' => 'Максимальная длина номера телефона - 15 цифр.',
             'phone.regex' => 'Телефон должен быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
         ];

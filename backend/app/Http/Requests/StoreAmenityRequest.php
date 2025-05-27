@@ -24,7 +24,7 @@ class StoreAmenityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'unique:amenities,name'],
+            'name' => ['required', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u', 'unique:amenities,name'],
             'icon' => ['required', 'image', 'mimes:jpeg,png', 'max:2048']
         ];
     }
@@ -32,15 +32,16 @@ class StoreAmenityRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Значение поля name обязательно для заполнения.',
-            'name.string' => 'Значение поля name должно быть строкой.',
-            'name.max' => 'Максимальная длина поля name 255 символов.',
-            'name.unique' => 'Такое оснащение номера уже есть.',
+            'name.required' => 'Поле "Название" обязательно для заполнения.',
+            'name.string' => 'Поле "Название" должно быть строкой.',
+            'name.max' => 'Поле "Название" не должно превышать 64 символов.',
+            'name.regex' => 'Поле "Название" может содержать только буквы, цифры и специальные символы.',
+            'name.unique' => 'Такое оснащение номера уже существует.',
 
-            'icon.required' => 'Значение поля icon обязательно для заполнения.',
-            'icon.image' => 'Значение поля icon должно быть изображением.',
-            'icon.mimes' => 'Значение поля icon должно быть в формате jpeg или png.',
-            'icon.max' => 'Поле icon не должно превышать 2 МБ.',
+            'icon.required' => 'Поле "Иконка" обязательно для заполнения.',
+            'icon.image' => 'Поле "Иконка" должно быть изображением.',
+            'icon.mimes' => 'Поле "Иконка" должно быть в формате jpeg или png.',
+            'icon.max' => 'Размер поля "Иконка" не должен превышать 2 МБ.',
         ];
     }
 }

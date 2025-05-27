@@ -28,7 +28,7 @@ class StoreBookingRequest extends FormRequest
             'check_in' => 'required|date|date_format:d-m-Y',
             'check_out' => 'required|date|date_format:d-m-Y|after:check_in',
             'pets' => 'required|array|min:1|max:4',
-            'pets.*' => 'required|string|max:255',
+            'pets.*' => ['required', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
         ];
     }
 
@@ -68,7 +68,8 @@ class StoreBookingRequest extends FormRequest
 
             'pets.*.required' => 'У каждого питомца должно быть указано название.',
             'pets.*.string' => 'Название каждого питомца должно быть строкой.',
-            'pets.*.max' => 'Название питомца не должно превышать 255 символов.',
+            'pets.*.max' => 'Название питомца не должно превышать 64 символов.',
+            'pets.*.regex' => 'Название питомца может содержать только буквы, цифры и специальные символы.',
         ];
     }
 

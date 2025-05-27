@@ -24,8 +24,8 @@ class UpdateFeedbackRequest extends FormRequest
     {
         return [
             'rate' => 'nullable|integer|between:1,5',
-            'title' => 'nullable|string|max:255',
-            'description' => 'string|nullable',
+            'title' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?]+$/u'],
+            'description' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
         ];
     }
 
@@ -48,9 +48,12 @@ class UpdateFeedbackRequest extends FormRequest
             'rate.between' => 'Оценка должна быть в пределах от 1 до 5.',
 
             'title.string' => 'Заголовок должен быть строкой.',
-            'title.max' => 'Заголовок не должен превышать 255 символов.',
+            'title.max' => 'Заголовок не должен превышать 64 символов.',
+            'title.regex' => 'Заголовок может содержать только буквы, цифры и специальные символы.',
 
             'description.string' => 'Описание должно быть строкой.',
+            'description.max' => 'Описание не должно превышать 255 символов.',
+            'description.regex' => 'Описание может содержать только буквы, цифры и специальные символы.',
         ];
     }
 }

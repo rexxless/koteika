@@ -22,8 +22,8 @@ class StoreRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'regex:/^[А-Яа-яЁё\s]+$/u', 'max:255'],
-            'description' => ['required', 'regex:/^[А-Яа-яЁё\s]+$/u', 'max:255'],
+            'title' => ['required', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u', 'max:255'],
+            'description' => ['required', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u', 'max:255'],
             'length' => ['required', 'integer', 'min:1', 'max:200'],
             'height' => ['required', 'integer', 'min:1', 'max:200'],
             'width' => ['required', 'integer', 'min:1', 'max:200'],
@@ -39,11 +39,12 @@ class StoreRoomRequest extends FormRequest
     {
         return [
             'title.required' => 'Поле title обязательно для заполнения.',
-            'title.regex' => 'Поле title должно содержать только кириллические символы и пробелы.',
+            'title.regex' => 'Поле title может содержать только буквы, цифры и специальные символы.',
             'title.max' => 'Максимальная длина поля title - 255 символов',
 
             'description.required' => 'Поле description обязательно для заполнения.',
-            'description.regex' => 'Поле description должно содержать только кириллические символы и пробелы.',
+            'description.regex' => 'Поле description может содержать только буквы, цифры и специальные символы.',
+            'description.max' => 'Максимальная длина поля description - 255 символов',
 
             'length.required' => 'Поле length обязательно для заполнения.',
             'length.integer' => 'Поле length должно быть целым числом.',

@@ -22,7 +22,7 @@ class UpdateRoomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['nullable', 'regex:/^[А-Яа-яЁё\s]+$/u'],
+            'title' => ['nullable', 'regex:/^А-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u', 'max:255'],
             'length' => ['nullable', 'integer', 'min:1'],
             'height' => ['nullable', 'integer', 'min:1'],
             'width' => ['nullable', 'integer', 'min:1'],
@@ -35,24 +35,25 @@ class UpdateRoomRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.regex' => 'Поле title должно содержать только кириллические символы и пробелы.',
+            'title.regex' => 'Поле "Название" может содержать только буквы, цифры и специальные символы.',
+            'title.max' => 'Поле "Название" не должно превышать 255 символов.',
 
-            'length.integer' => 'Поле length должно быть целым числом.',
-            'length.min' => 'Поле length должно быть не менее 1.',
+            'length.integer' => 'Поле "Длина" должно быть целым числом.',
+            'length.min' => 'Поле "Длина" должно быть не менее 1.',
 
-            'height.integer' => 'Поле height должно быть целым числом.',
-            'height.min' => 'Поле height должно быть не менее 1.',
+            'height.integer' => 'Поле "Высота" должно быть целым числом.',
+            'height.min' => 'Поле "Высота" должно быть не менее 1.',
 
-            'width.integer' => 'Поле width должно быть целым числом.',
-            'width.min' => 'Поле width должно быть не менее 1.',
+            'width.integer' => 'Поле "Ширина" должно быть целым числом.',
+            'width.min' => 'Поле "Ширина" должно быть не менее 1.',
 
-            'amenities.array' => 'Поле amenities должно быть массивом.',
+            'amenities.array' => 'Поле "Оснащение" должно быть массивом.',
             'amenities.exists' => 'Выбранное оснащение не найдено.',
 
-            'price.integer' => 'Поле price должно быть целым числом.',
-            'price.min' => 'Цена не может быть отрицательной.',
+            'price.integer' => 'Поле "Цена" должно быть целым числом.',
+            'price.min' => 'Поле "Цена" не может быть отрицательным.',
 
-            'showcase.boolean' => 'Поле showcase должно быть логическим значением (true или false).',
+            'showcase.boolean' => 'Поле "Отображать на главной странице" должно быть логическим значением (true или false).',
         ];
     }
 }
