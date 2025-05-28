@@ -4,7 +4,8 @@ namespace App\Services;
 
 use App\Http\Requests\StoreAmenityRequest;
 
-use App\Http\Requests\UpdateAmenityRequest;
+use App\Http\Requests\UpdateAmenityIconRequest;
+use App\Http\Requests\UpdateAmenityNameRequest;
 use App\Models\Amenity;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,29 +39,35 @@ class AmenityService
         return response()->json($amenity);
     }
 
-    public function update(UpdateAmenityRequest $request, Amenity $amenity)
+    public function update(UpdateAmenityNameRequest $request, Amenity $amenity)
     {
+        $amenity->update($request->only(['name']));
+        return response()->json([
+            'message' => 'Оснащение номера успешно обновлено.',
+            'amenity' => $amenity
+        ]);
+    }
 
-        if ($request->name !== null)
-        {
-            $data = $request->only(['name']);
+    public function updateIcon(UpdateAmenityIconRequest $request, Amenity $amenity)
+    {
+        $file = $request->file('icon');
+
+        // тестовые данные есть в БД, но не загружаются в Storage, а в основном такая проверка не потребуется
+        if (Storage::exists('amenities/' . $amenity->name)) {
+            Storage::delete('amenities/' . $amenity->name);
         }
-        else
-        {
+        if ($request->hasFile('icon')) {
+            $extension = $file->getClientOriginalExtension();
+            $path = $file->storeAs(
+                'amenities/' . $amenity->name,
+                'icon.' . $extension,
+                'public');
+
             $data = [];
-            $data["name"] = $amenity->name;
-        }
-
-
-        if ($request->hasFile('icon'))
-        {
-            $file = $request->file('icon');
-            Storage::delete('amenities/' . $data['name']);
-            $path = $file->store('amenities/' . $data['name'], 'public');
             $data['icon'] = Storage::url($path);
+            $amenity->update($data);
         }
 
-        $amenity->update($data);
         return response()->json([
             'message' => 'Оснащение номера успешно обновлено.',
             'amenity' => $amenity

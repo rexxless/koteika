@@ -46,6 +46,7 @@ Route::middleware('throttle:api')->group(function () {
         Route::delete('/profile/avatar', [AvatarController::class, 'destroy']);
 
         // Админ
+        Route::post('/amenities/{amenity}/icon', [AmenityController::class, 'updateIcon']);
         Route::apiResource('/amenities', AmenityController::class);
 
         Route::apiResource('/rooms', RoomController::class)

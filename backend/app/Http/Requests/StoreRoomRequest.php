@@ -75,6 +75,7 @@ class StoreRoomRequest extends FormRequest
             'photos.*.image' => 'Каждый файл должен быть изображением.',
             'photos.*.mimes' => 'Фотографии должны быть в формате jpeg или png.',
             'photos.*.max' => 'Размер каждой фотографии не должен превышать 2 МБ.',
+            'photos.*.*' => 'Не удалось загрузить фотографии.',
 
             'showcase.boolean' => 'Поле showcase должно быть логическим значением (true или false).',
         ];

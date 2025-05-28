@@ -6,7 +6,7 @@ use App\Models\Amenity;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreAmenityRequest extends FormRequest
+class UpdateAmenityNameRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class StoreAmenityRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u', 'unique:amenities,name'],
-            'icon' => ['required', 'image', 'mimes:jpeg,png', 'max:2048']
+            'name' => ['required', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u', 'unique:amenities,name']
         ];
     }
 
@@ -37,12 +36,6 @@ class StoreAmenityRequest extends FormRequest
             'name.max' => 'Поле name не должно превышать 64 символов.',
             'name.regex' => 'Поле name может содержать только буквы, цифры и специальные символы.',
             'name.unique' => 'Такое оснащение номера уже существует.',
-
-            'icon.required' => 'Поле icon обязательно для заполнения.',
-            'icon.image' => 'Поле icon должно быть изображением.',
-            'icon.mimes' => 'Поле icon должно быть в формате jpeg или png.',
-            'icon.max' => 'Размер поля icon не должен превышать 2 МБ.',
-            'icon.*' => 'Не удалось загрузить иконку.',
         ];
     }
 }
