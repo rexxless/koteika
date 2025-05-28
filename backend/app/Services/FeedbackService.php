@@ -69,6 +69,7 @@ class FeedbackService
     public function adminDestroy(Request $request)
     {
         $feedbackId = $request->feedback_id;
+        return $feedbackId;
         $feedback = Feedback::query()->where('id', $feedbackId);
         if ($feedback->exists()) {
             $feedback->delete();

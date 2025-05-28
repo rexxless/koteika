@@ -62,6 +62,8 @@ Route::middleware('throttle:api')->group(function () {
         Route::post('/rooms/{room}/photos', [PhotoController::class, 'store']);
         Route::delete('/photos/{photo}', [PhotoController::class, 'destroy']);
 
+        Route::delete('/feedback/{feedback}', [FeedbackController::class, 'adminDestroy']);
+
         // Пользователь | Админ
         Route::get('/bookings', [BookingController::class, 'show']);
 
