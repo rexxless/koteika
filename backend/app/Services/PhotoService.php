@@ -13,7 +13,7 @@ class PhotoService
 {
     public function store($request, Room $room)
     {
-        $files = $request-file('photos');
+        $files = $request->file('photos');
 
         foreach ($files as $file) {
 

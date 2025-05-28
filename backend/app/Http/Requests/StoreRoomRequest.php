@@ -29,7 +29,7 @@ class StoreRoomRequest extends FormRequest
             'width' => ['required', 'integer', 'min:1', 'max:200'],
             'amenities' => ['sometimes', 'array', 'exists:amenities,name'],
             'price' => ['required', 'integer', 'min:0', 'max:100000'],
-            'photos' => ['sometimes', 'array', 'max:5'],
+            'photos' => ['required', 'array', 'min:1', 'max:5'],
             'photos.*' => ['image', 'mimes:jpeg,png', 'max:2048'], // размер в КБ
             'showcase' => ['nullable', 'boolean'],
         ];
@@ -70,7 +70,9 @@ class StoreRoomRequest extends FormRequest
             'price.min' => 'Цена не может быть отрицательной.',
             'price.max' => 'Цена не может быть больше миллиарда.',
 
+            'photos.required' => 'Поле photos обязательно для заполнения.',
             'photos.array' => 'Поле photos должно быть массивом.',
+            'photos.min' => 'Загрузите хотя бы одну фотографию.',
             'photos.max' => 'Можно загрузить не более 5 фотографий.',
             'photos.*.image' => 'Каждый файл должен быть изображением.',
             'photos.*.mimes' => 'Фотографии должны быть в формате jpeg или png.',

@@ -24,6 +24,10 @@ class RoomResource extends JsonResource
             'photos' => Photo::query()->where('room_id', $this->id)
                 ->get(['id', 'link']),
             'description' => $this->description,
+            'amenities' => $this->amenities()
+                ->select(['room_amenities.name', 'icon'])
+                ->get()
+                ->makeHidden('pivot'),
             'price' => $this->price,
             'square' => $this->length * $this->width,
             'other_rooms' => Room::query()

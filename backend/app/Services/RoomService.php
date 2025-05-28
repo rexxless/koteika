@@ -22,13 +22,14 @@ class RoomService
         $photoService = new PhotoService();
         $photoService->store($request, $room);
 
-        foreach ($request->amenities as $amenity) {
-            RoomAmenity::create([
-                'name' => $amenity,
-                'room_id' => $room->id,
-            ]);
+        if (isset($request->amenities)) {
+            foreach ($request->amenities as $amenity) {
+                RoomAmenity::create([
+                    'name' => $amenity,
+                    'room_id' => $room->id,
+                ]);
+            }
         }
-
 
         return response()->json([
             'room_id' => $room->id,
@@ -58,7 +59,7 @@ class RoomService
 
     public function index()
     {
-        $query = Room::query();
+        $query = Room::query()->where('showcase', true);
 
         if (request()->has('amenities')) {
             $amenities = explode('-', request()->amenities);
