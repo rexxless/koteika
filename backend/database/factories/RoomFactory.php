@@ -12,7 +12,7 @@ class RoomFactory extends Factory
             'title' => $this->faker->sentence(3),
             'description' => $this->faker->paragraph(),
             'price' => $this->faker->randomNumber(4),
-            'showcase' => $this->faker->boolean(0),
+            'showcase' => $this->faker->boolean(1),
             'width' => $this->faker->numberBetween(1,10),
             'height' => $this->faker->numberBetween(2,3),
             'length' => $this->faker->numberBetween(1,10)
