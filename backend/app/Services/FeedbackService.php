@@ -14,7 +14,7 @@ class FeedbackService
 
     public function show(Room $room)
     {
-        return $room->feedbacks()->select(['id', 'author', 'rate', 'title', 'description'])->get();
+        return $room->feedbacks()->get();
     }
     /**
      * Create a new class instance.
@@ -66,16 +66,13 @@ class FeedbackService
 
     }
 
-    public function adminDestroy(Request $request)
+    public function adminDestroy($feedback)
     {
-        $feedbackId = $request->feedback_id;
-        return $feedbackId;
-        $feedback = Feedback::query()->where('id', $feedbackId);
-        if ($feedback->exists()) {
+        if ($feedback->exists) {
             $feedback->delete();
-            return response()->json(['message' => 'Отзыв успешно удалён']);
-        } else {
-            return response()->json(['message' => 'Такого отзыва нет'], 404);
+            return response()->json(['message' => 'Отзыв успешно удален']);
         }
+
+        return response()->json(['message' => 'Отзыв не найден'], 404);
     }
 }

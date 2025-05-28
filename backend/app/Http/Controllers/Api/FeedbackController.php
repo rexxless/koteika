@@ -49,9 +49,9 @@ class FeedbackController extends Controller
 
     }
 
-    public function adminDestroy(Request $request, Feedback $feedback, FeedbackService $feedbackService)
+    public function adminDestroy(Feedback $feedback, FeedbackService $feedbackService)
     {
         Gate::authorize('adminDelete', $feedback);
-        return $feedbackService->adminDestroy($request);
+        return $feedbackService->adminDestroy($feedback);
     }
 }

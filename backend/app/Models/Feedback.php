@@ -31,6 +31,9 @@ class Feedback extends Model
         'room_id'
     ];
 
+    protected $hidden = [
+        'room_id'
+    ];
 
     public $timestamps = false;
 

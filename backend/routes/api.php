@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\SocialLinkController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
-// там где нет апиресурсов, они там просто не будут работать
+// там где нет apiResource, они там просто не будут работать
 
 Route::middleware('throttle:api')->group(function () {
 
