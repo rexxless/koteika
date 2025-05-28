@@ -40,9 +40,9 @@ class MainPageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMainDataRequest $request, MainPageService $mainPageService)
+    public function update(UpdateMainDataRequest $request, MainData $mainData, MainPageService $mainPageService)
     {
-        Gate::authorize('update', MainData::class);
+        Gate::authorize('update', $mainData);
         return $mainPageService->update($request);
     }
 
