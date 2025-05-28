@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Http\Requests\StoreSocialLinkRequest;
 use App\Models\SocialLink;
-use Illuminate\Support\Facades\Gate;
 
 class SocialLinkService
 {
