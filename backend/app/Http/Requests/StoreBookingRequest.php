@@ -25,8 +25,8 @@ class StoreBookingRequest extends FormRequest
     {
         return [
             'room_id' => 'required|exists:rooms,id',
-            'check_in' => 'required|date|date_format:d-m-Y',
-            'check_out' => 'required|date|date_format:d-m-Y|after:check_in',
+            'check_in' => 'required|', // Нет проверки на корректность даты, т.к. она ниже
+            'check_out' => 'required|after:check_in', // Нет проверки на корректность даты, т.к. она ниже
             'pets' => 'required|array|min:1|max:4',
             'pets.*' => ['required', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
         ];
@@ -35,12 +35,32 @@ class StoreBookingRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
+            // Получаем данные
             $roomId = $this->input('room_id');
-            $checkIn = Carbon::createFromFormat('d-m-Y', $this->input('check_in'))->format('Y-m-d');
-            $checkOut = Carbon::createFromFormat('d-m-Y', $this->input('check_out'))->format('Y-m-d');
+            $checkIn = $this->input('check_in');
+            $checkOut = $this->input('check_out');
 
-            if (! (new AvailableBookingDates($roomId, $checkIn, $checkOut))->passes('', '')) {
-                $validator->errors()->add('check_in', 'Комната уже забронирована на эту дату.');
+            // Проверяем, что даты корректны
+            if (!preg_match('/\d{2}-\d{2}-\d{4}/', $checkIn)) {
+                $validator->errors()->add('check_in', 'Дата заезда указана неверно. Формат: дд-мм-гггг.');
+                return;
+            }
+
+            if (!preg_match('/\d{2}-\d{2}-\d{4}/', $checkOut)) {
+                $validator->errors()->add('check_out', 'Дата выезда указана неверно. Формат: дд-мм-гггг.');
+                return;
+            }
+
+            // Теперь можно безопасно использовать Carbon
+            try {
+                $carbonCheckIn = Carbon::createFromFormat('d-m-Y', $checkIn)->toDateString();
+                $carbonCheckOut = Carbon::createFromFormat('d-m-Y', $checkOut)->toDateString();
+
+                if (!(new AvailableBookingDates($roomId, $carbonCheckIn, $carbonCheckOut))->passes('', '')) {
+                    $validator->errors()->add('check_in', 'Комната уже забронирована на эту дату.');
+                }
+            } catch (\Exception $e) {
+                $validator->errors()->add('check_in', 'Невозможно обработать дату. Убедитесь, что дата в правильном формате.');
             }
         });
     }
@@ -72,7 +92,4 @@ class StoreBookingRequest extends FormRequest
             'pets.*.regex' => 'Название питомца может содержать только буквы, цифры и специальные символы.',
         ];
     }
-
-
-
 }
