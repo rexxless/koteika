@@ -30,12 +30,12 @@ class FeedbackService
             'author' => $data['author'],
         ])->exists()) {
             return response()->json([
-                'message' => 'Вы уже оставляли отзыв к этому номеру'
+                'message' => 'Вы уже оставляли отзыв к этому номеру.'
             ], 409);
         }
 
         Feedback::query()->create($data);
-        return response()->json(['message' => 'Отзыв успешно оставлен'], 201);
+        return response()->json(['message' => 'Отзыв успешно оставлен.'], 201);
     }
 
     public function update(Room $room, UpdateFeedbackRequest $request)
@@ -57,22 +57,21 @@ class FeedbackService
         $userId = auth()->id();
         if ($room->feedbacks()->where('author', $userId)->delete() === 1)
         {
-            return response()->json(['message' => 'Отзыв успешно удален']);
+            return response()->json(['message' => 'Отзыв успешно удален.']);
         }
         else
         {
-            return response()->json(['message' => 'Отзыв не найден'], 404);
+            return response()->json(['message' => 'Отзыв не найден.'], 404);
         }
 
     }
 
-    public function adminDestroy($feedback)
+    public function adminDestroy(Room $room, Feedback $feedback)
     {
-        if ($feedback->exists) {
-            $feedback->delete();
-            return response()->json(['message' => 'Отзыв успешно удален']);
+        if ($room->feedbacks()->where('id', $feedback->id)->delete() === 1)
+        {
+            return response()->json(['message' => 'Отзыв успешно удален.']);
         }
-
-        return response()->json(['message' => 'Отзыв не найден'], 404);
+        return response()->json(['message' => 'Отзыв не принадлежит этой комнате.'], 404);
     }
 }

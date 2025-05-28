@@ -47,6 +47,7 @@ Route::middleware('throttle:api')->group(function () {
 
         // Админ
         Route::post('/amenities/{amenity}/icon', [AmenityController::class, 'updateIcon']);
+
         Route::apiResource('/amenities', AmenityController::class);
 
         Route::apiResource('/rooms', RoomController::class)
@@ -60,6 +61,7 @@ Route::middleware('throttle:api')->group(function () {
             ->only(['store', 'destroy']);
 
         Route::post('/rooms/{room}/photos', [PhotoController::class, 'store']);
+
         Route::delete('/photos/{photo}', [PhotoController::class, 'destroy']);
 
         Route::delete('/rooms/{room}/feedback/{feedback}', [FeedbackController::class, 'adminDestroy']);
