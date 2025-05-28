@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "1c0ce31f-7d23-4ad3-a14e-a7c97d0abcd3",
 		"name": "Koteika",
-		"description": "# **Общие положения**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге (заполняется либо только поле \"rate\", либо все поля: rate, title, description);\n    \n- Просмотр/редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n**Тестовые данные для:**\n\n- Клиента\n    \n\n> {  \n\"email\": \"[user@example.com](https://mailto:user@example.com)\",  \n\"password\": \"QWEasd123\"  \n} \n  \n\n- Администратора\n    \n\n> {  \n\"email\": \"[admin@example.com](https://mailto:admin@example.com)\",  \n\"password\": \"password\"  \n} \n  \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).\n    \n\n# **Дополнительно**\n\n- В профиле можно изменить всё, кроме аватара, для загрузки/изменения/удаления аватара используйте _{{host}}/profile/avatar_ (POST в первом и втором случае, DELETE в третьем), при регистрации пользователя аватар передаётся с остальными данными\n    \n- Как использовать сортировку описано ниже...\n    \n\nКомнаты с определенными удобствами (через дефис передаются удобства):\n\n> {  \n\"amenities\": \"wi-fi-parking-breakfast\"  \n} \n  \n\nФильтр цены ОТ и/или ДО\n\n> {  \n\"min_price\": 350,  \n\"max_price\": 1200  \n} \n  \n\nФильтр площади ОТ и/или ДО\n\n> {  \n\"min_square\": 20,  \n\"max_square\": 100  \n} \n  \n\nСортировка по цене/площади по убыванию/возрастанию\n\n_Прим. (desk: по убыванию, ask: по возрастанию)_\n\n> {  \n\"sortby\": \"price_desc\"  \n} \n  \n> {  \n\"sortby\": \"price_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_desc\"  \n} \n  \n\nВозвращается массив вида\n\n> {  \n\"rooms\":{  \n.......  \n},  \n\"min_allowable_price\": \"минимальная цена для плейсхолдера\",  \n\"max_allowable_price\": \"максимальная цена для плейсхолдера\",  \n\"allowable_squares\": допустимые_площади,  \n\"amenities\": {  \n.....  \n}  \n}",
+		"description": "# **Общие положения**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге (заполняется либо только поле \"rate\", либо все поля: rate, title, description);\n    \n- Просмотр/редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n**Тестовые данные для:**\n\n- Клиента\n    \n\n> {  \n\"email\": \"[user@example.com](https://mailto:user@example.com)\",  \n\"password\": \"QWEasd123\"  \n} \n  \n\n- Администратора\n    \n\n> {  \n\"email\": \"[admin@example.com](https://mailto:admin@example.com)\",  \n\"password\": \"password\"  \n} \n  \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).\n    \n\n# **Дополнительно**\n\n- При изменении контента главной страницы, а именно соц. сетей, передавайте массив вида  \n    \"social_links\": { \"vk\": \"...\", \"instagram\": \"...\" }\n    \n- Соц. сети добавляются/удадяются в соответствующих эндпоинтах, изменение происходит в редактировании главной страницы\n    \n- В профиле можно изменить всё, кроме аватара, для загрузки/изменения/удаления аватара используйте _{{host}}/profile/avatar_ (POST в первом и втором случае, DELETE в третьем), при регистрации пользователя аватар передаётся с остальными данными\n    \n- Как использовать сортировку описано ниже...\n    \n\nКомнаты с определенными удобствами (через дефис передаются удобства):\n\n> {  \n\"amenities\": \"wi-fi-parking-breakfast\"  \n} \n  \n\nФильтр цены ОТ и/или ДО\n\n> {  \n\"min_price\": 350,  \n\"max_price\": 1200  \n} \n  \n\nФильтр площади ОТ и/или ДО\n\n> {  \n\"min_square\": 20,  \n\"max_square\": 100  \n} \n  \n\nСортировка по цене/площади по убыванию/возрастанию\n\n_Прим. (desk: по убыванию, ask: по возрастанию)_\n\n> {  \n\"sortby\": \"price_desc\"  \n} \n  \n> {  \n\"sortby\": \"price_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_desc\"  \n} \n  \n\nВозвращается массив вида\n\n> {  \n\"rooms\":{  \n.......  \n},  \n\"min_allowable_price\": \"минимальная цена для плейсхолдера\",  \n\"max_allowable_price\": \"максимальная цена для плейсхолдера\",  \n\"allowable_squares\": допустимые_площади,  \n\"amenities\": {  \n.....  \n}  \n}",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43328877"
 	},
@@ -192,14 +192,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/rooms/1/feedback",
+							"raw": "{{host}}/api/rooms/5/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"5",
 								"feedback"
 							]
 						},
@@ -241,7 +241,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"room_id\": 1,\n\t\"check_in\": \"2025-05-10\",\n\t\"check_out\": \"2025-05-15\",\n\t\"pets\": [\n\t\t{ \"name\": \"Барсик\" },\n\t\t{ \"name\": \"Мурка\" }\n\t]\n\n}"
+							"raw": "{\n    \"room_id\": 1,\n\t\"check_in\": \"15-05-2025\",\n\t\"check_out\": \"20-05-2025\",\n\t\"pets\": [\"Барсик\", \"Мурка\"]\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/rooms/1/booking",
@@ -326,14 +326,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}} /api/bookings/1",
+							"raw": "{{host}} /api/bookings/7",
 							"host": [
 								"{{host}} "
 							],
 							"path": [
 								"api",
 								"bookings",
-								"1"
+								"7"
 							]
 						},
 						"description": "#### Ответ (успех):   \n\n{\n\n\"message\": \"Бронь удалена\"\n\n}  \n\n#### Ошибки: \n\n- 401: Не авторизован\n    \n- 409: Бронь уже одобрена"
@@ -371,14 +371,14 @@
 							"raw": "{\n    \"rate\": 5,\n\t\"title\": \"Всё гуд\",\n\t\"description\": \"Услуга оказана качественно...\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1/feedback",
+							"raw": "{{host}}/api/rooms/2/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"2",
 								"feedback"
 							]
 						},
@@ -411,14 +411,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1/feedback",
+							"raw": "{{host}}/api/rooms/2/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"2",
 								"feedback"
 							]
 						}
@@ -495,7 +495,7 @@
 					"response": []
 				},
 				{
-					"name": "Редактировать профиль",
+					"name": "Редактирование профиля",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -521,8 +521,13 @@
 							}
 						],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
 							"raw": "{{host}}/api/profile",
@@ -533,8 +538,7 @@
 								"api",
 								"profile"
 							]
-						},
-						"description": "#### **Поля:**\n\n| **name** | **string** | **Необязательно** |  \n| **email** | **string** | **Необязательно** |  \n| **phone** | **string** | **Необязательно** |  \n| **avatar** | **file** | **Необязательно** |\n\n#### Ответ (успех):\n\n{\n\n\"message\": \"Профиль обновлен\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации"
+						}
 					},
 					"response": []
 				},
@@ -633,6 +637,16 @@
 				{
 					"name": "Список удобств",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [
 							{
@@ -855,47 +869,6 @@
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Успешно удалено\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
-					},
-					"response": []
-				},
-				{
-					"name": "Одобрение брони",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/bookings/1",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"bookings",
-								"1"
-							]
-						},
-						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь одобрена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 409: Бронь уже одобрена"
 					},
 					"response": []
 				},
@@ -1164,6 +1137,47 @@
 					"response": []
 				},
 				{
+					"name": "Одобрение брони",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/bookings/7",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"bookings",
+								"7"
+							]
+						},
+						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь одобрена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 409: Бронь уже одобрена"
+					},
+					"response": []
+				},
+				{
 					"name": "Удаление брони",
 					"request": {
 						"auth": {
@@ -1355,7 +1369,7 @@
 		},
 		{
 			"key": "token",
-			"value": "6|L77DDTtgyYPFMvHhVgrL0Lgig3RBZrJVnxQ5Wt9v4e394553",
+			"value": "11|TBKhpdnOQ2agKOuapnqZxxk2CWdhiNr8isKOlDJuba164e34",
 			"type": "string"
 		}
 	]
