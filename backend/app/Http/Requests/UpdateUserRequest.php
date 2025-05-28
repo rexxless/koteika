@@ -25,7 +25,7 @@ class UpdateUserRequest extends FormRequest
             'name' => ['nullable', 'regex:/^[A-Za-zА-Яа-яЁё\s.\-]+$/u', 'max:255'],
             'phone' => ['nullable', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
             'email' => ['nullable', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8', 'max:30', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
+            'password' => ['nullable', 'min:8', 'max:30', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
         ];
     }
 
