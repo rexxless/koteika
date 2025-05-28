@@ -34,7 +34,7 @@ class UpdateMainDataRequest extends FormRequest
             'slogan' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
 
             'address' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
-            'working_time' => ['nullable', 'string', 'max:64', 'regex:/^[0-9-:.\s]+$/u'],
+            'working_time' => ['nullable', 'string', 'max:64', 'regex:/^[А-Яа-яЁё0-9()_\'"\s]+$/u'],
             'phone' => 'nullable|regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/',
             'email' => 'nullable|email',
 
@@ -47,11 +47,11 @@ class UpdateMainDataRequest extends FormRequest
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
-            $socialLinks = $this->input('footer.social_links');
+            $socialLinks = $this->input('social_links');
             if (is_array($socialLinks)) {
                 foreach ($socialLinks as $k => $v) {
                     if (! (new ExistsSocialNetwork($k))->passes('', '')) {
-                        $validator->errors()->add('footer.social_links', 'Изменять можно только существующие социальные сети.');
+                        $validator->errors()->add('social_links', 'Изменять можно только существующие социальные сети.');
                     }
                 }
             }
@@ -84,7 +84,7 @@ class UpdateMainDataRequest extends FormRequest
 
             'working_time.string' => 'Поле working_time должно быть строкой.',
             'working_time.max' => 'Поле working_time не должно превышать 64 символов.',
-            'working_time.regex' => 'Поле working_time может содержать только буквы, цифры и специальные символы.',
+            'working_time.regex' => 'Поле working_time может содержать только кириллические буквы, цифры и скобки, нижнее подчеркивание и кавычки.',
 
             'phone.regex' => 'Поле phone должно быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
 
