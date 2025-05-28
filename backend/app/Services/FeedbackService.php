@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\StoreFeedbackRequest;
 use App\Http\Requests\UpdateFeedbackRequest;
+use App\Http\Resources\FeedbackResourse;
 use App\Models\Feedback;
 use App\Models\Room;
 use Illuminate\Http\Request;
@@ -43,8 +44,8 @@ class FeedbackService
         if ($feedback->exists()) {
             $feedback->update($request->validated());
             return response()->json([
-                'message' => 'Отзыв успешно обновлён.',
-                'feedback' => $feedback->first()
+                'message' => 'Отзыв успешно обновлён',
+                'feedback' => FeedbackResourse::make($feedback->first())
             ]);
         } else {
             return response()->json(['message' => 'Вы не оставляли отзыв об этом номере.'], 404);
