@@ -39,8 +39,8 @@ Route::middleware('throttle:api')->group(function () {
         Route::patch('/rooms/{room}/feedback', [FeedbackController::class, 'update']);
         Route::delete('/rooms/{room}/feedback', [FeedbackController::class, 'destroy']);
 
-        Route::apiResource('/profile', UserController::class)
-            ->only(['show', 'update']);
+        Route::get('/profile', [UserController::class, 'show']);
+        Route::patch('/profile', [UserController::class, 'update']);
 
         Route::post('/profile/avatar', [AvatarController::class, 'store']);
         Route::delete('/profile/avatar', [AvatarController::class, 'destroy']);
