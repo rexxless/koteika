@@ -23,9 +23,9 @@ class SocialLinkController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id, SocialLink $socialLink, SocialLinkService $socialLinkService)
+    public function destroy(SocialLink $socialLink, SocialLinkService $socialLinkService)
     {
         Gate::authorize('create', $socialLink);
-        return $socialLinkService->destroy($id);
+        return $socialLinkService->destroy($socialLink);
     }
 }

@@ -29,20 +29,18 @@ class UpdateMainDataRequest extends FormRequest
     {
         $allowedNetworks = SocialLink::query()->get('social_network')->toArray();
         return [
-            'header' => 'sometimes|array',
-            'header.title' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
-            'header.city' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
-            'header.slogan' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
+            'title' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
+            'city' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
+            'slogan' => ['nullable', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
 
-            'footer' => 'sometimes|array',
-            'footer.address' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
-            'footer.working_time' => ['nullable', 'string', 'max:64', 'regex:/^[0-9-:.\s]+$/u'],
-            'footer.phone' => 'nullable|regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/',
-            'footer.email' => 'nullable|email',
+            'address' => ['nullable', 'string', 'max:255', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
+            'working_time' => ['nullable', 'string', 'max:64', 'regex:/^[0-9-:.\s]+$/u'],
+            'phone' => 'nullable|regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/',
+            'email' => 'nullable|email',
 
             // Соцсети как ассоциативный массив: ['vk' => '...', 'instagram' => null]
-            'footer.social_links' => 'array|sometimes',
-            'footer.social_links.*' => 'nullable|url',
+            'social_links' => 'array|sometimes',
+            'social_links.*' => 'nullable|url',
         ];
     }
 
@@ -68,37 +66,33 @@ class UpdateMainDataRequest extends FormRequest
     public function messages()
     {
         return [
-            'header.array' => 'Поле "Шапка" должно быть массивом.',
+            'title.string' => 'Поле title должно быть строкой.',
+            'title.max' => 'Поле title не должно превышать 64 символов.',
+            'title.regex' => 'Поле title может содержать только буквы, цифры и специальные символы.',
 
-            'header.title.string' => 'Поле "Заголовок" должно быть строкой.',
-            'header.title.max' => 'Поле "Заголовок" не должно превышать 64 символов.',
-            'header.title.regex' => 'Поле "Заголовок" может содержать только буквы, цифры и специальные символы.',
+            'city.string' => 'Поле city должно быть строкой.',
+            'city.max' => 'Поле city не должно превышать 64 символов.',
+            'city.regex' => 'Поле city может содержать только буквы, цифры и специальные символы.',
 
-            'header.city.string' => 'Поле "Город" должно быть строкой.',
-            'header.city.max' => 'Поле "Город" не должно превышать 64 символов.',
-            'header.city.regex' => 'Поле "Город" может содержать только буквы, цифры и специальные символы.',
+            'slogan.string' => 'Поле slogan должно быть строкой.',
+            'slogan.max' => 'Поле slogan не должно превышать 64 символов.',
+            'slogan.regex' => 'Поле slogan может содержать только буквы, цифры и специальные символы.',
 
-            'header.slogan.string' => 'Поле "Слоган" должно быть строкой.',
-            'header.slogan.max' => 'Поле "Слоган" не должно превышать 64 символов.',
-            'header.slogan.regex' => 'Поле "Слоган" может содержать только буквы, цифры и специальные символы.',
+            'address.string' => 'Поле address должно быть строкой.',
+            'address.max' => 'Поле address не должно превышать 255 символов.',
+            'address.regex' => 'Поле address может содержать только буквы, цифры и специальные символы.',
 
-            'footer.array' => 'Поле "Подвал" должно быть массивом.',
+            'working_time.string' => 'Поле working_time должно быть строкой.',
+            'working_time.max' => 'Поле working_time не должно превышать 64 символов.',
+            'working_time.regex' => 'Поле working_time может содержать только буквы, цифры и специальные символы.',
 
-            'footer.address.string' => 'Поле "Адрес" должно быть строкой.',
-            'footer.address.max' => 'Поле "Адрес" не должно превышать 255 символов.',
-            'footer.address.regex' => 'Поле "Адрес" может содержать только буквы, цифры и специальные символы.',
+            'phone.regex' => 'Поле phone должно быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
 
-            'footer.working_time.string' => 'Поле "Время работы" должно быть строкой.',
-            'footer.working_time.max' => 'Поле "Время работы" не должно превышать 64 символов.',
-            'footer.working_time.regex' => 'Поле "Время работы" может содержать только буквы, цифры и специальные символы.',
+            'email.email' => 'Поле email должно быть корректным email-адресом.',
 
-            'footer.phone.regex' => 'Поле "Телефон" должно быть в формате +7(ХХХ)ХХХ-ХХ-ХХ.',
+            'social_links.array' => 'Поле social_links должно быть ассоциативным массивом.',
 
-            'footer.email.email' => 'Поле "Почта" должно быть корректным email-адресом.',
-
-            'footer.social_links.array' => 'Поле "Социальные сети" должно быть ассоциативным массивом.',
-
-            'footer.social_links.*.url' => 'Поле "URL" должно быть корректным URL-адресом.',
+            'social_links.*.url' => 'Поле url должно быть корректным URL-адресом.',
         ];
     }
 }
