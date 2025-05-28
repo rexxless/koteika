@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "1c0ce31f-7d23-4ad3-a14e-a7c97d0abcd3",
 		"name": "Koteika",
-		"description": "# **Общие положения**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге (заполняется либо только поле \"rate\", либо все поля: rate, title, description);\n    \n- Просмотр/редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n**Тестовые данные для:**\n\n- Клиента\n    \n\n> {  \n\"email\": \"[user@example.com](https://mailto:user@example.com)\",  \n\"password\": \"QWEasd123\"  \n} \n  \n\n- Администратора\n    \n\n> {  \n\"email\": \"[admin@example.com](https://mailto:admin@example.com)\",  \n\"password\": \"password\"  \n} \n  \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).\n    \n\n# **Дополнительно**\n\n- При изменении контента главной страницы, а именно соц. сетей, передавайте массив вида  \n    \"social_links\": { \"vk\": \"...\", \"instagram\": \"...\" }\n    \n- Соц. сети добавляются/удадяются в соответствующих эндпоинтах, изменение происходит в редактировании главной страницы\n    \n- В профиле можно изменить всё, кроме аватара, для загрузки/изменения/удаления аватара используйте _{{host}}/profile/avatar_ (POST в первом и втором случае, DELETE в третьем), при регистрации пользователя аватар передаётся с остальными данными\n    \n- Как использовать сортировку описано ниже...\n    \n\nКомнаты с определенными удобствами (через дефис передаются удобства):\n\n> {  \n\"amenities\": \"wi-fi-parking-breakfast\"  \n} \n  \n\nФильтр цены ОТ и/или ДО\n\n> {  \n\"min_price\": 350,  \n\"max_price\": 1200  \n} \n  \n\nФильтр площади ОТ и/или ДО\n\n> {  \n\"min_square\": 20,  \n\"max_square\": 100  \n} \n  \n\nСортировка по цене/площади по убыванию/возрастанию\n\n_Прим. (desk: по убыванию, ask: по возрастанию)_\n\n> {  \n\"sortby\": \"price_desc\"  \n} \n  \n> {  \n\"sortby\": \"price_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_desc\"  \n} \n  \n\nВозвращается массив вида\n\n> {  \n\"rooms\":{  \n.......  \n},  \n\"min_allowable_price\": \"минимальная цена для плейсхолдера\",  \n\"max_allowable_price\": \"максимальная цена для плейсхолдера\",  \n\"allowable_squares\": допустимые_площади,  \n\"amenities\": {  \n.....  \n}  \n}",
+		"description": "# **Общие положения**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге (заполняется либо только поле \"rate\", либо все поля: rate, title, description);\n    \n- Просмотр/редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n**Тестовые данные для:**\n\n- Клиента\n    \n\n> {  \n\"email\": \"[user@example.com](https://mailto:user@example.com)\",  \n\"password\": \"QWEasd123\"  \n} \n  \n\n- Администратора\n    \n\n> {  \n\"email\": \"[admin@example.com](https://mailto:admin@example.com)\",  \n\"password\": \"password\"  \n} \n  \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).\n    \n\n# **Дополнительно**\n\n- Передачу данных всегда осуществлять через raw (json), исключение: загрузка файлов, там где нужно загрузить файлы используйте form-data;\n    \n- При изменении контента главной страницы, а именно соц. сетей, передавайте массив вида  \n    \"social_links\": { \"vk\": \"...\", \"instagram\": \"...\" };\n    \n- Обновление в вещи из списка удобств разделено на 2 соответствующих эндпоинта (для названия и для иконки);\n    \n- Соц. сети добавляются/удадяются в соответствующих эндпоинтах, изменение происходит в редактировании главной страницы;\n    \n- Комнату можно полностью изменять (админка), кроме фотографий. Для работы с фотографиями (загрузка/удаление) используйте соответствующие эндпоинты, при создании комнаты фотографии можно передавать вместе с остальными данными;\n    \n- В профиле можно изменить всё, кроме аватара, для загрузки/изменения/удаления аватара используйте _{{host}}/profile/avatar (POST в первом и втором случае, DELETE в третьем), при регистрации пользователя аватар передаётся с остальными данными;\n    \n- Как использовать сортировку описано ниже...\n    \n\nКомнаты с определенными удобствами (через дефис передаются удобства):\n\n> {  \n\"amenities\": \"wi-fi-parking-breakfast\"  \n} \n  \n\nФильтр цены ОТ и/или ДО\n\n> {  \n\"min_price\": 350,  \n\"max_price\": 1200  \n} \n  \n\nФильтр площади ОТ и/или ДО\n\n> {  \n\"min_square\": 20,  \n\"max_square\": 100  \n} \n  \n\nСортировка по цене/площади по убыванию/возрастанию\n\n_Прим. (desk: по убыванию, ask: по возрастанию)_\n\n> {  \n\"sortby\": \"price_desc\"  \n} \n  \n> {  \n\"sortby\": \"price_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_desc\"  \n} \n  \n\nВозвращается массив вида\n\n> {  \n\"rooms\":{  \n.......  \n},  \n\"min_allowable_price\": \"минимальная цена для плейсхолдера\",  \n\"max_allowable_price\": \"максимальная цена для плейсхолдера\",  \n\"allowable_squares\": допустимые_площади,  \n\"amenities\": {  \n.....  \n}  \n}",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43328877"
 	},
@@ -192,14 +192,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/rooms/5/feedback",
+							"raw": "{{host}}/api/rooms/1/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"5",
+								"1",
 								"feedback"
 							]
 						},
@@ -585,6 +585,16 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/ig0R/Pictures/Screenshots/Снимок экрана (44).png"
+								}
+							]
+						},
 						"url": {
 							"raw": "{{host}}/api/profile/avatar",
 							"host": [
@@ -676,6 +686,9 @@
 				},
 				{
 					"name": "Редактировать главную страницу",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -702,7 +715,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"slogan\": \"New slogan\",\r\n    \"social_links\": {\r\n        \"vk\": \"...\",\r\n        \"instagram\": \"...\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"slogan\": \"New slogan\",\r\n    \"social_links\": {\r\n        \"vk\": \"https://vk.com/koteika2\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -750,13 +763,19 @@
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\":\"Холодильник\",\n    \"icon\":\"fridge.jpg\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test_am",
+									"type": "text"
+								},
+								{
+									"key": "icon",
+									"type": "file",
+									"src": "/C:/Users/ig0R/Pictures/Screenshots/Снимок экрана (43).png"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "{{host}}/api/amenities",
@@ -773,7 +792,7 @@
 					"response": []
 				},
 				{
-					"name": "Редактировать вещь в списке удобств",
+					"name": "Редактировать название вещи в списке удобств",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -800,7 +819,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"New Amenity_name\"\r\n}",
+							"raw": "{\r\n    \"name\": \"park\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -808,14 +827,71 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/amenities/1",
+							"raw": "{{host}}/api/amenities/parking",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"amenities",
-								"1"
+								"parking"
+							]
+						},
+						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Загрузить новую иконку вещи в списке удобств",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "icon",
+									"type": "file",
+									"src": "/C:/Users/ig0R/Pictures/Screenshots/Снимок экрана (44).png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/amenities/park/icon",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"amenities",
+								"park",
+								"icon"
 							]
 						},
 						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
@@ -858,17 +934,113 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/amenities/1",
+							"raw": "{{host}}/api/amenities/park",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"amenities",
-								"1"
+								"park"
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Успешно удалено\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
+					},
+					"response": []
+				},
+				{
+					"name": "Добавление номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Комнатка",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Уютненькая недорогая комнатка для бедных студентиков",
+									"type": "text"
+								},
+								{
+									"key": "length",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "width",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "height",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "10",
+									"type": "text"
+								},
+								{
+									"key": "photos[]",
+									"type": "file",
+									"src": "/C:/Users/ig0R/Pictures/Screenshots/Снимок экрана (54).png"
+								},
+								{
+									"key": "amenities[]",
+									"value": "park",
+									"type": "text"
+								},
+								{
+									"key": "amenities[]",
+									"value": "wifi",
+									"type": "text"
+								},
+								{
+									"key": "showcase",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/api/rooms/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								""
+							]
+						},
+						"description": "|  |  |\n| --- | --- |\n|  |  |\n\n| title | string | Обязательно |  \n| description | text | Обязательно |  \n| price | integer | Обязательно |  \n| photos | file | Обязательно |  \n| amenities | array | Обязательно |\n\n#### Ответ (успех):\n\n{\n\n\"message\": \"Номер добавлен\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 422: Ошибка валидации"
 					},
 					"response": []
 				},
@@ -919,88 +1091,6 @@
 							]
 						},
 						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
-					},
-					"response": []
-				},
-				{
-					"name": "Удаление номера",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/rooms/{{id}}",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"rooms",
-								"{{id}}"
-							]
-						},
-						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Номер удален\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Номер не найден"
-					},
-					"response": []
-				},
-				{
-					"name": "Добавление номера",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{host}}/api/rooms/",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"rooms",
-								""
-							]
-						},
-						"description": "|  |  |\n| --- | --- |\n|  |  |\n\n| title | string | Обязательно |  \n| description | text | Обязательно |  \n| price | integer | Обязательно |  \n| photos | file | Обязательно |  \n| amenities | array | Обязательно |\n\n#### Ответ (успех):\n\n{\n\n\"message\": \"Номер добавлен\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 422: Ошибка валидации"
 					},
 					"response": []
 				},
@@ -1092,6 +1182,47 @@
 								"1"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление номера",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/rooms/{{id}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"rooms",
+								"{{id}}"
+							]
+						},
+						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Номер удален\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Номер не найден"
 					},
 					"response": []
 				},
@@ -1204,14 +1335,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/bookings/1",
+							"raw": "{{host}}/api/bookings/7",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"bookings",
-								"1"
+								"7"
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь удалена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Бронь не найдена"
@@ -1281,7 +1412,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/main/social_links/vk",
+							"raw": "{{host}}/api/main/social_links/odnoklassniki",
 							"host": [
 								"{{host}}"
 							],
@@ -1289,7 +1420,7 @@
 								"api",
 								"main",
 								"social_links",
-								"vk"
+								"odnoklassniki"
 							]
 						}
 					},
@@ -1320,16 +1451,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/{room_id}/feedback/{feedback_id}",
+							"raw": "{{host}}/api/rooms/1/feedback/1{feedback_id}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"{room_id}",
+								"1",
 								"feedback",
-								"{feedback_id}"
+								"1{feedback_id}"
 							]
 						}
 					},
