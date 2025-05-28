@@ -12,6 +12,8 @@ use App\Http\Controllers\Api\SocialLinkController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
+// там где нет апиресурсов, они там просто не будут работать
+
 Route::middleware('throttle:api')->group(function () {
 
     // Гость
@@ -33,14 +35,14 @@ Route::middleware('throttle:api')->group(function () {
         // Пользователь
         Route::post('rooms/{room}/booking', [BookingController::class, 'store']);
 
-        Route::apiResource('/rooms/{room}/feedback', FeedbackController::class)
-            ->only(['store', 'update', 'destroy']);
+        Route::post('/rooms/{room}/feedback', [FeedbackController::class, 'store']);
+        Route::patch('/rooms/{room}/feedback', [FeedbackController::class, 'update']);
+        Route::delete('/rooms/{room}/feedback', [FeedbackController::class, 'destroy']);
 
         Route::apiResource('/profile', UserController::class)
             ->only(['show', 'update']);
 
         Route::post('/profile/avatar', [AvatarController::class, 'store']);
-
         Route::delete('/profile/avatar', [AvatarController::class, 'destroy']);
 
         // Админ
@@ -57,7 +59,6 @@ Route::middleware('throttle:api')->group(function () {
             ->only(['store', 'destroy']);
 
         Route::post('/rooms/{room}/photos', [PhotoController::class, 'store']);
-
         Route::delete('/photos/{photo}', [PhotoController::class, 'destroy']);
 
         // Пользователь | Админ
