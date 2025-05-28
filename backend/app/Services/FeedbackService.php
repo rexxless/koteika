@@ -72,6 +72,6 @@ class FeedbackService
         {
             return response()->json(['message' => 'Отзыв успешно удален.']);
         }
-        return response()->json(['message' => 'Отзыв не принадлежит этой комнате.'], 404);
+        return response()->json(['message' => 'Отзыв принадлежит другой комнате.'], 404);
     }
 }
