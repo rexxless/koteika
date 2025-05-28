@@ -59,7 +59,7 @@ class RoomService
 
     public function index()
     {
-        $query = Room::query()->where('showcase', true);
+        $query = Room::query();
 
         if (request()->has('amenities')) {
             $amenities = explode('-', request()->amenities);
