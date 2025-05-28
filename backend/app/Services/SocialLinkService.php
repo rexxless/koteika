@@ -10,6 +10,13 @@ class SocialLinkService
 {
     public function store(StoreSocialLinkRequest $request, SocialLink $socialLink)
     {
+        if (SocialLink::query()
+            ->where('social_network', $request->social_network)
+            ->exists()) {
+            return response([
+                'message' => 'Такая социальная сеть уже есть.'
+            ], 409);
+        }
         SocialLink::query()->create([
             'social_network' => $request->social_network,
             'url' => $request->url
