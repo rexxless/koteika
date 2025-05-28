@@ -30,10 +30,10 @@ class LoginUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'Поле "Почта" обязательно для заполнения.',
+            'email.required' => 'Поле email обязательно для заполнения.',
             'email.email' => 'Введена неверная электронная почта.',
 
-            'password.required' => 'Поле "Пароль" обязательно для заполнения.',
+            'password.required' => 'Поле password обязательно для заполнения.',
         ];
     }
 }
