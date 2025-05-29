@@ -29,7 +29,7 @@ class AmenityService
         $amenity = Amenity::query()->create($data);
 
         return response()->json([
-            'message' => 'Оснащение номера успешно добавлено',
+            'message' => 'Оснащение номера успешно добавлено.',
             'amenity' => $amenity
         ], 201);
     }

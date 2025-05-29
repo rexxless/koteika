@@ -45,7 +45,7 @@ class BookingService
         }
 
         return response()->json([
-            'message' => 'Бронь успешно создана'
+            'message' => 'Бронь успешно создана.'
         ], 201);
     }
 

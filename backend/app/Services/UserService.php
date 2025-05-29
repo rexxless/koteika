@@ -61,7 +61,7 @@ class UserService
         $user->update($data);
 
         return response()->json([
-            'message' => 'Данные обновлены',
+            'message' => 'Данные обновлены.',
             'user' => $user
         ]);
     }

@@ -44,7 +44,7 @@ class FeedbackService
         if ($feedback->exists()) {
             $feedback->update($request->validated());
             return response()->json([
-                'message' => 'Отзыв успешно обновлён',
+                'message' => 'Отзыв успешно обновлён.',
                 'feedback' => FeedbackResourse::make($feedback->first())
             ]);
         } else {
@@ -61,7 +61,7 @@ class FeedbackService
         }
         else
         {
-            return response()->json(['message' => 'Отзыв не найден.'], 404);
+            return response()->json(['message' => 'Вы не оставляли отзыв об этом номере.'], 404);
         }
 
     }

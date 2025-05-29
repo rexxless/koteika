@@ -39,7 +39,7 @@ class AuthService
     public function login(LoginUserRequest $request)
     {
         if (!Auth::attempt($request->only(['email', 'password']))) {
-            return response()->json(['error' => 'Неправильный логин или пароль'], 401);
+            return response()->json(['error' => 'Неправильный логин или пароль.'], 401);
         }
         $user = Auth::user();
         $user->tokens()->delete();

@@ -31,7 +31,7 @@ class AvatarService
         $user->save();
 
         return response()->json([
-            'message' => "Аватар успешно {$action}"
+            'message' => "Аватар успешно {$action}."
         ], 201);
     }
 
@@ -44,9 +44,9 @@ class AvatarService
             Storage::disk('public')->delete($path);
             $user->avatar = null;
             $user->save();
-            return response()->json(['message' => 'Аватар успешно удален']);
+            return response()->json(['message' => 'Аватар успешно удален.']);
         } else {
-            return response()->json(['message' => 'У вас отсутствует аватар'], 404);
+            return response()->json(['message' => 'У вас отсутствует аватар.'], 404);
         }
     }
 }

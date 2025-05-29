@@ -47,7 +47,7 @@ class RoomService
     {
         $room->update($request->validated());
         return response()->json([
-            'message' => 'Комната успешно обновлена',
+            'message' => 'Комната успешно обновлена.',
             'room' => RoomResource::make($room)
         ]);
     }
@@ -55,7 +55,7 @@ class RoomService
     public function destroy(Room $room)
     {
         $room->delete();
-        return response()->json(['message' => 'Комната успешно удалена']);
+        return response()->json(['message' => 'Комната успешно удалена.']);
     }
 
     public function index()
