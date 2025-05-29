@@ -7,6 +7,7 @@ use App\Http\Resources\BookingResource;
 use App\Http\Resources\UserBookingResource;
 use App\Models\Booking;
 use App\Models\Pet;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -25,10 +26,10 @@ class BookingService
 
         return UserBookingResource::collection($bookings);
     }
-    public function create(StoreBookingRequest $request)
+    public function store(StoreBookingRequest $request, Room $room)
     {
-        $data = $request->only(['room_id', 'check_in', 'check_out']);
-
+        $data = $request->only(['check_in', 'check_out']);
+        $data['room_id'] = $room->id;
         // Конвертируем в другой формат, т.к. бдшка не принимает d-m-Y
         $data['check_in'] = Carbon::createFromFormat('d-m-Y', $data['check_in'])->format('Y-m-d');
         $data['check_out'] = Carbon::createFromFormat('d-m-Y', $data['check_out'])->format('Y-m-d');

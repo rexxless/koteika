@@ -24,7 +24,6 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'room_id' => 'required|exists:rooms,id',
             'check_in' => 'required|', // Нет проверки на корректность даты, т.к. она ниже
             'check_out' => 'required|after:check_in', // Нет проверки на корректность даты, т.к. она ниже
             'pets' => 'required|array|min:1|max:4',
@@ -69,9 +68,6 @@ class StoreBookingRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'room_id.required' => 'Поле room_id обязательно.',
-            'room_id.exists' => 'Указанный номер комнаты не найден.',
-
             'check_in.required' => 'Поле check_in обязательно.',
             'check_in.date' => 'Поле check_in должно быть корректной датой.',
             'check_in.date_format' => 'Дата заезда должна быть в формате дд-мм-гггг.',

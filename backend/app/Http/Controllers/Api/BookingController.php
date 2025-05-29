@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBookingRequest;
 use App\Models\Booking;
+use App\Models\Room;
 use App\Services\BookingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -30,10 +31,10 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreBookingRequest $request, BookingService $bookingService)
+    public function store(StoreBookingRequest $request, Room $room, BookingService $bookingService)
     {
         Gate::authorize('create', Booking::class);
-        return $bookingService->create($request);
+        return $bookingService->store($request, $room);
     }
 
     /**
