@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "aefd667b-3c24-4352-9575-a8803110698c",
 		"name": "Koteika",
-		"description": "# **Общие положения**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге (заполняется либо только поле \"rate\", либо все поля: rate, title, description);\n    \n- Просмотр/редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n**Тестовые данные для:**\n\n- Клиента\n    \n\n> {  \n\"email\": \"[user@example.com](https://mailto:user@example.com)\",  \n\"password\": \"QWEasd123\"  \n} \n  \n\n- Администратора\n    \n\n> {  \n\"email\": \"[admin@example.com](https://mailto:admin@example.com)\",  \n\"password\": \"password\"  \n} \n  \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).\n    \n\n- Как использовать сортировку описано ниже...\n    \n\nКомнаты с определенными удобствами (через дефис передаются удобства):\n\n> {  \n\"amenities\": \"wi-fi-parking-breakfast\"  \n} \n  \n\nФильтр цены ОТ и/или ДО\n\n> {  \n\"min_price\": 350,  \n\"max_price\": 1200  \n} \n  \n\nФильтр площади ОТ и/или ДО\n\n> {  \n\"min_square\": 20,  \n\"max_square\": 100  \n} \n  \n\nСортировка по цене/площади по убыванию/возрастанию\n\n_Прим. (desk: по убыванию, ask: по возрастанию)_\n\n> {  \n\"sortby\": \"price_desc\"  \n} \n  \n> {  \n\"sortby\": \"price_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_asc\"  \n} \n  \n> {  \n\"sortby\": \"square_desc\"  \n} \n  \n\nВозвращается массив вида\n\n> {  \n\"rooms\":{  \n.......  \n},  \n\"min_allowable_price\": \"минимальная цена для плейсхолдера\",  \n\"max_allowable_price\": \"максимальная цена для плейсхолдера\",  \n\"allowable_squares\": допустимые_площади,  \n\"amenities\": {  \n.....  \n}  \n}",
+		"description": "# **Общие положения**\n\n**К каждому эндпоинту оставлена документация.**\n\n**Все пользователи системы подразделяются на три группы:**\n\n1. Гость;\n    \n2. Авторизованный пользователь;\n    \n3. Администратор.\n    \n\n**Функционал гостя:**\n\n- Просмотр контента главной страницы;\n    \n- Поиск подходящего номера в каталоге номеров;\n    \n- Просмотр страницы с конкретным номером;\n    \n- Регистрация/авторизация в системе.\n    \n\n**Функционал авторизованного пользователя:**\n\n- Бронирование номера;\n    \n- Отзыв об оказанной услуге (заполняется либо только поле \"rate\", либо все поля: rate, title, description);\n    \n- Просмотр/редактирование профиля.\n    \n\n**Функционал администратора:**\n\n- Управление контентом главной страницы;\n    \n- Управление каталогом номеров;\n    \n- Модерирование заявок на бронь номеров;\n    \n\n**Тестовые данные для:**\n\n- Клиента\n    \n\n> {  \n\"email\": \"[user@example.com](https://mailto:user@example.com)\",  \n\"password\": \"QWEasd123\"  \n} \n  \n\n- Администратора\n    \n\n> {  \n\"email\": \"[admin@example.com](https://mailto:admin@example.com)\",  \n\"password\": \"password\"  \n} \n  \n\n# **Запросы**\n\n- Все запросы выполняются через HTTP.\n    \n- Формат данных: JSON.\n    \n- Авторизация: Bearer Token (в заголовке Authorization).",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "43328877"
 	},
@@ -36,7 +36,7 @@
 								"main"
 							]
 						},
-						"description": "#### Ответ:\n\n{\n\n\"title\": \"Название отеля\",\n\n\"city\": \"Город\",\n\n\"slogan\": \"Слоган\",\n\n\"contacts\": \\[\n\n\"address\": \"Адрес\",\n\n\"phone\": \"+7(XXX)XXX-XX-XX\",\n\n\"email\": \"[email@example.com](https://mailto:email@example.com)\",\n\n\"social_links\": \\[\"[https://facebook.com](https://facebook.com) \", ...\\]\n\n\\],\n\n“reviews”: \\[/\\* 5 случайных отзывов \\*/\\]\n\n}"
+						"description": "#### Ответ:\n\n``` json\n{\n    \"header\": {\n        \"title\": \"Гостиница Котейка\",\n        \"city\": \"Москва\",\n        \"slogan\": \"Лучшее место для вашего питомца!\"\n    },\n    \"content\": {\n        \"rooms\": [\n            // номера, которым админ указал \"showcase\" = true         \n            // showcase можно изменить в эндпоинте с изменением номера, можно обозначить true при создании номера\n        ],\n        \"feedbacks\": [\n            1,\n            2,\n            3,\n            5,\n            4\n        ]\n    },\n    \"footer\": {\n        \"address\": \"ул. Пушкина, д. 34\",\n        \"working_time\": \"10:00 - 21:00\",\n        \"phone\": \"+7(495)123-45-67\",\n        \"email\": \"info@koteika.ru\",\n        \"social_links\": [\n            {\n                \"social_network\": \"vk\",\n                \"url\": \"https://vk.com/koteika\"\n            },\n            {\n                \"social_network\": \"telegram\",\n                \"url\": \"https://t.me/koteika\"\n            }\n        ]\n    }\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -66,7 +66,7 @@
 								"rooms"
 							]
 						},
-						"description": "#### Ответ:\n\n{\n\n\"id\": 1,\n\n\"avg_rate\": 4.6,\n\n\"feedbacks\": 122,\n\n\"title\": \"Стандарт\",\n\n\"price\": 3000\n\n},\n\n{\n\n…\n\n},\n\n..."
+						"description": "#### Сортировка:\n\nКомнаты с определенными удобствами (через дефис передаются удобства):\n\n``` json\n{\n    \"amenities\": \"wi-fi-parking-breakfast\"\n} \n\n ```\n\nФильтр цены ОТ и/или ДО\n\n``` json\n{\n    \"min_price\": 300,\n    \"max_price\": 1200\n} \n\n ```\n\nФильтр площади ОТ и/или ДО\n\n``` json\n{\n    \"min_square\": 20,\n    \"max_square\": 100\n} \n\n ```\n\nСортировка по цене/площади по убыванию/возрастанию\n\n_Прим. (desk: по убыванию, ask: по возрастанию)_\n\n``` json\n{\n    \"sortby\": \"price_desc\"\n}\n\n ```\n\n``` json\n{\n    \"sortby\": \"price_asc\"\n}\n\n ```\n\n``` json\n{\n    \"sortby\": \"square_asc\"\n} \n\n ```\n\n``` json\n{\n    \"sortby\": \"square_desc\"\n} \n\n ```\n\n#### Ответ:\n\n``` json\n{\n    \"rooms\": [\n        {\n            \"id\": 1,\n            \"title\": \"Стандарт\",\n            \"price\": 3000,\n            \"preview\": {\n                \"id\": 1,\n                \"link\": \"room_link\"\n            },    \n            \"photos\": [\n                {\n                    \"id\": 1,\n                    \"link\": \"room_link\"\n                },\n                ...\n            ],\n            \"description\": \"Описание номера...\",\n            \"amenities\": {\n                \"name\": \"parking\",\n                \"icon\": \"icon\"\n            },\n            \"square\": 25,\n            \"avg_rate\": 4.6,\n            \"feedbacks\": 122\n        },\n        {\n        ...\n        },\n        ...\n    ],\n    \"min_allowable_price\": \"минимальная цена для плейсхолдера\",\n    \"max_allowable_price\": \"максимальная цена для плейсхолдера\",\n    \"allowable_squares\": \"допустимые_площади\",\n    \"amenities\": [\n        {\n            \"name\": \"parking\",\n            \"icon\": \"icon\"\n        },\n        {\n        ...\n        },\n        ...\n    ]\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -97,7 +97,7 @@
 								"1"
 							]
 						},
-						"description": "#### **Ответ:**\n\n{\n\n\"id\": 1,\n\n\"avg_rate\": 4.2,\n\n\"feedbacks\": 122,\n\n\"title\": \"Стандарт\",\n\n\"description\": \"Уютный номер...\",\n\n\"price\": 3000,\n\n\"photos\": \\[\"url.jpg\"\\],\n\n\"amenities\": \\[\"Wi-Fi\", \"Телевизор\"\\]\n\n}"
+						"description": "#### **Ответ:**\n\n``` json\n{\n    \"id\": 1,\n    \"title\": \"Quos accusantium sed.\",\n    \"price\": 6621,\n    \"preview\": {\n        \"id\": 1,\n        \"link\": \"https://via.placeholder.com/640x480.png/008899?text=quasi\"\n    },\n    \"photos\": [\n        {\n            \"id\": 1,\n            \"link\": \"https://via.placeholder.com/640x480.png/008899?text=quasi\"\n        },\n        {\n            \"id\": 2,\n            \"link\": \"https://via.placeholder.com/640x480.png/0066cc?text=recusandae\"\n        }\n    ],\n    \"description\": \"Ratione similique tempore laborum distinctio. Est deserunt voluptate quibusdam reiciendis aspernatur. Facilis magni et aut perferendis officiis.\",\n    \"amenities\": [\n        {\n            \"name\": \"parking\",\n            \"icon\": \"https://via.placeholder.com/640x480.png/009933?text=velit\"\n        }\n    ],\n    \"square\": 35,\n    \"avg_rate\": 4,\n    \"feedbacks\": 1,\n    \"other_rooms\": [\n        4,\n        3,\n        5\n    ]\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -192,14 +192,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/rooms/1/feedback",
+							"raw": "{{host}}/api/rooms/{{room_id}}/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"{{room_id}}",
 								"feedback"
 							]
 						},
@@ -244,14 +244,14 @@
 							"raw": "{\n    \"room_id\": 1,\n\t\"check_in\": \"15-05-2025\",\n\t\"check_out\": \"20-05-2025\",\n\t\"pets\": [\"Барсик\", \"Мурка\"]\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1/booking",
+							"raw": "{{host}}/api/rooms/{{room_id}}/booking",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"{{room_id}}",
 								"booking"
 							]
 						},
@@ -326,14 +326,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}} /api/bookings/7",
+							"raw": "{{host}}/api/bookings/{{booking_id}}",
 							"host": [
-								"{{host}} "
+								"{{host}}"
 							],
 							"path": [
 								"api",
 								"bookings",
-								"7"
+								"{{booking_id}}"
 							]
 						},
 						"description": "#### Ответ (успех):   \n\n{\n\n\"message\": \"Бронь удалена\"\n\n}  \n\n#### Ошибки: \n\n- 401: Не авторизован\n    \n- 409: Бронь уже одобрена"
@@ -371,14 +371,14 @@
 							"raw": "{\n    \"rate\": 5,\n\t\"title\": \"Всё гуд\",\n\t\"description\": \"Услуга оказана качественно...\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/2/feedback",
+							"raw": "{{host}}/api/rooms/{{room_id}}/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"2",
+								"{{room_id}}",
 								"feedback"
 							]
 						},
@@ -411,14 +411,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/2/feedback",
+							"raw": "{{host}}/api/rooms/{{room_id}}/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"2",
+								"{{room_id}}",
 								"feedback"
 							]
 						}
@@ -441,14 +441,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/rooms/1/feedback",
+							"raw": "{{host}}/api/rooms/{{room_id}}/feedback",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"{{room_id}}",
 								"feedback"
 							]
 						}
@@ -827,14 +827,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/amenities/parking",
+							"raw": "{{host}}/api/amenities/{{amenity_name}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"amenities",
-								"parking"
+								"{{amenity_name}}"
 							]
 						},
 						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
@@ -883,14 +883,14 @@
 							]
 						},
 						"url": {
-							"raw": "{{host}}/api/amenities/park/icon",
+							"raw": "{{host}}/api/amenities/{{amenity_name}}/icon",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"amenities",
-								"park",
+								"{{amenity_name}}",
 								"icon"
 							]
 						},
@@ -934,14 +934,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/amenities/park",
+							"raw": "{{host}}/api/amenities/{{amenity_name}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"amenities",
-								"park"
+								"{{amenity_name}}"
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Успешно удалено\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен"
@@ -1080,14 +1080,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1",
+							"raw": "{{host}}/api/rooms/{{room_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1"
+								"{{room_id}}"
 							]
 						},
 						"description": "Возвращает удобство с измененными данными.\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 422: Ошибка валидации\n    \n- 403: Доступ запрещен"
@@ -1125,14 +1125,14 @@
 							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1/photos",
+							"raw": "{{host}}/api/rooms/{{room_id}}/photos",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"{{room_id}}",
 								"photos"
 							]
 						}
@@ -1170,16 +1170,16 @@
 							"raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1/photos/1",
+							"raw": "{{host}}/api/rooms/{{room_id}}/photos/{{photo_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"{{room_id}}",
 								"photos",
-								"1"
+								"{{photo_id}}"
 							]
 						}
 					},
@@ -1212,14 +1212,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/rooms/{{id}}",
+							"raw": "{{host}}/api/rooms/{{room_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"{{id}}"
+								"{{room_id}}"
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Номер удален\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Номер не найден"
@@ -1294,14 +1294,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/bookings/7",
+							"raw": "{{host}}/api/bookings/{{booking_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"bookings",
-								"7"
+								"{{booking_id}}"
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь одобрена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 409: Бронь уже одобрена"
@@ -1335,14 +1335,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/bookings/7",
+							"raw": "{{host}}/api/bookings/{{booking_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"bookings",
-								"7"
+								"{{booking_id}}"
 							]
 						},
 						"description": "#### Ответ (успех):\n\n{\n\n\"message\": \"Бронь удалена\"\n\n}\n\n#### Ошибки:\n\n- 401: Не авторизован\n    \n- 403: Доступ запрещен\n    \n- 404: Бронь не найдена"
@@ -1412,7 +1412,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/main/social_links/odnoklassniki",
+							"raw": "{{host}}/api/main/social_links/{{social_link_name}}",
 							"host": [
 								"{{host}}"
 							],
@@ -1420,7 +1420,7 @@
 								"api",
 								"main",
 								"social_links",
-								"odnoklassniki"
+								"{{social_link_name}}"
 							]
 						}
 					},
@@ -1451,16 +1451,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/rooms/1/feedback/1{feedback_id}",
+							"raw": "{{host}}/api/rooms/{{room_id}}/feedback/{{feedback_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"rooms",
-								"1",
+								"{{room_id}}",
 								"feedback",
-								"1{feedback_id}"
+								"{{feedback_id}}"
 							]
 						}
 					},
