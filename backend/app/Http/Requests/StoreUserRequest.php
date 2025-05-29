@@ -26,7 +26,7 @@ class StoreUserRequest extends FormRequest
             'name' => ['required', 'regex:/^[А-Яа-яЁё\s.\-]+$/u', 'max:255'],
             'phone' => ['required', 'regex:/^\+7\(\d{3}\)\d{3}-\d{2}-\d{2}$/', 'unique:users,phone'],
             'email' => ['required', 'email', 'unique:users,email'],
-            'password' => ['required', 'min:8', 'max:30', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
+            'password' => ['required', 'min:8', 'max:64', 'regex:/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>\/?]+$/'],
         ];
     }
 
@@ -54,6 +54,7 @@ class StoreUserRequest extends FormRequest
 
             'password.required' => 'Поле password обязательно для заполнения.',
             'password.min' => 'Пароль должен содержать не менее 8 символов.',
+            'password.max' => 'Пароль должен содержать не более 64 символов.',
             'password.regex' => 'Пароль может содержать только латинские символы, цифры и специальные символы.',
         ];
     }
