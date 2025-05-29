@@ -23,26 +23,26 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'message' => 'Not found'
+                    'message' => 'Страница не найдена.'
                 ], 404);
             } return null;
         });
 
         $exceptions->renderable(function (AuthenticationException $e, $request) {
             return response()->json([
-                'message' => 'Login failed',
-            ], 403);
+                'message' => 'Доступно только для авторизованных пользователей.',
+            ], 401);
         });
 
         $exceptions->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return response()->json([
-                'message' => 'Method not allowed',
+                'message' => 'HTTP-метод не поддерживается для данного маршрута.',
             ], 405);
         });
 
         $exceptions->renderable(function (AccessDeniedHttpException $e, $request) {
             return response()->json([
-                'message' => 'Forbidden',
+                'message' => 'Не доступно для вас.',
             ], 403);
         });
     })
