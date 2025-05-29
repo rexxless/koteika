@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\StoreRoomRequest;
 use App\Http\Requests\UpdateRoomRequest;
 use App\Http\Resources\RoomResource;
+use App\Http\Resources\RoomsResource;
 use App\Models\Amenity;
 use App\Models\Room;
 use App\Models\RoomAmenity;
@@ -117,7 +118,7 @@ class RoomService
             ->pluck('square');
 
         return response()->json([
-            'rooms' => RoomResource::collection($query->get()),
+            'rooms' => RoomsResource::collection($query->get()),
             'min_allowable_price' => $minAllowablePrice,
             'max_allowable_price' => $maxAllowablePrice,
             'allowable_squares' => $allowableSquares,

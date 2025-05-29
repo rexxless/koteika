@@ -3,11 +3,10 @@
 namespace App\Http\Resources;
 
 use App\Models\Photo;
-use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoomResource extends JsonResource
+class RoomsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -37,13 +36,7 @@ class RoomResource extends JsonResource
                 ->makeHidden('pivot'),
             'square' => $this->length * $this->width,
             'avg_rate' => $avgRate,
-            'feedbacks' => $this->feedbacks()->count(),
-            'other_rooms' => Room::query()
-                ->where('id', '!=', $this->id)
-                ->inRandomOrder()
-                ->limit(3)
-                ->pluck('id')
-                ->toArray()
+            'feedbacks' => $this->feedbacks()->count()
         ];
     }
 }
