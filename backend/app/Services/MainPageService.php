@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\UpdateMainDataRequest;
+use App\Http\Resources\RoomsResource;
 use App\Models\Feedback;
 use App\Models\MainData;
 use App\Models\Room;
@@ -24,7 +25,7 @@ class MainPageService
                 'slogan' => $mainData->slogan ?? null,
             ],
             'content' => [
-                'rooms' => Room::query()->where('showcase', true)->get(),
+                'rooms' => RoomsResource::collection(Room::query()->where('showcase', true)->get()),
                 'feedbacks' => Feedback::inRandomOrder()->limit(5)->pluck('id')->toArray()
             ],
             'footer' => [
