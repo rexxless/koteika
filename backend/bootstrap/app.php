@@ -42,7 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $exceptions->renderable(function (AccessDeniedHttpException $e, $request) {
             return response()->json([
-                'message' => 'Не доступно для вас.',
+                'message' => 'Недоступно для вас.',
             ], 403);
         });
     })
