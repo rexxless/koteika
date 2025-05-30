@@ -61,7 +61,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room, RoomService $roomService)
     {
-        Gate::authorize('destroy', $room);
+        Gate::authorize('delete', $room);
         return $roomService->destroy($room);
     }
 }

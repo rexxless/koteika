@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->foreign('name')->references('name')->on('amenities')
-            ->onDelete('cascade')
-            ->onUpdate('cascade');
-            $table->foreignId('room_id')->constrained('rooms');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+            $table->foreignId('room_id')->constrained('rooms')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
