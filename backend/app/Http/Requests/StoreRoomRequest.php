@@ -68,7 +68,7 @@ class StoreRoomRequest extends FormRequest
             'price.required' => 'Поле price обязательно для заполнения.',
             'price.integer' => 'Поле price должно быть целым числом.',
             'price.min' => 'Цена не может быть отрицательной.',
-            'price.max' => 'Цена не может быть больше миллиарда.',
+            'price.max' => 'Цена не может быть больше 100000.',
 
             'photos.required' => 'Поле photos обязательно для заполнения.',
             'photos.array' => 'Поле photos должно быть массивом.',
