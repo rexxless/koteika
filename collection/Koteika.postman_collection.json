@@ -862,14 +862,12 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							},
 							{
 								"key": "Content-Type",
 								"value": "application/json",
-								"type": "text",
-								"disabled": true
+								"type": "text"
 							}
 						],
 						"body": {
@@ -1365,7 +1363,18 @@
 							]
 						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"social_network\": \"odnoklassniki\", \r\n    \"url\": \"https://ok.ru/koteika\"\r\n}",
@@ -1386,7 +1395,7 @@
 								"social_links"
 							]
 						},
-						"description": "#### **Поля:**\n\n``` json\n{\n    ...\n}\n\n ```\n\n#### **Ответ (успех):**\n\n``` json\n{\n    \"message\": \"Успешно выполнено.\"\n}\n\n ```"
+						"description": "#### **Поля:**\n\n``` json\n{\n    \"social_network\":[\n        \"Обязательно\", \"string\", \"Уникальное\", \"Латинские буквы, цифры, точки и пробелы\", \"До 255 символов\"\n    ],\n    \"url\":[\n        \"Обязательно\", \"string\", \"Формат url\"\n    ],\n}\n\n ```\n\n#### **Ответ (успех):**\n\n``` json\n{\n    \"message\": \"Социальная сеть успешно добавлена.\"\n}\n\n ```\n\n#### **Ответ (ошибки: невалидные данные, код 422)**\n\n``` json\n{\n    \"message\": \"Описание ошибки\",\n    \"errors\": {\n        \"поле1\": [\n            \"Описание ошибки\"\n        ],\n        ...\n    }\n}\n\n ```\n\n#### **Ответ (неавторизован, код 401)**\n\n``` json\n{\n    \"message\": \"Доступно только для авторизованных пользователей.\"\n}\n\n ```\n\n#### **Ответ (нет прав, код 403)**\n\n``` json\n{\n    \"message\": \"Недоступно для вас.\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -1404,7 +1413,18 @@
 							]
 						},
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1426,7 +1446,7 @@
 								"{{social_link_name}}"
 							]
 						},
-						"description": "#### **Ответ (успех):**\n\n``` json\n{\n    \"message\": \"Успешно удалено.\"\n}\n\n ```"
+						"description": "#### **Ответ (успех)**\n\n``` json\n{\n    \"message\": \"Социальная сеть успешно удалена.\"\n}\n\n ```\n\n#### **Ответ (неавторизован, код 401)**\n\n``` json\n{\n    \"message\": \"Доступно только для авторизованных пользователей.\"\n}\n\n ```\n\n#### **Ответ (нет прав, код 403)**\n\n``` json\n{\n    \"message\": \"Недоступно для вас.\"\n}\n\n ```\n\n#### **Ответ (социальная сеть не найдена, код 404)**\n\n``` json\n{\n    \"message\": \"Страница не найдена.\"\n}\n\n ```"
 					},
 					"response": []
 				},
@@ -1444,7 +1464,18 @@
 							]
 						},
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
 							"raw": "",
@@ -1467,7 +1498,7 @@
 								"{{feedback_id}}"
 							]
 						},
-						"description": "#### **Ответ (успех):**\n\n``` json\n{\n    \"message\": \"Успешно удалено.\"\n}\n\n ```"
+						"description": "#### **Ответ (успех)**\n\n``` json\n{\n    \"message\": \"Отзыв успешно удален.\"\n}\n\n ```\n\n#### **Ответ (неавторизован, код 401)**\n\n``` json\n{\n    \"message\": \"Доступно только для авторизованных пользователей.\"\n}\n\n ```\n\n#### **Ответ (нет прав, код 403)**\n\n``` json\n{\n    \"message\": \"Недоступно для вас.\"\n}\n\n ```\n\n#### **Ответ (номер/отзыв не найден, код 404)**\n\n``` json\n{\n    \"message\": \"Страница не найдена.\"\n}\n\n ```"
 					},
 					"response": []
 				}
