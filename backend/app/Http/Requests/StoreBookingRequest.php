@@ -35,7 +35,7 @@ class StoreBookingRequest extends FormRequest
     {
         $validator->after(function ($validator) {
             // Получаем данные
-            $roomId = $this->input('room_id');
+            $roomId = $this->route('room')->id;
             $checkIn = $this->input('check_in');
             $checkOut = $this->input('check_out');
 
