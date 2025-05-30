@@ -84,12 +84,12 @@ class RoomService
 
         if (request()->has('min_square')) {
             $min_square = request()->min_square;
-            $query->where('width * length', '>', $min_square);
+            $query->where(DB::raw('width * length'), '>', $min_square);
         }
 
         if (request()->has('max_square')) {
             $max_square = request()->max_square;
-            $query->where('width * length', '<', $max_square);
+            $query->where(DB::raw('width * length'), '<', $max_square);
         }
 
         if (request()-> has('sortby')) {
