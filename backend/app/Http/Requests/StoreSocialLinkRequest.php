@@ -27,7 +27,8 @@ class StoreSocialLinkRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'unique:social_links,social_network'
+                'unique:social_links,social_network',
+                'regex:/^[A-Za-z0-9.\s]+$/u'
             ],
             "url" => "required|url",
         ];
@@ -40,7 +41,7 @@ class StoreSocialLinkRequest extends FormRequest
             "social_network.string" => "Название социальной сети должно быть строкой",
             "social_network.max" => "Максимальная длина названия социальной сети 255 символов.",
             "social_network.unique" => "Такая социальная сеть уже есть.",
-            "social_network.*" => "Не удалось загрузить социальную сеть.",
+            "social_network.regex" => "Поле social_network может содержать только латинские буквы, цифры, точки и пробелы.",
 
             "url.required" => 'Поле url обязательно для заполнения.',
             "url.url" => 'Введите корректный URL-адрес.',
