@@ -87,7 +87,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/rooms/1",
+							"raw": "{{host}}/api/rooms/{{room_id}}",
 							"host": [
 								"{{host}}"
 							],
