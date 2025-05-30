@@ -79,6 +79,7 @@ class BookingController extends Controller
         } abort(403);
     }
 
+
     public function approve(Booking $booking, BookingService $bookingService)
     {
         Gate::authorize('approve', $booking);

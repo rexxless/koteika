@@ -24,8 +24,8 @@ class StoreBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'check_in' => 'required|', // Нет проверки на корректность даты, т.к. она ниже
-            'check_out' => 'required|after:check_in', // Нет проверки на корректность даты, т.к. она ниже
+            'check_in' => 'required|date', // Нет проверки на корректность даты, т.к. она ниже
+            'check_out' => 'required|after:check_in|date', // Нет проверки на корректность даты, т.к. она ниже
             'pets' => 'required|array|min:1|max:4',
             'pets.*' => ['required', 'string', 'max:64', 'regex:/^[A-Za-zА-Яа-яЁё0-9!@#$%^&*()_+\-=\{};\':"|,.<>\/?\s]+$/u'],
         ];

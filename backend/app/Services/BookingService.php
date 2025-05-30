@@ -66,7 +66,7 @@ class BookingService
 
     public function adminDestroy(Booking $booking)
     {
-        Pet::query()->where('booking_id', $booking->id)->delete();
+        $booking->pets()->delete();
         $booking->delete();
         return response()->json(['message' => 'Бронь успешно удалена.']);
     }
