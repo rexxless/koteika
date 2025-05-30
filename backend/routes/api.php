@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 // там где нет apiResource, они там просто не будут работать
+// там где прописан явно where, там не работает без него
 
 Route::middleware('throttle:api')->group(function () {
 
@@ -64,7 +65,8 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::delete('/photos/{photo}', [PhotoController::class, 'destroy']);
 
-        Route::delete('/rooms/{room}/feedback/{feedback}', [FeedbackController::class, 'adminDestroy']);
+        Route::delete('/rooms/{room}/feedback/{feedback}', [FeedbackController::class, 'adminDestroy'])
+            ->where(['feedback' => '[0-9]+', 'room' => '[0-9]+']);
 
         // Пользователь | Админ
         Route::get('/bookings', [BookingController::class, 'show']);

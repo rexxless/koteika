@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->text('link');
-            $table->foreignId('room_id')->constrained('rooms');
+            $table->foreignId('room_id')->constrained('rooms')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

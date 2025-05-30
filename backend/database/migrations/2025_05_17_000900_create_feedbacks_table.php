@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreignId('author')->constrained('users');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
-            $table->foreignId('room_id')->constrained('rooms');
+            $table->foreignId('room_id')->constrained('rooms')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');;
         });
     }
 
