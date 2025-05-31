@@ -61,9 +61,10 @@ Route::middleware('throttle:api')->group(function () {
         Route::apiResource('/main/social_links', SocialLinkController::class)
             ->only(['store', 'destroy']);
 
-        Route::post('/rooms/{room}/photos', [PhotoController::class, 'store']);
+        Route::apiResource('/rooms/{room}/photos', PhotoController::class)
+            ->only(['store', 'destroy']);
 
-        Route::delete('/photos/{photo}', [PhotoController::class, 'destroy']);
+        Route::delete('/rooms/{room}/photos/{photo}', [PhotoController::class, 'destroy']);
 
         Route::delete('/rooms/{room}/feedback/{feedback}', [FeedbackController::class, 'adminDestroy'])
             ->where(['feedback' => '[0-9]+', 'room' => '[0-9]+']);

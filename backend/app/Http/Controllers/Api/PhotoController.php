@@ -24,9 +24,9 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PhotoService $photoService, Photo $photo)
+    public function destroy(PhotoService $photoService, Room $room, Photo $photo)
     {
         Gate::authorize('delete', $photo);
-        return $photoService->destroy($photo);
+        return $photoService->destroy($room, $photo);
     }
 }

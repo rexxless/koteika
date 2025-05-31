@@ -38,22 +38,30 @@ class PhotoService
         ], 201);
     }
 
-    public function destroy(Photo $photo)
+    public function destroy(Room $room, Photo $photo)
     {
         $path = $photo->link;
+        if ($room->photos()->where('id', $photo->id)->exists()) {
 
-        $photo->delete();
+            $photo->delete();
 
-        if ($path && Storage::disk('public')->exists($path)) {
-            Storage::disk('public')->delete($path);
-        } else {
+            if (Storage::disk('public')->exists($path))
+            {
+                Storage::disk('public')->delete($path);
+            } else {
+                return response()->json([
+                    'message' => 'Фотография не найдена.',
+                ], 404);
+            }
+
             return response()->json([
-                'message' => 'Фотография не найдена.',
-            ], 404);
+                'message' => 'Фотография успешно удалена.'
+            ]);
+        }
+        else
+        {
+            return response()->json(['message' => 'Фотография не принадлежит этой комнате.'], 404);
         }
 
-        return response()->json([
-            'message' => 'Фотография успешно удалена.'
-        ]);
     }
 }
